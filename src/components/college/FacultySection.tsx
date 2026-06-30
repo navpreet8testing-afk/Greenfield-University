@@ -100,7 +100,7 @@ export function FacultySection({ faculty }: FacultySectionProps) {
 
         {/* Faculty grid — bento-style: first card spans 2 cols on md+ */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {faculty.map((member, i) => {
+          {faculty.filter(member => member.name !== 'Dr. Meera Nair').map((member, i) => {
             const isFeatured = i === 0;
             const imgUrl = FACULTY_IMAGES[i % FACULTY_IMAGES.length];
             const hasError = imageErrors[i];
