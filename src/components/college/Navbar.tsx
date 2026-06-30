@@ -169,15 +169,15 @@ export function Navbar() {
     }
   }, [router, pathname, openMega]);
 
-  const linkClass = `px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-    scrolled ? 'text-foreground/70 hover:text-emerald hover:bg-emerald-50' : 'text-white/70 hover:text-white hover:bg-white/10'
+  const linkClass = `px-3 py-2 text-sm font-semibold rounded-md transition-colors ${
+    scrolled ? 'text-slate-700 hover:text-emerald-600 hover:bg-emerald-50 dark:text-white dark:hover:text-emerald-400 dark:hover:bg-slate-800' : 'text-white/90 hover:text-white hover:bg-white/10'
   }`;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] border-b border-emerald-100/50'
+          ? 'bg-white/80 backdrop-blur-xl shadow-[0_1px_3px_rgba(0,0,0,0.05)] border-b border-emerald-100/50 dark:bg-slate-900/80 dark:border-slate-700/50'
           : 'bg-transparent'
       }`}
     >
@@ -204,10 +204,10 @@ export function Navbar() {
               <span className="text-white font-bold text-lg">G</span>
             </div>
             <div className="flex flex-col">
-              <span className={`font-bold text-base leading-tight transition-colors ${scrolled ? 'text-slate-dark' : 'text-white'}`}>
+              <span className={`font-bold text-base leading-tight transition-colors ${scrolled ? 'text-slate-dark dark:text-white' : 'text-white'}`}>
                 Greenfield
               </span>
-              <span className={`text-[10px] uppercase tracking-[0.2em] leading-tight transition-colors ${scrolled ? 'text-emerald' : 'text-emerald-light'}`}>
+              <span className={`text-[10px] uppercase tracking-[0.2em] leading-tight transition-colors ${scrolled ? 'text-emerald dark:text-emerald-400' : 'text-emerald-light'}`}>
                 University
               </span>
             </div>
@@ -241,10 +241,10 @@ export function Navbar() {
                     openMega === menu.label ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 pointer-events-none'
                   }`}
                 >
-                  <div className="bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-100 p-6 grid grid-cols-3 gap-6 w-[36rem]">
+                  <div className="bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-100 p-6 grid grid-cols-3 gap-6 w-[36rem] dark:bg-slate-800 dark:border-slate-700">
                     {menu.cols.map((col) => (
                       <div key={col.title}>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-emerald mb-3 pb-2 border-b-2 border-emerald-100">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-emerald mb-3 pb-2 border-b-2 border-emerald-100 dark:text-emerald-400 dark:border-slate-600">
                           {col.title}
                         </h4>
                         <ul className="space-y-0.5">
@@ -252,7 +252,7 @@ export function Navbar() {
                             <li key={link.label}>
                               <Link
                                 href={link.href}
-                                className="flex items-center gap-2 py-1.5 px-2 text-sm text-slate-600 rounded-lg hover:bg-emerald-50 hover:text-emerald hover:translate-x-1 transition-all"
+                                className="flex items-center gap-2 py-1.5 px-2 text-sm text-slate-600 rounded-lg hover:bg-emerald-50 hover:text-emerald hover:translate-x-1 transition-all dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-emerald-400"
                               >
                                 {link.label}
                               </Link>
@@ -268,10 +268,10 @@ export function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <ThemeToggle className={`${scrolled ? 'text-foreground/70 hover:bg-gray-100' : 'text-white/70 hover:bg-white/10'}`} />
+            <ThemeToggle className={`${scrolled ? 'text-foreground/70 hover:bg-gray-100 dark:text-white/70 dark:hover:bg-slate-700' : 'text-white/70 hover:bg-white/10'}`} />
             <Button
               size="sm"
-              className="bg-emerald hover:bg-emerald-dark text-white rounded-full px-5 shadow-lg shadow-emerald/20 transition-all hover:shadow-emerald/40 hover:scale-105"
+              className="bg-emerald hover:bg-emerald-dark text-white rounded-full px-5 shadow-lg shadow-emerald/20 transition-all hover:shadow-emerald/40 hover:scale-105 dark:bg-emerald-600 dark:hover:bg-emerald-500"
               asChild
             >
               <Link href="/admissions">Apply Now</Link>
@@ -285,9 +285,9 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             {mobileOpen ? (
-              <X className={`w-5 h-5 ${scrolled ? 'text-foreground' : 'text-white'}`} />
+              <X className={`w-5 h-5 ${scrolled ? 'text-foreground dark:text-white' : 'text-white'}`} />
             ) : (
-              <Menu className={`w-5 h-5 ${scrolled ? 'text-foreground' : 'text-white'}`} />
+              <Menu className={`w-5 h-5 ${scrolled ? 'text-foreground dark:text-white' : 'text-white'}`} />
             )}
           </button>
         </div>
@@ -299,13 +299,13 @@ export function Navbar() {
           mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-white/95 backdrop-blur-xl border-t border-emerald-100/50 px-4 py-4 space-y-1 overflow-y-auto max-h-[70vh]">
-          <Link href="/" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 text-sm font-medium text-foreground/80 hover:text-emerald hover:bg-emerald-50 rounded-md">Home</Link>
+        <div className="bg-white/95 backdrop-blur-xl border-t border-emerald-100/50 px-4 py-4 space-y-1 overflow-y-auto max-h-[70vh] dark:bg-slate-900/95 dark:border-slate-700/50">
+          <Link href="/" onClick={() => setMobileOpen(false)} className="block px-3 py-2.5 text-sm font-medium text-foreground/80 hover:text-emerald hover:bg-emerald-50 rounded-md dark:text-white/80 dark:hover:text-emerald-400 dark:hover:bg-slate-800">Home</Link>
           {megaMenus.map((menu) => (
             <div key={menu.label}>
               <button
                 onClick={() => handleMobileMenuClick(menu.label)}
-                className="flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium text-foreground/80 hover:text-emerald hover:bg-emerald-50 rounded-md"
+                className="flex items-center justify-between w-full px-3 py-2.5 text-sm font-medium text-foreground/80 hover:text-emerald hover:bg-emerald-50 rounded-md dark:text-white/80 dark:hover:text-emerald-400 dark:hover:bg-slate-800"
               >
                 {menu.label}
                 <ChevronDown className={`w-4 h-4 transition-transform ${openMega === menu.label ? 'rotate-180' : ''}`} />
@@ -313,9 +313,9 @@ export function Navbar() {
               <div className={`pl-4 transition-all duration-300 overflow-hidden ${openMega === menu.label ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                 {menu.cols.map((col) => (
                   <div key={col.title} className="mb-2">
-                    <div className="px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald">{col.title}</div>
+                    <div className="px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald dark:text-emerald-400">{col.title}</div>
                     {col.links.map((link) => (
-                      <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)} className="block px-3 py-1.5 text-sm text-muted-foreground hover:text-emerald rounded-md">
+                      <Link key={link.label} href={link.href} onClick={() => setMobileOpen(false)} className="block px-3 py-1.5 text-sm text-muted-foreground hover:text-emerald rounded-md dark:text-slate-400 dark:hover:text-emerald-400">
                         {link.label}
                       </Link>
                     ))}
@@ -325,10 +325,10 @@ export function Navbar() {
             </div>
           ))}
           <div className="pt-2 flex items-center gap-3">
-            <ThemeToggle className="text-foreground/70 hover:bg-gray-100" />
+            <ThemeToggle className="text-foreground/70 hover:bg-gray-100 dark:text-white/70 dark:hover:bg-slate-700" />
             <Button
               size="sm"
-              className="w-full bg-emerald hover:bg-emerald-dark text-white rounded-full"
+              className="w-full bg-emerald hover:bg-emerald-dark text-white rounded-full dark:bg-emerald-600 dark:hover:bg-emerald-500"
               asChild
             >
               <Link href="/admissions" onClick={() => setMobileOpen(false)}>Apply Now</Link>
