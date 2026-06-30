@@ -38,7 +38,9 @@ async function sendAdminEmail(
   const adminEmail = 'navpreet8testing@gmail.com';
   const transporter = getTransporter();
   const gmailUser = process.env.GMAIL_USER;
-  if (!transporter || !adminEmail || !gmailUser) return;
+  if (!transporter || !adminEmail || !gmailUser) {
+    throw new Error('Email service not configured: missing GMAIL_USER or GMAIL_APP_PASSWORD');
+  }
 
   function esc(s: string) {
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -148,16 +150,17 @@ export async function POST(request: Request) {
       data: dbData,
     });
 
-    // Send admin email with form data + PDF attachment (fire-and-forget)
-    sendAdminEmail(
+    // Send admin email with form data + PDF attachment (awaited - fail if email fails)
+    await sendAdminEmail(
       validated as unknown as Record<string, string>,
       pdfBase64,
       pdfFileName,
       validated.documentRef,
-    ).catch((err) => console.error('[applications] Failed to send email:', err));
+    );
 
     return NextResponse.json(application, { status: 201 });
   } catch (error) {
+    console.error('[applications] Error:', error);
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues[0].message }, { status: 400 });
     }
