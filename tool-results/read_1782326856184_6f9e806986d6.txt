@@ -1,0 +1,612 @@
+    60→    60→        { label: 'Course Catalog', href: '/academics.html#courses' },
+    61→    61→      ]},
+    62→    62→      { title: 'Resources', links: [
+    63→    63→        { label: 'Faculty Spotlight', href: '/faculty.html' },
+    64→    64→        { label: 'Student Portal', href: '/portal.html' },
+    65→    65→        { label: 'Library', href: '/campus-life.html#library' },
+    66→    66→        { label: 'Labs & Facilities', href: '/campus-life.html#labs' },
+    67→    67→      ]},
+    68→    68→    ]
+    69→    69→  },
+    70→    70→  campus: {
+    71→    71→    label: 'Campus',
+    72→    72→    href: '/campus-life.html',
+    73→    73→    cols: [
+    74→    74→      { title: 'Life at GU', links: [
+    75→    75→        { label: 'Campus Overview', href: '/campus-life.html' },
+    76→    76→        { label: 'Sports & Fitness', href: '/campus-life.html#sports' },
+    77→    77→        { label: 'Clubs & Societies', href: '/campus-life.html#clubs' },
+    78→    78→        { label: 'Hostel & Dining', href: '/campus-life.html#hostel' },
+    79→    79→      ]},
+    80→    80→      { title: 'Facilities', links: [
+    81→    81→        { label: 'Library', href: '/campus-life.html#library' },
+    82→    82→        { label: 'Laboratories', href: '/campus-life.html#labs' },
+    83→    83→        { label: 'Cafeteria', href: '/campus-life.html#cafeteria' },
+    84→    84→        { label: 'Gallery', href: '/gallery.html' },
+    85→    85→      ]},
+    86→    86→      { title: 'Activities', links: [
+    87→    87→        { label: 'Events', href: '/events.html' },
+    88→    88→        { label: 'Annual Fest', href: '/events.html#fest' },
+    89→    89→        { label: 'Cultural Programs', href: '/campus-life.html#cultural' },
+    90→    90→        { label: 'Workshops', href: '/events.html#workshops' },
+    91→    91→      ]},
+    92→    92→    ]
+    93→    93→  },
+    94→    94→  about: {
+    95→    95→    label: 'About',
+    96→    96→    href: '/about.html',
+    97→    97→    cols: [
+    98→    98→      { title: 'University', links: [
+    99→    99→        { label: 'About Us', href: '/about.html' },
+   100→   100→        { label: 'Leadership Team', href: '/about.html#leadership' },
+   101→   101→        { label: 'History & Heritage', href: '/about.html#history' },
+   102→   102→        { label: 'Vision & Mission', href: '/about.html#vision' },
+   103→   103→      ]},
+   104→   104→      { title: 'Excellence', links: [
+   105→   105→        { label: 'Accreditations', href: '/about.html#accreditations' },
+   106→   106→        { label: 'Awards & Rankings', href: '/about.html#awards' },
+   107→   107→        { label: 'Research Impact', href: '/research.html' },
+   108→   108→        { label: 'Global Partners', href: '/about.html#partners' },
+   109→   109→      ]},
+   110→   110→      { title: 'Community', links: [
+   111→   111→        { label: 'Alumni Network', href: '/alumni.html' },
+   112→   112→        { label: 'Testimonials', href: '/testimonials.html' },
+   113→   113→        { label: 'News & Updates', href: '/news.html' },
+   114→   114→        { label: 'Careers at GU', href: '/careers.html' },
+   115→   115→      ]},
+   116→   116→    ]
+   117→   117→  },
+   118→   118→  admissions: {
+   119→   119→    label: 'Admissions',
+   120→   120→    href: '/admissions.html',
+   121→   121→    cols: [
+   122→   122→      { title: 'Apply', links: [
+   123→   123→        { label: 'How to Apply', href: '/admissions.html#process' },
+   124→   124→        { label: 'Eligibility Criteria', href: '/admissions.html#eligibility' },
+   125→   125→        { label: 'Important Dates', href: '/admissions.html#dates' },
+   126→   126→        { label: 'Application Form', href: '/admissions.html#apply' },
+   127→   127→      ]},
+   128→   128→      { title: 'Financial', links: [
+   129→   129→        { label: 'Fee Structure', href: '/admissions.html#fees' },
+   130→   130→        { label: 'Scholarships', href: '/admissions.html#scholarships' },
+   131→   131→        { label: 'Education Loans', href: '/admissions.html#loans' },
+   132→   132→        { label: 'Fee Payment', href: '/portal.html' },
+   133→   133→      ]},
+   134→   134→      { title: 'Help', links: [
+   135→   135→        { label: 'FAQs', href: '/admissions.html#faq' },
+   136→   136→        { label: 'Contact Admissions', href: '/contact.html' },
+   137→   137→        { label: 'Campus Visit', href: '/contact.html#visit' },
+   138→   138→        { label: 'Virtual Tour', href: '/campus-life.html' },
+   139→   139→      ]},
+   140→   140→    ]
+   141→   141→  },
+   142→   142→  connect: {
+   143→   143→    label: 'Connect',
+   144→   144→    href: '/contact.html',
+   145→   145→    cols: [
+   146→   146→      { title: 'Reach Us', links: [
+   147→   147→        { label: 'Contact Us', href: '/contact.html' },
+   148→   148→        { label: 'Campus Map', href: '/contact.html#map' },
+   149→   149→        { label: 'Department Contacts', href: '/contact.html#departments' },
+   150→   150→        { label: 'Social Media', href: '/contact.html#social' },
+   151→   151→      ]},
+   152→   152→      { title: 'Network', links: [
+   153→   153→        { label: 'Alumni Network', href: '/alumni.html' },
+   154→   154→        { label: 'Placement Cell', href: '/careers.html' },
+   155→   155→        { label: 'Industry Partners', href: '/careers.html#partners' },
+   156→   156→        { label: 'International Office', href: '/about.html#international' },
+   157→   157→      ]},
+   158→   158→      { title: 'Info', links: [
+   159→   159→        { label: 'News & Updates', href: '/news.html' },
+   160→   160→        { label: 'Events', href: '/events.html' },
+   161→   161→        { label: 'Testimonials', href: '/testimonials.html' },
+   162→   162→        { label: 'Student Portal', href: '/portal.html' },
+   163→   163→      ]},
+   164→   164→    ]
+   165→   165→  },
+   166→   166→};
+   167→   167→
+   168→   168→// Get current page filename for active state
+   169→   169→function getCurrentPage() {
+   170→   170→  const path = window.location.pathname;
+   171→   171→  const filename = path.split('/').pop() || 'index.html';
+   172→   172→  return filename === '/' ? 'index.html' : filename;
+   173→   173→}
+   174→   174→
+   175→   175→// Render mega menu HTML
+   176→   176→function renderMegaMenu(key) {
+   177→   177→  const m = megaMenuData[key];
+   178→   178→  if (!m) return '';
+   179→   179→  let colsHTML = '';
+   180→   180→  m.cols.forEach(col => {
+   181→   181→    let linksHTML = '';
+   182→   182→    col.links.forEach(link => {
+   183→   183→      linksHTML += `<li><a href="${link.href}">${link.label}</a></li>`;
+   184→   184→    });
+   185→   185→    colsHTML += `<div class="mega-col"><h4>${col.title}</h4><ul>${linksHTML}</ul></div>`;
+   186→   186→  });
+   187→   187→  return `<div class="mega-menu"><div class="mega-menu-inner">${colsHTML}</div></div>`;
+   188→   188→}
+   189→   189→
+   190→   190→// Render full header
+   191→   191→function renderHeader() {
+   192→   192→  const currentPage = getCurrentPage();
+   193→   193→  const isActive = (href) => {
+   194→   194→    if (href === '/') return currentPage === 'index.html';
+   195→   195→    return currentPage === href.split('/').pop();
+   196→   196→  };
+   197→   197→
+   198→   198→  let navLinksHTML = `<li><a href="/" class="nav-link ${isActive('/') ? 'active' : ''}">Home</a></li>`;
+   199→   199→  Object.entries(megaMenuData).forEach(([key, m]) => {
+   200→   200→    navLinksHTML += `
+   201→   201→      <li class="has-mega">
+   202→   202→        <a href="${m.href}" class="nav-link ${isActive(m.href) ? 'active' : ''} mega-trigger">
+   203→   203→          ${m.label} ${icons.chevronDown}
+   204→   204→        </a>
+   205→   205→        ${renderMegaMenu(key)}
+   206→   206→      </li>`;
+   207→   207→  });
+   208→   208→
+   209→   209→  // Mobile menu
+   210→   210→  let mobileNavHTML = `<li><a href="/" class="${isActive('/') ? 'active' : ''}">Home</a></li>`;
+   211→   211→  Object.entries(megaMenuData).forEach(([key, m]) => {
+   212→   212→    let mobileLinks = '';
+   213→   213→    m.cols.forEach(col => {
+   214→   214→      col.links.forEach(link => {
+   215→   215→        mobileLinks += `<a href="${link.href}">${link.label}</a>`;
+   216→   216→      });
+   217→   217→    });
+   218→   218→    mobileNavHTML += `
+   219→   219→      <li class="mobile-mega-section">
+   220→   220→        <button class="mobile-mega-toggle">${m.label} ${icons.chevronDown}</button>
+   221→   221→        <div class="mobile-mega-dropdown">${mobileLinks}</div>
+   222→   222→      </li>`;
+   223→   223→  });
+   224→   224→
+   225→   225→  const html = `
+   226→   226→    <header class="site-header" id="siteHeader">
+   227→   227→      <div class="top-bar">
+   228→   228→        <div class="top-bar-inner">
+   229→   229→          <div class="top-bar-items">
+   230→   230→            <span class="top-bar-item">${icons.phone} +91 1234 567 890</span>
+   231→   231→            <span class="top-bar-item">${icons.mail} info@greenfield.edu</span>
+   232→   232→          </div>
+   233→   233→          <span class="top-bar-item">${icons.mapPin} University Road, Academic City</span>
+   234→   234→        </div>
+   235→   235→      </div>
+   236→   236→      <nav class="navbar">
+   237→   237→        <a href="/" class="logo-link">
+   238→   238→          <div class="logo-icon">G</div>
+   239→   239→          <div class="logo-text">
+   240→   240→            <span class="logo-name">Greenfield</span>
+   241→   241→            <span class="logo-sub">University</span>
+   242→   242→          </div>
+   243→   243→        </a>
+   244→   244→        <ul class="nav-links">${navLinksHTML}</ul>
+   245→   245→        <a href="/admissions.html#apply" class="nav-cta nav-cta-desktop">Apply Now</a>
+   246→   246→        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">${icons.menu}</button>
+   247→   247→      </nav>
+   248→   248→    </header>
+   249→   249→    <div class="mobile-menu" id="mobileMenu">
+   250→   250→      <div class="mobile-menu-panel">
+   251→   251→        <div class="mobile-menu-close"><button id="mobileClose">${icons.x}</button></div>
+   252→   252→        <ul class="mobile-nav-links">${mobileNavHTML}</ul>
+   253→   253→        <div class="mobile-cta-section">
+   254→   254→          <a href="/admissions.html#apply" class="mobile-cta">Apply Now</a>
+   255→   255→        </div>
+   256→   256→      </div>
+   257→   257→    </div>`;
+   258→   258→  document.getElementById('site-header').innerHTML = html;
+   259→   259→}
+   260→   260→
+   261→   261→// Render footer
+   262→   262→function renderFooter() {
+   263→   263→  const year = new Date().getFullYear();
+   264→   264→  const html = `
+   265→   265→    <footer class="site-footer">
+   266→   266→      <div class="footer-ticker">
+   267→   267→        <div class="footer-ticker-inner">
+   268→   268→          <span class="footer-ticker-item"><span class="dot"></span>Admissions Open 2025-26 — Apply Now!</span>
+   269→   269→          <span class="footer-ticker-item"><span class="dot"></span>CodeStorm 2025 — National Hackathon Registrations Open</span>
+   270→   270→          <span class="footer-ticker-item"><span class="dot"></span>94% Placement Record — 300+ Companies Recruited</span>
+   271→   271→          <span class="footer-ticker-item"><span class="dot"></span>NAAC A++ Accredited — Among Top Universities</span>
+   272→   272→          <span class="footer-ticker-item"><span class="dot"></span>Admissions Open 2025-26 — Apply Now!</span>
+   273→   273→          <span class="footer-ticker-item"><span class="dot"></span>CodeStorm 2025 — National Hackathon Registrations Open</span>
+   274→   274→          <span class="footer-ticker-item"><span class="dot"></span>94% Placement Record — 300+ Companies Recruited</span>
+   275→   275→          <span class="footer-ticker-item"><span class="dot"></span>NAAC A++ Accredited — Among Top Universities</span>
+   276→   276→        </div>
+   277→   277→      </div>
+   278→   278→      <div class="footer-main">
+   279→   279→        <div class="footer-brand">
+   280→   280→          <a href="/" class="logo-link">
+   281→   281→            <div class="logo-icon">G</div>
+   282→   282→            <div class="logo-text">
+   283→   283→              <span class="logo-name" style="color:white">Greenfield</span>
+   284→   284→              <span class="logo-sub" style="color:var(--emerald-400)">University</span>
+   285→   285→            </div>
+   286→   286→          </a>
+   287→   287→          <p>Shaping futures through academic excellence, innovation, and holistic development since 2003.</p>
+   288→   288→          <div class="footer-socials">
+   289→   289→            <a href="#" class="footer-social-link" aria-label="Facebook">${icons.facebook}</a>
+   290→   290→            <a href="#" class="footer-social-link" aria-label="Twitter">${icons.twitter}</a>
+   291→   291→            <a href="#" class="footer-social-link" aria-label="Instagram">${icons.instagram}</a>
+   292→   292→            <a href="#" class="footer-social-link" aria-label="LinkedIn">${icons.linkedin}</a>
+   293→   293→            <a href="#" class="footer-social-link" aria-label="YouTube">${icons.youtube}</a>
+   294→   294→          </div>
+   295→   295→        </div>
+   296→   296→        <div class="footer-col">
+   297→   297→          <h4>Quick Links</h4>
+   298→   298→          <ul>
+   299→   299→            <li><a href="/about.html">About Us</a></li>
+   300→   300→            <li><a href="/academics.html">Programs</a></li>
+   301→   301→            <li><a href="/faculty.html">Faculty</a></li>
+   302→   302→            <li><a href="/campus-life.html">Campus Life</a></li>
+   303→   303→            <li><a href="/events.html">Events</a></li>
+   304→   304→            <li><a href="/contact.html">Contact</a></li>
+   305→   305→          </ul>
+   306→   306→        </div>
+   307→   307→        <div class="footer-col">
+   308→   308→          <h4>Resources</h4>
+   309→   309→          <ul>
+   310→   310→            <li><a href="/academics.html#calendar">Academic Calendar</a></li>
+   311→   311→            <li><a href="/campus-life.html#library">Library Portal</a></li>
+   312→   312→            <li><a href="/portal.html">Student Portal</a></li>
+   313→   313→            <li><a href="/admissions.html#scholarships">Scholarships</a></li>
+   314→   314→            <li><a href="/careers.html">Placement Cell</a></li>
+   315→   315→            <li><a href="/research.html">Research Portal</a></li>
+   316→   316→          </ul>
+   317→   317→        </div>
+   318→   318→        <div class="footer-col">
+   319→   319→          <h4>Contact</h4>
+   320→   320→          <div class="footer-contact-item">${icons.mapPin}<span>University Road, Academic City, State 123456, India</span></div>
+   321→   321→          <div class="footer-contact-item">${icons.phone}<span>+91 1234 567 890<br>+91 9876 543 210</span></div>
+   322→   322→          <div class="footer-contact-item">${icons.mail}<span>info@greenfield.edu<br>admissions@greenfield.edu</span></div>
+   323→   323→        </div>
+   324→   324→      </div>
+   325→   325→      <div class="footer-bottom">
+   326→   326→        <p>&copy; ${year} Greenfield University. All rights reserved.</p>
+   327→   327→        <div class="footer-bottom-links">
+   328→   328→          <a href="#">Privacy Policy</a>
+   329→   329→          <a href="#">Terms of Service</a>
+   330→   330→          <a href="#">Sitemap</a>
+   331→   331→          <a href="#">Accessibility</a>
+   332→   332→        </div>
+   333→   333→      </div>
+   334→   334→    </footer>`;
+   335→   335→  document.getElementById('site-footer').innerHTML = html;
+   336→   336→}
+   337→   337→
+   338→   338→// Render floating dock
+   339→   339→function renderFloatingDock() {
+   340→   340→  const html = `
+   341→   341→    <div class="floating-dock" id="floatingDock">
+   342→   342→      <div class="floating-dock-inner">
+   343→   343→        <div class="dock-pill-bg" id="dockPill"></div>
+   344→   344→        <a href="/academics.html" class="dock-link" data-dock="0">
+   345→   345→          ${icons.compass} <span class="dock-link-text">Programs</span>
+   346→   346→        </a>
+   347→   347→        <a href="/admissions.html#apply" class="dock-link" data-dock="1">
+   348→   348→          ${icons.fileText} <span class="dock-link-text">Apply Now</span>
+   349→   349→        </a>
+   350→   350→        <a href="/campus-life.html" class="dock-link" data-dock="2">
+   351→   351→          ${icons.globe} <span class="dock-link-text">Campus Tour</span>
+   352→   352→        </a>
+   353→   353→      </div>
+   354→   354→    </div>
+   355→   355→    <button class="back-to-top" id="backToTop" aria-label="Back to top">${icons.arrowUp}</button>`;
+   356→   356→  document.getElementById('floating-dock').innerHTML = html;
+   357→   357→}
+   358→   358→
+   359→   359→// Initialize scroll-based header
+   360→   360→function initHeader() {
+   361→   361→  const header = document.getElementById('siteHeader');
+   362→   362→  let lastScrollY = 0;
+   363→   363→  const onScroll = () => {
+   364→   364→    const scrollY = window.scrollY;
+   365→   365→    if (scrollY > 60) {
+   366→   366→      header.classList.add('scrolled');
+   367→   367→    } else {
+   368→   368→      header.classList.remove('scrolled');
+   369→   369→    }
+   370→   370→    lastScrollY = scrollY;
+   371→   371→  };
+   372→   372→  window.addEventListener('scroll', onScroll, { passive: true });
+   373→   373→  onScroll();
+   374→   374→}
+   375→   375→
+   376→   376→// Initialize mobile menu
+   377→   377→function initMobileMenu() {
+   378→   378→  const toggle = document.getElementById('mobileToggle');
+   379→   379→  const menu = document.getElementById('mobileMenu');
+   380→   380→  const close = document.getElementById('mobileClose');
+   381→   381→
+   382→   382→  toggle.addEventListener('click', () => menu.classList.add('open'));
+   383→   383→  close.addEventListener('click', () => menu.classList.remove('open'));
+   384→   384→  menu.addEventListener('click', (e) => {
+   385→   385→    if (e.target === menu) menu.classList.remove('open');
+   386→   386→  });
+   387→   387→
+   388→   388→  // Mobile mega toggles
+   389→   389→  document.querySelectorAll('.mobile-mega-toggle').forEach(btn => {
+   390→   390→    btn.addEventListener('click', () => {
+   391→   391→      btn.classList.toggle('open');
+   392→   392→      const dropdown = btn.nextElementSibling;
+   393→   393→      dropdown.classList.toggle('open');
+   394→   394→    });
+   395→   395→  });
+   396→   396→
+   397→   397→  // Close on link click
+   398→   398→  menu.querySelectorAll('a').forEach(a => {
+   399→   399→    a.addEventListener('click', () => menu.classList.remove('open'));
+   400→   400→  });
+   401→   401→}
+   402→   402→
+   403→   403→// Initialize floating dock
+   404→   404→function initFloatingDock() {
+   405→   405→  const dock = document.getElementById('floatingDock');
+   406→   406→  const backToTop = document.getElementById('backToTop');
+   407→   407→  const dockLinks = dock.querySelectorAll('.dock-link');
+   408→   408→  const pill = document.getElementById('dockPill');
+   409→   409→  const total = dockLinks.length;
+   410→   410→
+   411→   411→  let lastScrollY = 0;
+   412→   412→  const onScroll = () => {
+   413→   413→    const scrollY = window.scrollY;
+   414→   414→    const velocity = Math.abs(scrollY - lastScrollY);
+   415→   415→
+   416→   416→    if (scrollY > window.innerHeight * 0.6) {
+   417→   417→      dock.classList.add('visible');
+   418→   418→    } else {
+   419→   419→      dock.classList.remove('visible');
+   420→   420→    }
+   421→   421→
+   422→   422→    if (velocity > 15) {
+   423→   423→      dock.style.transform = 'translateX(-50%) translateY(0) scale(0.95)';
+   424→   424→      dock.style.opacity = '0.85';
+   425→   425→    } else {
+   426→   426→      dock.style.transform = '';
+   427→   427→      dock.style.opacity = '';
+   428→   428→    }
+   429→   429→
+   430→   430→    if (scrollY > 400) {
+   431→   431→      backToTop.classList.add('visible');
+   432→   432→    } else {
+   433→   433→      backToTop.classList.remove('visible');
+   434→   434→    }
+   435→   435→
+   436→   436→    lastScrollY = scrollY;
+   437→   437→  };
+   438→   438→  window.addEventListener('scroll', onScroll, { passive: true });
+   439→   439→
+   440→   440→  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+   441→   441→
+   442→   442→  // Pill hover
+   443→   443→  dockLinks.forEach((link, i) => {
+   444→   444→    link.addEventListener('mouseenter', () => {
+   445→   445→      const pct = 100 / total;
+   446→   446→      pill.style.left = `${i * pct}%`;
+   447→   447→      pill.style.width = `${pct}%`;
+   448→   448→    });
+   449→   449→  });
+   450→   450→  dock.addEventListener('mouseleave', () => {
+   451→   451→    pill.style.left = '-100%';
+   452→   452→  });
+   453→   453→}
+   454→   454→
+   455→   455→// Initialize GSAP ScrollTrigger animations
+   456→   456→function initAnimations() {
+   457→   457→  gsap.registerPlugin(ScrollTrigger);
+   458→   458→
+   459→   459→  // Common reveals
+   460→   460→  gsap.utils.toArray('.gsap-reveal').forEach(el => {
+   461→   461→    gsap.fromTo(el,
+   462→   462→      { opacity: 0, y: 40 },
+   463→   463→      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+   464→   464→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   465→   465→      }
+   466→   466→    );
+   467→   467→  });
+   468→   468→
+   469→   469→  gsap.utils.toArray('.gsap-reveal-left').forEach(el => {
+   470→   470→    gsap.fromTo(el,
+   471→   471→      { opacity: 0, x: -50 },
+   472→   472→      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+   473→   473→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   474→   474→      }
+   475→   475→    );
+   476→   476→  });
+   477→   477→
+   478→   478→  gsap.utils.toArray('.gsap-reveal-right').forEach(el => {
+   479→   479→    gsap.fromTo(el,
+   480→   480→      { opacity: 0, x: 50 },
+   481→   481→      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+   482→   482→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   483→   483→      }
+   484→   484→    );
+   485→   485→  });
+   486→   486→
+   487→   487→  gsap.utils.toArray('.gsap-reveal-scale').forEach(el => {
+   488→   488→    gsap.fromTo(el,
+   489→   489→      { opacity: 0, scale: 0.92 },
+   490→   490→      { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out',
+   491→   491→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   492→   492→      }
+   493→   493→    );
+   494→   494→  });
+   495→   495→
+   496→   496→  // Section headers
+   497→   497→  gsap.utils.toArray('.section-header').forEach(el => {
+   498→   498→    gsap.fromTo(el.children,
+   499→   499→      { opacity: 0, y: 30 },
+   500→   500→      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+   501→   501→        scrollTrigger: { trigger: el, start: 'top 82%' }
+   502→   502→      }
+   503→   503→    );
+   504→   504→  });
+   505→   505→
+   506→   506→  // Cards with stagger
+   507→   507→  gsap.utils.toArray('.card-stagger').forEach(container => {
+   508→   508→    gsap.fromTo(container.children,
+   509→   509→      { opacity: 0, y: 40 },
+   510→   510→      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
+   511→   511→        scrollTrigger: { trigger: container, start: 'top 88%' }
+   512→   512→      }
+   513→   513→    );
+   514→   514→  });
+   515→   515→
+   516→   516→  // Stat counters
+   517→   517→  gsap.utils.toArray('[data-counter]').forEach(el => {
+   518→   518→    const target = parseFloat(el.getAttribute('data-counter'));
+   519→   519→    const suffix = el.getAttribute('data-suffix') || '';
+   520→   520→    const obj = { val: 0 };
+   521→   521→    gsap.to(obj, {
+   522→   522→      val: target, duration: 2, ease: 'power2.out',
+   523→   523→      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+   524→   524→      onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString() + suffix; }
+   525→   525→    });
+   526→   526→  });
+   527→   527→
+   528→   528→  // Hero scroll scale
+   529→   529→  const heroBg = document.querySelector('.page-hero-bg');
+   530→   530→  if (heroBg) {
+   531→   531→    gsap.to(heroBg, {
+   532→   532→      scrollTrigger: {
+   533→   533→        trigger: '.page-hero',
+   534→   534→        start: 'top top',
+   535→   535→        end: 'bottom top',
+   536→   536→        scrub: 1.2,
+   537→   537→      },
+   538→   538→      scale: 1.1,
+   539→   539→      borderRadius: '24px',
+   540→   540→      ease: 'power2.out',
+   541→   541→    });
+   542→   542→  }
+   543→   543→
+   544→   544→  // Hero parallax
+   545→   545→  const heroContent = document.querySelector('.page-hero-content');
+   546→   546→  if (heroContent) {
+   547→   547→    gsap.to(heroContent, {
+   548→   548→      scrollTrigger: {
+   549→   549→        trigger: '.page-hero',
+   550→   550→        start: 'top top',
+   551→   551→        end: 'bottom top',
+   552→   552→        scrub: 1,
+   553→   553→      },
+   554→   554→      y: -80, opacity: 0,
+   555→   555→    });
+   556→   556→  }
+   557→   557→}
+   558→   558→
+   559→   559→// Initialize Lenis smooth scroll
+   560→   560→function initLenis() {
+   561→   561→  if (typeof Lenis === 'undefined') return;
+   562→   562→  const lenis = new Lenis({
+   563→   563→    duration: 1.2,
+   564→   564→    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+   565→   565→    smoothWheel: true,
+   566→   566→  });
+   567→   567→
+   568→   568→  lenis.on('scroll', ScrollTrigger.update);
+   569→   569→
+   570→   570→  gsap.ticker.add((time) => {
+   571→   571→    lenis.raf(time * 1000);
+   572→   572→  });
+   573→   573→  gsap.ticker.lagSmoothing(0);
+   574→   574→
+   575→   575→  // Smooth scroll for anchor links
+   576→   576→  document.querySelectorAll('a[href^="#"]').forEach(a => {
+   577→   577→    a.addEventListener('click', (e) => {
+   578→   578→      const href = a.getAttribute('href');
+   579→   579→      if (href === '#') return;
+   580→   580→      e.preventDefault();
+   581→   581→      const target = document.querySelector(href);
+   582→   582→      if (target) lenis.scrollTo(target, { offset: -80 });
+   583→   583→    });
+   584→   584→  });
+   585→   585→}
+   586→   586→
+   587→   587→// Initialize accordion
+   588→   588→function initAccordions() {
+   589→   589→  document.querySelectorAll('.accordion-header').forEach(header => {
+   590→   590→    header.addEventListener('click', () => {
+   591→   591→      const body = header.nextElementSibling;
+   592→   592→      const inner = body.querySelector('.accordion-body-inner');
+   593→   593→      const isOpen = header.classList.contains('open');
+   594→   594→
+   595→   595→      // Close all others
+   596→   596→      document.querySelectorAll('.accordion-header.open').forEach(h => {
+   597→   597→        if (h !== header) {
+   598→   598→          h.classList.remove('open');
+   599→   599→          h.nextElementSibling.style.maxHeight = '0';
+   600→   600→        }
+   601→   601→      });
+   602→   602→
+   603→   603→      if (isOpen) {
+   604→   604→        header.classList.remove('open');
+   605→   605→        body.style.maxHeight = '0';
+   606→   606→      } else {
+   607→   607→        header.classList.add('open');
+   608→   608→        body.style.maxHeight = inner.scrollHeight + 20 + 'px';
+   609→   609→      }
+   610→   610→    });
+   611→   611→  });
+   612→   612→}
+   613→   613→
+   614→   614→// Initialize tabs
+   615→   615→function initTabs() {
+   616→   616→  document.querySelectorAll('.tab-bar').forEach(bar => {
+   617→   617→    const btns = bar.querySelectorAll('.tab-btn');
+   618→   618→    btns.forEach(btn => {
+   619→   619→      btn.addEventListener('click', () => {
+   620→   620→        btns.forEach(b => b.classList.remove('active'));
+   621→   621→        btn.classList.add('active');
+   622→   622→        const tabId = btn.getAttribute('data-tab');
+   623→   623→        if (tabId) {
+   624→   624→          document.querySelectorAll('.tab-panel').forEach(p => {
+   625→   625→            p.style.display = p.id === tabId ? 'block' : 'none';
+   626→   626→          });
+   627→   627→        }
+   628→   628→      });
+   629→   629→    });
+   630→   630→  });
+   631→   631→}
+   632→   632→
+   633→   633→// Initialize lightbox
+   634→   634→function initLightbox() {
+   635→   635→  const lightbox = document.createElement('div');
+   636→   636→  lightbox.className = 'lightbox';
+   637→   637→  lightbox.id = 'lightbox';
+   638→   638→  lightbox.innerHTML = `<button class="lightbox-close" id="lightboxClose">${icons.x}</button><img src="" alt="Gallery image" id="lightboxImg">`;
+   639→   639→  document.body.appendChild(lightbox);
+   640→   640→
+   641→   641→  document.querySelectorAll('.masonry-item').forEach(item => {
+   642→   642→    item.addEventListener('click', () => {
+   643→   643→      const img = item.querySelector('img');
+   644→   644→      if (img) {
+   645→   645→        document.getElementById('lightboxImg').src = img.src;
+   646→   646→        lightbox.classList.add('open');
+   647→   647→      }
+   648→   648→    });
+   649→   649→  });
+   650→   650→
+   651→   651→  lightbox.addEventListener('click', (e) => {
+   652→   652→    if (e.target === lightbox || e.target.id === 'lightboxClose' || e.target.closest('#lightboxClose')) {
+   653→   653→      lightbox.classList.remove('open');
+   654→   654→    }
+   655→   655→  });
+   656→   656→}
+   657→   657→
+   658→   658→// MAIN INIT
+   659→   659→document.addEventListener('DOMContentLoaded', () => {
+   660→   660→  renderHeader();
+   661→   661→  renderFooter();
+   662→   662→  renderFloatingDock();
+   663→   663→  initHeader();
+   664→   664→  initMobileMenu();
+   665→   665→  initFloatingDock();
+   666→   666→  initAnimations();
+   667→   667→  initLenis();
+   668→   668→  initAccordions();
+   669→   669→  initTabs();
+   670→   670→  initLightbox();
+   671→   671→});

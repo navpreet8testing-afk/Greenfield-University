@@ -1,0 +1,461 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>About Us - Greenfield University</title>
+     7→  <meta name="description" content="Learn about Greenfield University — our mission, vision, history, leadership, accreditations, and two decades of academic excellence.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Cinzel:wght@700;900&family=Space+Grotesk:wght@400;700&family=Chakra+Petch:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Great+Vibes&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→  <style>
+    15→    .vision-mission-icon {
+    16→      width: 3.5rem; height: 3.5rem; border-radius: 1rem;
+    17→      display: flex; align-items: center; justify-content: center;
+    18→      font-size: 1.5rem; margin-bottom: 1.25rem;
+    19→    }
+    20→    .vision-card { border-top: 4px solid var(--emerald); }
+    21→    .mission-card { border-top: 4px solid var(--gold); }
+    22→    .leader-avatar {
+    23→      width: 5rem; height: 5rem; border-radius: 50%;
+    24→      display: flex; align-items: center; justify-content: center;
+    25→      font-size: 1.125rem; font-weight: 700; color: white;
+    26→      margin: 0 auto 1rem; letter-spacing: 0.05em;
+    27→    }
+    28→    .accred-icon {
+    29→      width: 3.5rem; height: 3.5rem; border-radius: 1rem;
+    30→      display: flex; align-items: center; justify-content: center;
+    31→      font-size: 1.5rem; margin-bottom: 1rem;
+    32→    }
+    33→    .award-item {
+    34→      display: flex; gap: 1.25rem; align-items: flex-start;
+    35→      padding: 1.5rem; border-radius: var(--radius-xl);
+    36→      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    37→      transition: all 0.4s var(--ease-out-quint);
+    38→    }
+    39→    .award-item:hover {
+    40→      background: rgba(255,255,255,0.08);
+    41→      border-color: rgba(5,150,105,0.3);
+    42→      transform: translateY(-2px);
+    43→    }
+    44→    .award-year {
+    45→      font-size: 0.75rem; font-weight: 700; color: var(--emerald-400);
+    46→      white-space: nowrap; padding-top: 0.125rem;
+    47→    }
+    48→    .award-icon-wrap {
+    49→      width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; flex-shrink: 0;
+    50→      background: rgba(5,150,105,0.15); color: var(--emerald-400);
+    51→      display: flex; align-items: center; justify-content: center;
+    52→      font-size: 1.25rem;
+    53→    }
+    54→    .timeline-grid {
+    55→      display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem;
+    56→    }
+    57→    .timeline-grid .timeline { padding-left: 2rem; }
+    58→    .timeline-grid .timeline:nth-child(even) {
+    59→      padding-top: 3.5rem;
+    60→    }
+    61→    @media (max-width: 768px) {
+    62→      .timeline-grid { grid-template-columns: 1fr; }
+    63→      .timeline-grid .timeline:nth-child(even) { padding-top: 0; }
+    64→    }
+    65→  </style>
+    66→</head>
+    67→<body class="min-h-screen flex flex-col">
+    68→  <div id="site-header"></div>
+    69→  <main class="flex-1">
+    70→
+    71→    <!-- ==================== SECTION 1: HERO ==================== -->
+    72→    <section class="page-hero noise">
+    73→      <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=80')"></div>
+    74→      <div class="page-hero-overlay"></div>
+    75→      <div class="page-hero-content">
+    76→        <nav class="hero-breadcrumbs" aria-label="Breadcrumb">
+    77→          <a href="/">Home</a>
+    78→          <span class="sep">/</span>
+    79→          <span>About Us</span>
+    80→        </nav>
+    81→        <div class="hero-badge">
+    82→          <span class="pulse-dot"></span>
+    83→          Established 2003
+    84→        </div>
+    85→        <h1>About Greenfield University</h1>
+    86→        <p class="hero-sub">For over two decades, Greenfield University has been a beacon of academic excellence, nurturing future leaders through transformative education, cutting-edge research, and a commitment to societal impact.</p>
+    87→      </div>
+    88→    </section>
+    89→
+    90→    <!-- ==================== SECTION 2: VISION & MISSION ==================== -->
+    91→    <section id="vision" class="section bg-white">
+    92→      <div class="container">
+    93→        <div class="section-header gsap-reveal">
+    94→          <span class="section-label">Who We Are</span>
+    95→          <h2 class="section-title">Vision &amp; Mission</h2>
+    96→          <p class="section-desc">Guided by a bold vision and a resolute mission, Greenfield University strives to redefine higher education in India and make a mark on the global academic landscape.</p>
+    97→        </div>
+    98→        <div class="grid-2">
+    99→          <article class="card vision-card gsap-reveal" style="padding: 2.5rem;">
+   100→            <div class="vision-mission-icon" style="background: var(--emerald-50); color: var(--emerald);">
+   101→              &#x1F3AF;
+   102→            </div>
+   103→            <h3 style="font-size: 1.375rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 1rem;">Our Vision</h3>
+   104→            <p style="font-size: 0.9375rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem;">
+   105→              To emerge as a globally top-100 university recognized for academic rigor, interdisciplinary research, and the holistic development of socially responsible citizens. We envision a campus where innovation thrives, cultural diversity is celebrated, and every student is empowered to lead meaningful change in an interconnected world.
+   106→            </p>
+   107→            <p style="font-size: 0.9375rem; color: var(--muted); line-height: 1.75;">
+   108→              By 2030, Greenfield aims to be the premier destination for aspiring scholars and researchers across South Asia, forging partnerships with the world's leading institutions and contributing breakthrough solutions to humanity's most pressing challenges.
+   109→            </p>
+   110→          </article>
+   111→          <article class="card mission-card gsap-reveal" style="padding: 2.5rem;">
+   112→            <div class="vision-mission-icon" style="background: var(--gold-50); color: var(--gold);">
+   113→              &#x1F680;
+   114→            </div>
+   115→            <h3 style="font-size: 1.375rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 1rem;">Our Mission</h3>
+   116→            <p style="font-size: 0.9375rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem;">
+   117→              To deliver transformative education that equips students with critical thinking, technical expertise, and ethical grounding. We are committed to fostering a research-driven ecosystem where faculty and students collaborate on projects that advance knowledge and serve the public good.
+   118→            </p>
+   119→            <p style="font-size: 0.9375rem; color: var(--muted); line-height: 1.75;">
+   120→              Through industry partnerships, community engagement programs, and an inclusive campus culture, we prepare graduates who are not only career-ready but also compassionate leaders capable of driving societal progress and sustainable development.
+   121→            </p>
+   122→          </article>
+   123→        </div>
+   124→      </div>
+   125→    </section>
+   126→
+   127→    <!-- ==================== SECTION 3: STATS COUNTER ==================== -->
+   128→    <section class="section-sm bg-light">
+   129→      <div class="container">
+   130→        <div class="section-header gsap-reveal">
+   131→          <span class="section-label">Greenfield in Numbers</span>
+   132→          <h2 class="section-title">Building Impact at Scale</h2>
+   133→        </div>
+   134→        <div class="card-stagger" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem;">
+   135→          <div class="stat-card">
+   136→            <div class="stat-icon">&#x1F393;</div>
+   137→            <div class="stat-number" data-counter="3200" data-suffix="+">0</div>
+   138→            <div class="stat-label">Students Enrolled</div>
+   139→          </div>
+   140→          <div class="stat-card">
+   141→            <div class="stat-icon">&#x1F468;&#x200D;&#x1F3EB;</div>
+   142→            <div class="stat-number" data-counter="150" data-suffix="+">0</div>
+   143→            <div class="stat-label">Faculty Members</div>
+   144→          </div>
+   145→          <div class="stat-card">
+   146→            <div class="stat-icon">&#x1F4DA;</div>
+   147→            <div class="stat-number" data-counter="25" data-suffix="+">0</div>
+   148→            <div class="stat-label">Programs Offered</div>
+   149→          </div>
+   150→          <div class="stat-card">
+   151→            <div class="stat-icon">&#x1F4C8;</div>
+   152→            <div class="stat-number" data-counter="94" data-suffix="%">0</div>
+   153→            <div class="stat-label">Placement Rate</div>
+   154→          </div>
+   155→          <div class="stat-card">
+   156→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=120&q=80" alt="" aria-hidden="true"></div>
+   157→            <div class="stat-number" data-counter="450" data-suffix="+">0</div>
+   158→            <div class="stat-label">Research Papers</div>
+   159→          </div>
+   160→          <div class="stat-card">
+   161→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" aria-hidden="true"></div>
+   162→            <div class="stat-number" data-counter="80" data-suffix="+">0</div>
+   163→            <div class="stat-label">Global Partners</div>
+   164→          </div>
+   165→        </div>
+   166→      </div>
+   167→    </section>
+   168→
+   169→    <!-- ==================== SECTION 4: HISTORY TIMELINE ==================== -->
+   170→    <section id="history" class="section bg-white">
+   171→      <div class="container">
+   172→        <div class="section-header gsap-reveal">
+   173→          <span class="section-label">Our Heritage</span>
+   174→          <h2 class="section-title">Our Journey Since 2003</h2>
+   175→          <p class="section-desc">From a fledgling institution with 120 students to a NAAC A++ accredited university with global recognition, every milestone reflects our relentless pursuit of excellence.</p>
+   176→        </div>
+   177→        <div class="timeline-grid">
+   178→          <div class="timeline card-stagger">
+   179→            <div class="timeline-item">
+   180→              <div class="timeline-dot"></div>
+   181→              <div class="timeline-year">2003</div>
+   182→              <h4 class="timeline-title">University Founded</h4>
+   183→              <p class="timeline-desc">Greenfield University was established by the Greenfield Education Trust with an inaugural batch of 120 students across three undergraduate programs in Engineering, Business Administration, and Computer Applications. The campus opened on a 50-acre plot on University Road.</p>
+   184→            </div>
+   185→            <div class="timeline-item">
+   186→              <div class="timeline-dot"></div>
+   187→              <div class="timeline-year">2006</div>
+   188→              <h4 class="timeline-title">First Graduating Batch</h4>
+   189→              <p class="timeline-desc">The university celebrated its first convocation, graduating 95 students. Over 70% of graduates received job offers within three months, with several securing positions at leading multinational corporations. The event was presided over by the Governor of the State.</p>
+   190→            </div>
+   191→            <div class="timeline-item">
+   192→              <div class="timeline-dot"></div>
+   193→              <div class="timeline-year">2010</div>
+   194→              <h4 class="timeline-title">NAAC Accredited</h4>
+   195→              <p class="timeline-desc">Greenfield received its first NAAC accreditation with a B++ grade, validating the quality of its academic infrastructure, faculty qualifications, research output, and student support systems. This marked the beginning of the university's quality assurance journey.</p>
+   196→            </div>
+   197→            <div class="timeline-item">
+   198→              <div class="timeline-dot"></div>
+   199→              <div class="timeline-year">2013</div>
+   200→              <h4 class="timeline-title">Research Centers Launched</h4>
+   201→              <p class="timeline-desc">Three dedicated research centers were inaugurated: the Center for Artificial Intelligence &amp; Data Science, the Center for Renewable Energy Studies, and the Center for Biomedical Research. Faculty publications doubled within the first year of operations.</p>
+   202→            </div>
+   203→          </div>
+   204→          <div class="timeline card-stagger">
+   205→            <div class="timeline-item">
+   206→              <div class="timeline-dot"></div>
+   207→              <div class="timeline-year">2016</div>
+   208→              <h4 class="timeline-title">International Partnerships</h4>
+   209→              <p class="timeline-desc">The university signed memoranda of understanding with 15 international institutions, including the University of Edinburgh, TU Munich, and Nanyang Technological University. Student exchange programs, joint research initiatives, and dual-degree options became available for the first time.</p>
+   210→            </div>
+   211→            <div class="timeline-item">
+   212→              <div class="timeline-dot"></div>
+   213→              <div class="timeline-year">2019</div>
+   214→              <h4 class="timeline-title">NAAC A++ Grade Achieved</h4>
+   215→              <p class="timeline-desc">In the third cycle of NAAC assessment, Greenfield was awarded the prestigious A++ grade — the highest possible rating — placing it among the top 5% of universities in India. The assessment report commended the university's research culture, industry linkages, and student welfare measures.</p>
+   216→            </div>
+   217→            <div class="timeline-item">
+   218→              <div class="timeline-dot"></div>
+   219→              <div class="timeline-year">2022</div>
+   220→              <h4 class="timeline-title">25,000+ Alumni Network</h4>
+   221→              <p class="timeline-desc">The Greenfield Alumni Association crossed the 25,000-member milestone, with alumni spread across 40 countries. The network includes Fortune 500 executives, startup founders, published researchers, civil servants, and social entrepreneurs making a difference worldwide.</p>
+   222→            </div>
+   223→            <div class="timeline-item">
+   224→              <div class="timeline-dot"></div>
+   225→              <div class="timeline-year">2025</div>
+   226→              <h4 class="timeline-title">AI Research Lab Inaugurated</h4>
+   227→              <p class="timeline-desc">A state-of-the-art AI Research Lab was launched in collaboration with leading tech companies, featuring GPU clusters, robotics workstations, and a dedicated Natural Language Processing wing. The lab aims to produce 50+ research papers annually and support 20 doctoral scholars.</p>
+   228→            </div>
+   229→          </div>
+   230→        </div>
+   231→      </div>
+   232→    </section>
+   233→
+   234→    <!-- ==================== SECTION 5: LEADERSHIP TEAM ==================== -->
+   235→    <section id="leadership" class="section bg-emerald-tint">
+   236→      <div class="container">
+   237→        <div class="section-header gsap-reveal">
+   238→          <span class="section-label">Our People</span>
+   239→          <h2 class="section-title">Leadership Team</h2>
+   240→          <p class="section-desc">Meet the visionary leaders who guide Greenfield University's strategic direction, academic standards, and institutional growth.</p>
+   241→        </div>
+   242→        <div class="grid-3 card-stagger">
+   243→          <!-- Leader 1: Chancellor -->
+   244→          <article class="card" style="padding: 2rem; text-align: center;">
+   245→            <div class="leader-avatar" style="background: linear-gradient(135deg, var(--emerald-700), var(--emerald-500));">AS</div>
+   246→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Anand Sharma</h3>
+   247→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Chancellor</p>
+   248→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Office of the Chancellor</p>
+   249→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Dr. Sharma brings over 35 years of experience in higher education administration. A former Vice Chancellor at a central university, he has served on national policy committees and authored three books on educational reform. Under his stewardship, Greenfield has grown into a nationally ranked institution.</p>
+   250→          </article>
+   251→          <!-- Leader 2: Vice Chancellor -->
+   252→          <article class="card" style="padding: 2rem; text-align: center;">
+   253→            <div class="leader-avatar" style="background: linear-gradient(135deg, var(--gold-700), var(--gold-500));">MK</div>
+   254→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Meera Krishnan</h3>
+   255→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Vice Chancellor</p>
+   256→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Academic Affairs</p>
+   257→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">An alumna of IIT Madras and MIT, Dr. Krishnan holds a Ph.D. in Computer Science with 120+ published papers. She has been instrumental in establishing international research collaborations and spearheading the university's digital transformation initiatives since joining in 2015.</p>
+   258→          </article>
+   259→          <!-- Leader 3: Registrar -->
+   260→          <article class="card" style="padding: 2rem; text-align: center;">
+   261→            <div class="leader-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">RG</div>
+   262→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Rajesh Gupta</h3>
+   263→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Registrar</p>
+   264→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Administration &amp; Governance</p>
+   265→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Dr. Gupta oversees all administrative operations, compliance, and governance frameworks. With an MBA from XLRI and two decades in academic administration, he has streamlined admission processes and implemented ERP systems that improved operational efficiency by 40%.</p>
+   266→          </article>
+   267→          <!-- Leader 4: Dean Academics -->
+   268→          <article class="card" style="padding: 2rem; text-align: center;">
+   269→            <div class="leader-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">PM</div>
+   270→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Priya Menon</h3>
+   271→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Dean, Academics</p>
+   272→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Academic Programs &amp; Curriculum</p>
+   273→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Dr. Menon holds a Ph.D. in Mathematics from TIFR and has introduced choice-based credit systems, interdisciplinary minors, and project-based learning across all programs. Her efforts have resulted in a 30% increase in student satisfaction scores over three years.</p>
+   274→          </article>
+   275→          <!-- Leader 5: Dean Research -->
+   276→          <article class="card" style="padding: 2rem; text-align: center;">
+   277→            <div class="leader-avatar" style="background: linear-gradient(135deg, #0ea5e9, #06b6d4);">VP</div>
+   278→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Vikram Patel</h3>
+   279→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Dean, Research</p>
+   280→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Research &amp; Innovation</p>
+   281→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">A Stanford postdoctoral fellow in AI, Dr. Patel has secured over &#x20B9;25 crores in research grants and mentored 40+ Ph.D. scholars. He established the university's patent cell and technology transfer office, leading to 15 filed patents and 3 commercialized technologies.</p>
+   282→          </article>
+   283→          <!-- Leader 6: Dean Student Affairs -->
+   284→          <article class="card" style="padding: 2rem; text-align: center;">
+   285→            <div class="leader-avatar" style="background: linear-gradient(135deg, #f97316, #ef4444);">SR</div>
+   286→            <h3 style="font-size: 1.125rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.25rem;">Dr. Sunita Reddy</h3>
+   287→            <p style="font-size: 0.8125rem; font-weight: 600; color: var(--emerald); margin-bottom: 0.125rem;">Dean, Student Affairs</p>
+   288→            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem;">Student Welfare &amp; Development</p>
+   289→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Dr. Reddy is a psychologist and educator with 18 years of experience in student mentoring and campus wellness. She launched the university's counseling center, anti-ragging committee, and holistic development program that covers leadership, arts, and community service.</p>
+   290→          </article>
+   291→        </div>
+   292→      </div>
+   293→    </section>
+   294→
+   295→    <!-- ==================== SECTION 6: ACCREDITATIONS & RANKINGS ==================== -->
+   296→    <section id="accreditations" class="section bg-white">
+   297→      <div class="container">
+   298→        <div class="section-header gsap-reveal">
+   299→          <span class="section-label">Quality Assurance</span>
+   300→          <h2 class="section-title">Accreditations &amp; Recognitions</h2>
+   301→          <p class="section-desc">Greenfield University's commitment to quality is validated by India's most prestigious accreditation bodies and recognized by international ranking frameworks.</p>
+   302→        </div>
+   303→        <div class="grid-3 card-stagger">
+   304→          <!-- Accreditation 1 -->
+   305→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   306→            <div class="accred-icon"  style="background: var(--emerald-50); color: var(--emerald);"><img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=120&q=80" alt="" aria-hidden="true"></div>
+   307→            <span class="badge badge-emerald" style="margin-bottom: 0.75rem;">2020</span>
+   308→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">NAAC A++ Grade</h3>
+   309→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Awarded the highest possible accreditation grade by the National Assessment and Accreditation Council in the third cycle, placing Greenfield among the top 5% of all accredited universities in India with a CGPA of 3.72 out of 4.0.</p>
+   310→          </article>
+   311→          <!-- Accreditation 2 -->
+   312→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   313→            <div class="accred-icon"  style="background: var(--gold-50); color: var(--gold);"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=120&q=80" alt="" aria-hidden="true"></div>
+   314→            <span class="badge badge-gold" style="margin-bottom: 0.75rem;">2024</span>
+   315→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">NIRF Top 100</h3>
+   316→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Ranked in the top 100 universities nationally by the National Institutional Ranking Framework under the Ministry of Education. Consistently ranked among the top 50 in the 'Research' and 'Outreach &amp; Inclusivity' categories since 2021.</p>
+   317→          </article>
+   318→          <!-- Accreditation 3 -->
+   319→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   320→            <div class="accred-icon"  style="background: #cffafe; color: #0e7490;"><img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=120&q=80" alt="" aria-hidden="true"></div>
+   321→            <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">2005</span>
+   322→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">UGC Recognized</h3>
+   323→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Fully recognized under Section 2(f) and 12(B) of the UGC Act, 1956. Eligible to receive central government grants and students can avail national fellowships. The university complies with all UGC regulations on admissions, curriculum, and faculty qualifications.</p>
+   324→          </article>
+   325→          <!-- Accreditation 4 -->
+   326→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   327→            <div class="accred-icon" style="background: #f3e8ff; color: #7c3aed;">✓</div>
+   328→            <span class="badge badge-purple" style="margin-bottom: 0.75rem;">2004</span>
+   329→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">AICTE Approved</h3>
+   330→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">All engineering and technology programs are approved by the All India Council for Technical Education. The university maintains compliance with AICTE norms for faculty-student ratios, infrastructure, and curriculum revision cycles.</p>
+   331→          </article>
+   332→          <!-- Accreditation 5 -->
+   333→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   334→            <div class="accred-icon" style="background: #ccfbf1; color: #0d9488;">🛡️</div>
+   335→            <span class="badge badge-teal" style="margin-bottom: 0.75rem;">2018</span>
+   336→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">ISO 9001:2015 Certified</h3>
+   337→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">The university's quality management system is certified to the ISO 9001:2015 international standard, covering all academic and administrative processes. This ensures systematic approach to quality improvement across every department and function.</p>
+   338→          </article>
+   339→          <!-- Accreditation 6 -->
+   340→          <article class="card gsap-reveal" style="padding: 2rem; text-align: center;">
+   341→            <div class="accred-icon"  style="background: var(--gold-50); color: var(--gold);"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" aria-hidden="true"></div>
+   342→            <span class="badge badge-gold" style="margin-bottom: 0.75rem;">2023</span>
+   343→            <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--slate-dark); margin-bottom: 0.5rem;">QS Asia Rankings</h3>
+   344→            <p style="font-size: 0.8125rem; color: var(--muted); line-height: 1.65;">Featured in the QS Asia University Rankings for the first time in 2023, recognized for academic reputation, employer reputation, faculty-student ratio, and international research network. The university aims to break into the QS World Rankings by 2027.</p>
+   345→          </article>
+   346→        </div>
+   347→      </div>
+   348→    </section>
+   349→
+   350→    <!-- ==================== SECTION 7: AWARDS & ACHIEVEMENTS ==================== -->
+   351→    <section id="awards" class="section bg-dark">
+   352→      <div class="container">
+   353→        <div class="section-header gsap-reveal">
+   354→          <span class="section-label">Recognition</span>
+   355→          <h2 class="section-title">Awards &amp; Achievements</h2>
+   356→          <p class="section-desc">Greenfield University has been consistently recognized by national and international bodies for its contributions to education, research, sustainability, and community development.</p>
+   357→        </div>
+   358→        <div class="grid-2 card-stagger">
+   359→          <!-- Award 1 -->
+   360→          <article class="award-item">
+   361→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1607604276583-c986900aaaa4?w=120&q=80" alt="" aria-hidden="true"></div>
+   362→            <div>
+   363→              <div class="award-year">2024</div>
+   364→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Best University Award</h4>
+   365→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by AICTE — All India Council for Technical Education</p>
+   366→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Recognized for overall institutional excellence, including academic outcomes, research output, industry partnerships, and student welfare programs. Selected from over 500 nominated institutions across India.</p>
+   367→            </div>
+   368→          </article>
+   369→          <!-- Award 2 -->
+   370→          <article class="award-item">
+   371→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=120&q=80" alt="" aria-hidden="true"></div>
+   372→            <div>
+   373→              <div class="award-year">2023</div>
+   374→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Excellence in Research</h4>
+   375→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by UGC — University Grants Commission</p>
+   376→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Honored for the highest number of cited research papers among private universities in the state. The award acknowledged the university's focus on interdisciplinary research and its impact on public policy and industry innovation.</p>
+   377→            </div>
+   378→          </article>
+   379→          <!-- Award 3 -->
+   380→          <article class="award-item">
+   381→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=120&q=80" alt="" aria-hidden="true"></div>
+   382→            <div>
+   383→              <div class="award-year">2023</div>
+   384→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Green Campus Award</h4>
+   385→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by Centre for Science &amp; Environment (CSE)</p>
+   386→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Recognized for the 200kW solar power installation, rainwater harvesting systems covering 80% of campus buildings, zero-waste cafeteria initiative, and the plantation of over 5,000 native trees across the campus grounds.</p>
+   387→            </div>
+   388→          </article>
+   389→          <!-- Award 4 -->
+   390→          <article class="award-item">
+   391→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" aria-hidden="true"></div>
+   392→            <div>
+   393→              <div class="award-year">2022</div>
+   394→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Innovation in Teaching</h4>
+   395→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by National Education Foundation</p>
+   396→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Won for pioneering the flipped classroom model, AR/VR lab integration, and AI-powered adaptive learning platforms. Faculty training programs on modern pedagogy have been adopted as a model by five other universities.</p>
+   397→            </div>
+   398→          </article>
+   399→          <!-- Award 5 -->
+   400→          <article class="award-item">
+   401→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&q=80" alt="" aria-hidden="true"></div>
+   402→            <div>
+   403→              <div class="award-year">2022</div>
+   404→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Best Placement Cell</h4>
+   405→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by Confederation of Indian Industry (CII)</p>
+   406→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Acknowledged for achieving a 94% placement rate with the highest average package in the region. The placement cell's industry mentorship program, mock interview series, and soft-skill bootcamps were cited as best practices.</p>
+   407→            </div>
+   408→          </article>
+   409→          <!-- Award 6 -->
+   410→          <article class="award-item">
+   411→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" aria-hidden="true"></div>
+   412→            <div>
+   413→              <div class="award-year">2021</div>
+   414→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">International Collaboration Award</h4>
+   415→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by British Council &amp; DAAD</p>
+   416→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Recognized for building one of the most active international academic partnership networks among Indian private universities. Joint publications, faculty exchanges, and semester-abroad programs with 80+ global institutions were highlighted.</p>
+   417→            </div>
+   418→          </article>
+   419→          <!-- Award 7 -->
+   420→          <article class="award-item">
+   421→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=120&q=80" alt="" aria-hidden="true"></div>
+   422→            <div>
+   423→              <div class="award-year">2020</div>
+   424→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Community Service Excellence</h4>
+   425→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by Rotary International District</p>
+   426→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Honored for the National Service Scheme (NSS) unit's contribution of over 50,000 volunteer hours annually. Key initiatives include adult literacy programs in 12 surrounding villages, health camps, and digital literacy workshops for rural youth.</p>
+   427→            </div>
+   428→          </article>
+   429→          <!-- Award 8 -->
+   430→          <article class="award-item">
+   431→            <div class="award-icon-wrap"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=120&q=80" alt="" aria-hidden="true"></div>
+   432→            <div>
+   433→              <div class="award-year">2019</div>
+   434→              <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 0.375rem;">Digital Campus Award</h4>
+   435→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem;">Awarded by NASSCOM &amp; Ministry of Electronics</p>
+   436→              <p style="font-size: 0.8125rem; color: rgba(255,255,255,0.4); line-height: 1.6;">Won for the comprehensive campus digitization initiative including a unified ERP system, smart classroom infrastructure in 100% of rooms, RFID-enabled library, and a mobile-first student portal serving 3,000+ daily active users.</p>
+   437→            </div>
+   438→          </article>
+   439→        </div>
+   440→      </div>
+   441→    </section>
+   442→
+   443→    <!-- ==================== SECTION 8: CTA ==================== -->
+   444→    <section class="cta-section">
+   445→      <h2 class="gsap-reveal">Ready to Be Part of Our Story?</h2>
+   446→      <p class="gsap-reveal">Join a community of 25,000+ alumni and 3,200+ students who are shaping the future. Discover programs that match your aspirations and take the first step toward an extraordinary education.</p>
+   447→      <div class="gsap-reveal" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+   448→        <a href="/academics.html" class="btn btn-outline btn-lg">Explore Programs</a>
+   449→        <a href="/admissions.html#apply" class="btn btn-primary btn-lg" style="background: white; color: var(--emerald-800); box-shadow: 0 4px 14px rgba(255,255,255,0.2);">Apply Now</a>
+   450→      </div>
+   451→    </section>
+   452→
+   453→  </main>
+   454→  <div id="site-footer"></div>
+   455→  <div id="floating-dock"></div>
+   456→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   457→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   458→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   459→  <script src="/js/college-base.js"></script>
+   460→</body>
+   461→</html>

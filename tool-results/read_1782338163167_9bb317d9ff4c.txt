@@ -1,0 +1,524 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Faculty - Greenfield University</title>
+     7→  <meta name="description" content="Meet the distinguished faculty at Greenfield University — 150+ educators, 40+ PhD holders, and 500+ publications driving academic excellence and research innovation.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→  <style>
+    15→    .faculty-card .faculty-bio { display:none; }
+    16→    .faculty-card .faculty-details { display:flex; flex-direction:column; gap:0.25rem; }
+    17→    @media(min-width:768px){
+    18→      .faculty-card .faculty-bio { display:block; }
+    19→    }
+    20→  </style>
+    21→</head>
+    22→<body class="min-h-screen flex flex-col">
+    23→  <div id="site-header"></div>
+    24→  <main class="flex-1">
+    25→
+    26→    <!-- Hero -->
+    27→    <section class="page-hero noise">
+    28→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80')"></div>
+    29→      <div class="page-hero-overlay"></div>
+    30→      <div class="page-hero-content">
+    31→        <div class="hero-breadcrumbs">
+    32→          <a href="/">Home</a>
+    33→          <span class="sep">/</span>
+    34→          <span>Faculty</span>
+    35→        </div>
+    36→        <div class="hero-badge">
+    37→          <span class="pulse-dot"></span>
+    38→          150+ Distinguished Educators
+    39→        </div>
+    40→        <h1>Our Esteemed Faculty</h1>
+    41→        <p class="hero-sub">Learn from the best minds in academia and industry. Our faculty brings decades of research expertise, real-world experience, and a passion for mentoring the next generation.</p>
+    42→      </div>
+    43→    </section>
+    44→
+    45→    <!-- Faculty Stats -->
+    46→    <section class="section bg-white" style="padding-top:-2rem;margin-top:-2rem;position:relative;z-index:2">
+    47→      <div class="container">
+    48→        <div class="grid-4 card-stagger" style="margin-top:-3rem">
+    49→          <div class="stat-card">
+    50→            <div class="stat-icon">👨‍🏫</div>
+    51→            <div class="stat-number" data-counter="150" data-suffix="+">0</div>
+    52→            <div class="stat-label">Faculty Members</div>
+    53→          </div>
+    54→          <div class="stat-card">
+    55→            <div class="stat-icon">🎓</div>
+    56→            <div class="stat-number" data-counter="40" data-suffix="+">0</div>
+    57→            <div class="stat-label">PhD Holders</div>
+    58→          </div>
+    59→          <div class="stat-card">
+    60→            <div class="stat-icon">📄</div>
+    61→            <div class="stat-number" data-counter="500" data-suffix="+">0</div>
+    62→            <div class="stat-label">Publications</div>
+    63→          </div>
+    64→          <div class="stat-card">
+    65→            <div class="stat-icon">🏆</div>
+    66→            <div class="stat-number" data-counter="20" data-suffix="+">0</div>
+    67→            <div class="stat-label">Years Avg Experience</div>
+    68→          </div>
+    69→        </div>
+    70→      </div>
+    71→    </section>
+    72→
+    73→    <!-- Faculty Directory -->
+    74→    <section class="section bg-light" id="directory">
+    75→      <div class="container">
+    76→        <div class="section-header">
+    77→          <span class="section-label">Faculty Directory</span>
+    78→          <h2 class="section-title">Meet Our Faculty</h2>
+    79→          <p class="section-desc">Browse our faculty by department to find experts in your area of interest.</p>
+    80→        </div>
+    81→
+    82→        <div class="tab-bar">
+    83→          <button class="tab-btn active" data-tab="filter-all">All</button>
+    84→          <button class="tab-btn" data-tab="filter-cs">Computer Science</button>
+    85→          <button class="tab-btn" data-tab="filter-commerce">Commerce</button>
+    86→          <button class="tab-btn" data-tab="filter-mgmt">Management</button>
+    87→          <button class="tab-btn" data-tab="filter-science">Science</button>
+    88→          <button class="tab-btn" data-tab="filter-humanities">Humanities</button>
+    89→        </div>
+    90→
+    91→        <!-- All Faculty -->
+    92→        <div class="tab-panel" id="filter-all">
+    93→          <div class="grid-4 card-stagger" id="facultyGrid">
+    94→
+    95→            <!-- 1. Dr. Rajesh Kumar -->
+    96→            <div class="card faculty-card" data-dept="cs">
+    97→              <div class="flex items-center gap-3 mb-3">
+    98→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#059669,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">RK</div>
+    99→                <div>
+   100→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Rajesh Kumar</h4>
+   101→                  <p class="text-xs text-muted">Professor & HOD</p>
+   102→                </div>
+   103→              </div>
+   104→              <span class="badge badge-emerald mb-2">Computer Science</span>
+   105→              <div class="faculty-details">
+   106→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IIT Delhi</p>
+   107→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> rajesh.kumar@greenfield.edu</p>
+   108→              </div>
+   109→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Specializes in artificial intelligence and neural architecture search. Published 85+ papers in top-tier journals. 18 years of teaching and research experience.</p>
+   110→            </div>
+   111→
+   112→            <!-- 2. Dr. Priya Sharma -->
+   113→            <div class="card faculty-card" data-dept="cs">
+   114→              <div class="flex items-center gap-3 mb-3">
+   115→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#ec4899,#9d174d);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">PS</div>
+   116→                <div>
+   117→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Priya Sharma</h4>
+   118→                  <p class="text-xs text-muted">Associate Professor</p>
+   119→                </div>
+   120→              </div>
+   121→              <span class="badge badge-emerald mb-2">Computer Science</span>
+   122→              <div class="faculty-details">
+   123→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD BITS Pilani</p>
+   124→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> priya.sharma@greenfield.edu</p>
+   125→              </div>
+   126→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Expert in data science and big data analytics. Led multiple funded research projects on predictive modeling. 12 years of industry-academia experience.</p>
+   127→            </div>
+   128→
+   129→            <!-- 3. Prof. Anil Mehta -->
+   130→            <div class="card faculty-card" data-dept="commerce">
+   131→              <div class="flex items-center gap-3 mb-3">
+   132→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AM</div>
+   133→                <div>
+   134→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Anil Mehta</h4>
+   135→                  <p class="text-xs text-muted">Associate Professor & HOD</p>
+   136→                </div>
+   137→              </div>
+   138→              <span class="badge badge-gold mb-2">Commerce</span>
+   139→              <div class="faculty-details">
+   140→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> CA, M.Com</p>
+   141→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> anil.mehta@greenfield.edu</p>
+   142→              </div>
+   143→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Chartered Accountant with expertise in financial reporting and taxation. Former auditor at Deloitte with 15 years of professional and teaching experience.</p>
+   144→            </div>
+   145→
+   146→            <!-- 4. Dr. Sunita Reddy -->
+   147→            <div class="card faculty-card" data-dept="mgmt">
+   148→              <div class="flex items-center gap-3 mb-3">
+   149→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#b45309);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">SR</div>
+   150→                <div>
+   151→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Sunita Reddy</h4>
+   152→                  <p class="text-xs text-muted">Professor & HOD</p>
+   153→                </div>
+   154→              </div>
+   155→              <span class="badge badge-rose mb-2">Management</span>
+   156→              <div class="faculty-details">
+   157→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IIM Ahmedabad</p>
+   158→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> sunita.reddy@greenfield.edu</p>
+   159→              </div>
+   160→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Former McKinsey consultant specializing in strategic management and organizational behavior. Published in Harvard Business Review. 20 years of experience.</p>
+   161→            </div>
+   162→
+   163→            <!-- 5. Prof. Vikram Singh -->
+   164→            <div class="card faculty-card" data-dept="science">
+   165→              <div class="flex items-center gap-3 mb-3">
+   166→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0369a1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">VS</div>
+   167→                <div>
+   168→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Vikram Singh</h4>
+   169→                  <p class="text-xs text-muted">Assistant Professor</p>
+   170→                </div>
+   171→              </div>
+   172→              <span class="badge badge-cyan mb-2">Science</span>
+   173→              <div class="faculty-details">
+   174→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> M.Sc, NET Qualified</p>
+   175→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> vikram.singh@greenfield.edu</p>
+   176→              </div>
+   177→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Specializes in applied mathematics and computational physics. UGC NET qualified with research interests in optimization theory and numerical methods.</p>
+   178→            </div>
+   179→
+   180→            <!-- 6. Dr. Meera Nair -->
+   181→            <div class="card faculty-card" data-dept="humanities">
+   182→              <div class="flex items-center gap-3 mb-3">
+   183→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#5b21b6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">MN</div>
+   184→                <div>
+   185→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Meera Nair</h4>
+   186→                  <p class="text-xs text-muted">Associate Professor & HOD</p>
+   187→                </div>
+   188→              </div>
+   189→              <span class="badge badge-purple mb-2">Humanities</span>
+   190→              <div class="faculty-details">
+   191→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD JNU</p>
+   192→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> meera.nair@greenfield.edu</p>
+   193→              </div>
+   194→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Scholar of postcolonial literature and cultural studies. Published three books and 40+ research papers. 16 years of teaching across premier institutions.</p>
+   195→            </div>
+   196→
+   197→            <!-- 7. Dr. Arjun Das -->
+   198→            <div class="card faculty-card" data-dept="cs">
+   199→              <div class="flex items-center gap-3 mb-3">
+   200→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#059669,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AD</div>
+   201→                <div>
+   202→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Arjun Das</h4>
+   203→                  <p class="text-xs text-muted">Professor</p>
+   204→                </div>
+   205→              </div>
+   206→              <span class="badge badge-emerald mb-2">Computer Science</span>
+   207→              <div class="faculty-details">
+   208→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IISc Bangalore</p>
+   209→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> arjun.das@greenfield.edu</p>
+   210→              </div>
+   211→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Blockchain and distributed systems researcher. Holds 5 patents in cryptographic protocols. Published 60+ papers in ACM and IEEE venues. 14 years of experience.</p>
+   212→            </div>
+   213→
+   214→            <!-- 8. Prof. Kavitha Rao -->
+   215→            <div class="card faculty-card" data-dept="cs">
+   216→              <div class="flex items-center gap-3 mb-3">
+   217→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#14b8a6,#0d9488);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">KR</div>
+   218→                <div>
+   219→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Kavitha Rao</h4>
+   220→                  <p class="text-xs text-muted">Associate Professor</p>
+   221→                </div>
+   222→              </div>
+   223→              <span class="badge badge-teal mb-2">Information Technology</span>
+   224→              <div class="faculty-details">
+   225→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> M.Tech NIT Trichy</p>
+   226→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> kavitha.rao@greenfield.edu</p>
+   227→              </div>
+   228→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Specializes in enterprise systems and IT governance. Certified PMP and AWS Solutions Architect. 10 years of industry experience at Infosys and TCS.</p>
+   229→            </div>
+   230→
+   231→            <!-- 9. Dr. Ramesh Iyer -->
+   232→            <div class="card faculty-card" data-dept="commerce">
+   233→              <div class="flex items-center gap-3 mb-3">
+   234→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">RI</div>
+   235→                <div>
+   236→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Ramesh Iyer</h4>
+   237→                  <p class="text-xs text-muted">Assistant Professor</p>
+   238→                </div>
+   239→              </div>
+   240→              <span class="badge badge-gold mb-2">Commerce</span>
+   241→              <div class="faculty-details">
+   242→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD, M.Com</p>
+   243→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> ramesh.iyer@greenfield.edu</p>
+   244→              </div>
+   245→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Expert in financial accounting and auditing standards. Research focus on fintech adoption in banking. Published 25+ papers in national and international journals.</p>
+   246→            </div>
+   247→
+   248→            <!-- 10. Dr. Anita Sharma -->
+   249→            <div class="card faculty-card" data-dept="mgmt">
+   250→              <div class="flex items-center gap-3 mb-3">
+   251→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#f43f5e,#be123c);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AS</div>
+   252→                <div>
+   253→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Anita Sharma</h4>
+   254→                  <p class="text-xs text-muted">Assistant Professor</p>
+   255→                </div>
+   256→              </div>
+   257→              <span class="badge badge-rose mb-2">Management</span>
+   258→              <div class="faculty-details">
+   259→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> MBA, PhD</p>
+   260→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> anita.sharma@greenfield.edu</p>
+   261→              </div>
+   262→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Human resources and organizational psychology specialist. Former HR lead at a Fortune 500 company. Researches talent management and employee wellbeing.</p>
+   263→            </div>
+   264→
+   265→            <!-- 11. Prof. Suresh Menon -->
+   266→            <div class="card faculty-card" data-dept="science">
+   267→              <div class="flex items-center gap-3 mb-3">
+   268→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0369a1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">SM</div>
+   269→                <div>
+   270→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Suresh Menon</h4>
+   271→                  <p class="text-xs text-muted">Associate Professor</p>
+   272→                </div>
+   273→              </div>
+   274→              <span class="badge badge-cyan mb-2">Science</span>
+   275→              <div class="faculty-details">
+   276→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD Physics</p>
+   277→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> suresh.menon@greenfield.edu</p>
+   278→              </div>
+   279→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Researches renewable energy materials and nanotechnology. Recipient of DST-SERB grant for solar cell efficiency research. 13 years of academic experience.</p>
+   280→            </div>
+   281→
+   282→            <!-- 12. Dr. Lakshmi Nair -->
+   283→            <div class="card faculty-card" data-dept="humanities">
+   284→              <div class="flex items-center gap-3 mb-3">
+   285→                <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#5b21b6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">LN</div>
+   286→                <div>
+   287→                  <h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Lakshmi Nair</h4>
+   288→                  <p class="text-xs text-muted">Assistant Professor</p>
+   289→                </div>
+   290→              </div>
+   291→              <span class="badge badge-purple mb-2">Humanities</span>
+   292→              <div class="faculty-details">
+   293→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD English Literature</p>
+   294→                <p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> lakshmi.nair@greenfield.edu</p>
+   295→              </div>
+   296→              <p class="text-xs text-muted mt-2 faculty-bio" style="line-height:1.7">Digital humanities and creative writing specialist. Published poet and translator. Researches computational approaches to literary analysis and digital archiving.</p>
+   297→            </div>
+   298→
+   299→          </div>
+   300→        </div>
+   301→
+   302→        <!-- Filtered panels (CS) -->
+   303→        <div class="tab-panel" id="filter-cs" style="display:none">
+   304→          <div class="grid-4 card-stagger">
+   305→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#059669,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">RK</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Rajesh Kumar</h4><p class="text-xs text-muted">Professor & HOD</p></div></div><span class="badge badge-emerald mb-2">Computer Science</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IIT Delhi</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> rajesh.kumar@greenfield.edu</p></div></div>
+   306→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#ec4899,#9d174d);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">PS</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Priya Sharma</h4><p class="text-xs text-muted">Associate Professor</p></div></div><span class="badge badge-emerald mb-2">Computer Science</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD BITS Pilani</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> priya.sharma@greenfield.edu</p></div></div>
+   307→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#059669,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AD</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Arjun Das</h4><p class="text-xs text-muted">Professor</p></div></div><span class="badge badge-emerald mb-2">Computer Science</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IISc Bangalore</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> arjun.das@greenfield.edu</p></div></div>
+   308→          </div>
+   309→        </div>
+   310→
+   311→        <!-- Filtered panels (Commerce) -->
+   312→        <div class="tab-panel" id="filter-commerce" style="display:none">
+   313→          <div class="grid-4 card-stagger">
+   314→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AM</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Anil Mehta</h4><p class="text-xs text-muted">Associate Professor & HOD</p></div></div><span class="badge badge-gold mb-2">Commerce</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> CA, M.Com</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> anil.mehta@greenfield.edu</p></div></div>
+   315→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">RI</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Ramesh Iyer</h4><p class="text-xs text-muted">Assistant Professor</p></div></div><span class="badge badge-gold mb-2">Commerce</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD, M.Com</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> ramesh.iyer@greenfield.edu</p></div></div>
+   316→          </div>
+   317→        </div>
+   318→
+   319→        <!-- Filtered panels (Management) -->
+   320→        <div class="tab-panel" id="filter-mgmt" style="display:none">
+   321→          <div class="grid-4 card-stagger">
+   322→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#b45309);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">SR</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Sunita Reddy</h4><p class="text-xs text-muted">Professor & HOD</p></div></div><span class="badge badge-rose mb-2">Management</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD IIM Ahmedabad</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> sunita.reddy@greenfield.edu</p></div></div>
+   323→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#f43f5e,#be123c);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">AS</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Anita Sharma</h4><p class="text-xs text-muted">Assistant Professor</p></div></div><span class="badge badge-rose mb-2">Management</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> MBA, PhD</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> anita.sharma@greenfield.edu</p></div></div>
+   324→          </div>
+   325→        </div>
+   326→
+   327→        <!-- Filtered panels (Science) -->
+   328→        <div class="tab-panel" id="filter-science" style="display:none">
+   329→          <div class="grid-4 card-stagger">
+   330→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0369a1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">VS</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Vikram Singh</h4><p class="text-xs text-muted">Assistant Professor</p></div></div><span class="badge badge-cyan mb-2">Science</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> M.Sc, NET Qualified</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> vikram.singh@greenfield.edu</p></div></div>
+   331→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0369a1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">SM</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Prof. Suresh Menon</h4><p class="text-xs text-muted">Associate Professor</p></div></div><span class="badge badge-cyan mb-2">Science</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD Physics</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> suresh.menon@greenfield.edu</p></div></div>
+   332→          </div>
+   333→        </div>
+   334→
+   335→        <!-- Filtered panels (Humanities) -->
+   336→        <div class="tab-panel" id="filter-humanities" style="display:none">
+   337→          <div class="grid-4 card-stagger">
+   338→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#5b21b6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">MN</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Meera Nair</h4><p class="text-xs text-muted">Associate Professor & HOD</p></div></div><span class="badge badge-purple mb-2">Humanities</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD JNU</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> meera.nair@greenfield.edu</p></div></div>
+   339→            <div class="card faculty-card"><div class="flex items-center gap-3 mb-3"><div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#5b21b6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.8125rem;flex-shrink:0">LN</div><div><h4 class="font-bold text-sm" style="color:var(--slate-dark)">Dr. Lakshmi Nair</h4><p class="text-xs text-muted">Assistant Professor</p></div></div><span class="badge badge-purple mb-2">Humanities</span><div class="faculty-details"><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Qualification:</span> PhD English Literature</p><p class="text-xs text-muted"><span class="font-medium" style="color:var(--slate-600)">Email:</span> lakshmi.nair@greenfield.edu</p></div></div>
+   340→          </div>
+   341→        </div>
+   342→
+   343→      </div>
+   344→    </section>
+   345→
+   346→    <!-- Department Heads -->
+   347→    <section class="section bg-white" id="heads">
+   348→      <div class="container">
+   349→        <div class="section-header">
+   350→          <span class="section-label">Leadership</span>
+   351→          <h2 class="section-title">Department Heads</h2>
+   352→          <p class="section-desc">Experienced academic leaders guiding each department toward excellence in teaching, research, and institutional development.</p>
+   353→        </div>
+   354→        <div class="grid-3 card-stagger">
+   355→          <div class="card" style="border-left:4px solid var(--emerald)">
+   356→            <div class="flex items-center gap-4 mb-4">
+   357→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#059669,#064e3b);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">RK</div>
+   358→              <div>
+   359→                <h3 class="font-bold" style="color:var(--slate-dark)">Dr. Rajesh Kumar</h3>
+   360→                <p class="text-sm" style="color:var(--emerald)">Head — Computer Science</p>
+   361→              </div>
+   362→            </div>
+   363→            <p class="text-sm text-muted mb-3" style="line-height:1.7">PhD from IIT Delhi with 18 years of experience. Leads a department of 28 faculty members, 6 research labs, and active collaborations with Google Research and Microsoft.</p>
+   364→            <div class="flex items-center gap-2">
+   365→              <span class="badge badge-emerald">85+ Publications</span>
+   366→              <span class="badge badge-outline">18 Years Exp</span>
+   367→            </div>
+   368→          </div>
+   369→          <div class="card" style="border-left:4px solid #d97706">
+   370→            <div class="flex items-center gap-4 mb-4">
+   371→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#d97706,#92400e);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">AM</div>
+   372→              <div>
+   373→                <h3 class="font-bold" style="color:var(--slate-dark)">Prof. Anil Mehta</h3>
+   374→                <p class="text-sm" style="color:#d97706">Head — Commerce & Finance</p>
+   375→              </div>
+   376→            </div>
+   377→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Chartered Accountant who transitioned from Deloitte to academia. 15 years of combined corporate and teaching experience. Established the Bloomberg Terminal lab on campus.</p>
+   378→            <div class="flex items-center gap-2">
+   379→              <span class="badge badge-gold">CA, M.Com</span>
+   380→              <span class="badge badge-outline">15 Years Exp</span>
+   381→            </div>
+   382→          </div>
+   383→          <div class="card" style="border-left:4px solid #f43f5e">
+   384→            <div class="flex items-center gap-4 mb-4">
+   385→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#b45309);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">SR</div>
+   386→              <div>
+   387→                <h3 class="font-bold" style="color:var(--slate-dark)">Dr. Sunita Reddy</h3>
+   388→                <p class="text-sm" style="color:#f43f5e">Head — Management</p>
+   389→              </div>
+   390→            </div>
+   391→            <p class="text-sm text-muted mb-3" style="line-height:1.7">PhD from IIM Ahmedabad, former McKinsey consultant. 20 years of experience spanning corporate strategy and academic leadership. Published in HBR and JMTP.</p>
+   392→            <div class="flex items-center gap-2">
+   393→              <span class="badge badge-rose">PhD IIMA</span>
+   394→              <span class="badge badge-outline">20 Years Exp</span>
+   395→            </div>
+   396→          </div>
+   397→          <div class="card" style="border-left:4px solid #0ea5e9">
+   398→            <div class="flex items-center gap-4 mb-4">
+   399→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#0369a1);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">VS</div>
+   400→              <div>
+   401→                <h3 class="font-bold" style="color:var(--slate-dark)">Prof. Vikram Singh</h3>
+   402→                <p class="text-sm" style="color:#0ea5e9">Head — Science & Mathematics</p>
+   403→              </div>
+   404→            </div>
+   405→            <p class="text-sm text-muted mb-3" style="line-height:1.7">UGC NET qualified with research in computational physics and optimization. Manages 20 faculty members and oversees the renewable energy research initiative.</p>
+   406→            <div class="flex items-center gap-2">
+   407→              <span class="badge badge-cyan">M.Sc, NET</span>
+   408→              <span class="badge badge-outline">12 Years Exp</span>
+   409→            </div>
+   410→          </div>
+   411→          <div class="card" style="border-left:4px solid #8b5cf6">
+   412→            <div class="flex items-center gap-4 mb-4">
+   413→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#5b21b6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">MN</div>
+   414→              <div>
+   415→                <h3 class="font-bold" style="color:var(--slate-dark)">Dr. Meera Nair</h3>
+   416→                <p class="text-sm" style="color:#8b5cf6">Head — Humanities</p>
+   417→              </div>
+   418→            </div>
+   419→            <p class="text-sm text-muted mb-3" style="line-height:1.7">PhD from JNU in postcolonial studies. Author of three books and 40+ research papers. Championed the digital humanities initiative and creative writing program.</p>
+   420→            <div class="flex items-center gap-2">
+   421→              <span class="badge badge-purple">PhD JNU</span>
+   422→              <span class="badge badge-outline">16 Years Exp</span>
+   423→            </div>
+   424→          </div>
+   425→          <div class="card" style="border-left:4px solid #14b8a6">
+   426→            <div class="flex items-center gap-4 mb-4">
+   427→              <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#14b8a6,#0d9488);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.125rem;flex-shrink:0">KR</div>
+   428→              <div>
+   429→                <h3 class="font-bold" style="color:var(--slate-dark)">Prof. Kavitha Rao</h3>
+   430→                <p class="text-sm" style="color:#14b8a6">Head — Information Technology</p>
+   431→              </div>
+   432→            </div>
+   433→            <p class="text-sm text-muted mb-3" style="line-height:1.7">M.Tech from NIT Trichy with 10 years of industry experience at Infosys and TCS. Leads the IT department with focus on enterprise systems and cloud computing.</p>
+   434→            <div class="flex items-center gap-2">
+   435→              <span class="badge badge-teal">M.Tech, PMP</span>
+   436→              <span class="badge badge-outline">14 Years Exp</span>
+   437→            </div>
+   438→          </div>
+   439→        </div>
+   440→      </div>
+   441→    </section>
+   442→
+   443→    <!-- Research Output -->
+   444→    <section class="section bg-dark" id="output">
+   445→      <div class="container">
+   446→        <div class="section-header">
+   447→          <span class="section-label">Impact</span>
+   448→          <h2 class="section-title">Research Output</h2>
+   449→          <p class="section-desc">Our faculty consistently produces high-impact research recognized by leading journals and institutions worldwide.</p>
+   450→        </div>
+   451→        <div class="grid-3 card-stagger">
+   452→          <div class="stat-card card-dark" style="text-align:center">
+   453→            <div class="stat-number" data-counter="500" data-suffix="+" style="color:white">0</div>
+   454→            <div class="stat-label" style="color:rgba(255,255,255,0.5)">Total Publications</div>
+   455→            <p class="text-sm mt-3" style="color:rgba(255,255,255,0.4);line-height:1.7">Across SCI, Scopus, and UGC-approved journals including IEEE, ACM, Springer, and Elsevier.</p>
+   456→          </div>
+   457→          <div class="stat-card card-dark" style="text-align:center">
+   458→            <div class="stat-number" data-counter="8500" data-suffix="+" style="color:white">0</div>
+   459→            <div class="stat-label" style="color:rgba(255,255,255,0.5)">Total Citations</div>
+   460→            <p class="text-sm mt-3" style="color:rgba(255,255,255,0.4);line-height:1.7">Cumulative citation index across Google Scholar, Web of Science, and Scopus databases.</p>
+   461→          </div>
+   462→          <div class="stat-card card-dark" style="text-align:center">
+   463→            <div class="stat-number" data-counter="45" data-suffix="" style="color:white">0</div>
+   464→            <div class="stat-label" style="color:rgba(255,255,255,0.5)">Average H-Index</div>
+   465→            <p class="text-sm mt-3" style="color:rgba(255,255,255,0.4);line-height:1.7">Faculty h-index reflecting sustained research impact and contribution to respective fields.</p>
+   466→          </div>
+   467→        </div>
+   468→      </div>
+   469→    </section>
+   470→
+   471→    <!-- Faculty Development -->
+   472→    <section class="section bg-white">
+   473→      <div class="container">
+   474→        <div class="section-header">
+   475→          <span class="section-label">Growth</span>
+   476→          <h2 class="section-title">Faculty Development Programs</h2>
+   477→          <p class="section-desc">We invest in our faculty through continuous professional development, ensuring they remain at the forefront of their disciplines.</p>
+   478→        </div>
+   479→        <div class="grid-4 card-stagger">
+   480→          <div class="card text-center">
+   481→            <div class="stat-icon mb-4">🌏</div>
+   482→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">International Conferences</h3>
+   483→            <p class="text-sm text-muted" style="line-height:1.7">Full funding support for faculty to present research at leading international conferences including NeurIPS, AAAI, ICML, and WWW.</p>
+   484→          </div>
+   485→          <div class="card text-center">
+   486→            <div class="stat-icon mb-4">🔄</div>
+   487→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Faculty Exchange</h3>
+   488→            <p class="text-sm text-muted" style="line-height:1.7">Semester-long exchange programs with partner institutions in the US, UK, Singapore, and Australia for collaborative research and teaching.</p>
+   489→          </div>
+   490→          <div class="card text-center">
+   491→            <div class="stat-icon mb-4">💰</div>
+   492→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Research Grants</h3>
+   493→            <p class="text-sm text-muted" style="line-height:1.7">Dedicated seed funding of up to ₹10 lakhs per project. Faculty encouraged to apply for DST, UGC, SERB, and international grants.</p>
+   494→          </div>
+   495→          <div class="card text-center">
+   496→            <div class="stat-icon mb-4">🎓</div>
+   497→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Workshop Participation</h3>
+   498→            <p class="text-sm text-muted" style="line-height:1.7">Sponsored participation in FDPs, ATAL workshops, and industry certification programs to keep teaching methods current and effective.</p>
+   499→          </div>
+   500→        </div>
+   501→      </div>
+   502→    </section>
+   503→
+   504→    <!-- CTA -->
+   505→    <section class="cta-section">
+   506→      <div class="container">
+   507→        <h2 class="gsap-reveal">Join Our Academic Family</h2>
+   508→        <p class="gsap-reveal">We are always looking for passionate educators and researchers. Explore open positions and become part of our vibrant academic community.</p>
+   509→        <div class="flex items-center justify-center gap-4 flex-wrap gsap-reveal">
+   510→          <a href="/careers.html" class="btn btn-primary btn-lg">View Open Positions</a>
+   511→          <a href="/contact.html" class="btn btn-outline btn-lg">Contact Us</a>
+   512→        </div>
+   513→      </div>
+   514→    </section>
+   515→
+   516→  </main>
+   517→  <div id="site-footer"></div>
+   518→  <div id="floating-dock"></div>
+   519→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   520→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   521→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   522→  <script src="/js/college-base.js"></script>
+   523→</body>
+   524→</html>

@@ -1,0 +1,671 @@
+     1→/* ============================================
+     2→   GREENFIELD UNIVERSITY — COLLEGE BASE JS
+     3→   Shared functionality for all pages
+     4→   ============================================ */
+     5→
+     6→// SVG Icon helpers
+     7→const icons = {
+     8→  phone: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+     9→  mail: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+    10→  mapPin: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    11→  chevronDown: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+    12→  menu: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>',
+    13→  x: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+    14→  arrowUp: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>',
+    15→  arrowRight: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+    16→  compass: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
+    17→  fileText: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>',
+    18→  globe: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
+    19→  facebook: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+    20→  twitter: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>',
+    21→  instagram: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>',
+    22→  linkedin: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>',
+    23→  youtube: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>',
+    24→  bookOpen: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+    25→  graduationCap: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 10 3 12 0v-5"/></svg>',
+    26→  users: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    27→  star: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    28→  search: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+    29→  play: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>',
+    30→  clock: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    31→  calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>',
+    32→  trendingUp: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+    33→  award: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>',
+    34→  handshake: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.883-3.883a2 2 0 0 0-2.828 0l-.414.414a2 2 0 0 1-2.828 0l-.883-.883a1 1 0 0 0-1.414 0L2 16"/><path d="m18.5 2.5 3 3L12 15"/><path d="m2 7 3-3 3 3"/><path d="M7 10l3-3"/></svg>',
+    35→  check: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    36→  dollarSign: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+    37→  briefcase: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    38→  send: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>',
+    39→  zap: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    40→  target: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+    41→  flame: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+    42→};
+    43→
+    44→// Mega menu data structure
+    45→const megaMenuData = {
+    46→  academics: {
+    47→    label: 'Academics',
+    48→    href: '/academics.html',
+    49→    cols: [
+    50→      { title: 'Programs', links: [
+    51→        { label: 'Undergraduate', href: '/academics.html#undergraduate' },
+    52→        { label: 'Postgraduate', href: '/academics.html#postgraduate' },
+    53→        { label: 'Doctoral (PhD)', href: '/academics.html#doctoral' },
+    54→        { label: 'Certificate Courses', href: '/academics.html#certificates' },
+    55→      ]},
+    56→      { title: 'Academics', links: [
+    57→        { label: 'Departments', href: '/academics.html#departments' },
+    58→        { label: 'Research Centers', href: '/research.html' },
+    59→        { label: 'Academic Calendar', href: '/academics.html#calendar' },
+    60→        { label: 'Course Catalog', href: '/academics.html#courses' },
+    61→      ]},
+    62→      { title: 'Resources', links: [
+    63→        { label: 'Faculty Spotlight', href: '/faculty.html' },
+    64→        { label: 'Student Portal', href: '/portal.html' },
+    65→        { label: 'Library', href: '/campus-life.html#library' },
+    66→        { label: 'Labs & Facilities', href: '/campus-life.html#labs' },
+    67→      ]},
+    68→    ]
+    69→  },
+    70→  campus: {
+    71→    label: 'Campus',
+    72→    href: '/campus-life.html',
+    73→    cols: [
+    74→      { title: 'Life at GU', links: [
+    75→        { label: 'Campus Overview', href: '/campus-life.html' },
+    76→        { label: 'Sports & Fitness', href: '/campus-life.html#sports' },
+    77→        { label: 'Clubs & Societies', href: '/campus-life.html#clubs' },
+    78→        { label: 'Hostel & Dining', href: '/campus-life.html#hostel' },
+    79→      ]},
+    80→      { title: 'Facilities', links: [
+    81→        { label: 'Library', href: '/campus-life.html#library' },
+    82→        { label: 'Laboratories', href: '/campus-life.html#labs' },
+    83→        { label: 'Cafeteria', href: '/campus-life.html#cafeteria' },
+    84→        { label: 'Gallery', href: '/gallery.html' },
+    85→      ]},
+    86→      { title: 'Activities', links: [
+    87→        { label: 'Events', href: '/events.html' },
+    88→        { label: 'Annual Fest', href: '/events.html#fest' },
+    89→        { label: 'Cultural Programs', href: '/campus-life.html#cultural' },
+    90→        { label: 'Workshops', href: '/events.html#workshops' },
+    91→      ]},
+    92→    ]
+    93→  },
+    94→  about: {
+    95→    label: 'About',
+    96→    href: '/about.html',
+    97→    cols: [
+    98→      { title: 'University', links: [
+    99→        { label: 'About Us', href: '/about.html' },
+   100→        { label: 'Leadership Team', href: '/about.html#leadership' },
+   101→        { label: 'History & Heritage', href: '/about.html#history' },
+   102→        { label: 'Vision & Mission', href: '/about.html#vision' },
+   103→      ]},
+   104→      { title: 'Excellence', links: [
+   105→        { label: 'Accreditations', href: '/about.html#accreditations' },
+   106→        { label: 'Awards & Rankings', href: '/about.html#awards' },
+   107→        { label: 'Research Impact', href: '/research.html' },
+   108→        { label: 'Global Partners', href: '/about.html#partners' },
+   109→      ]},
+   110→      { title: 'Community', links: [
+   111→        { label: 'Alumni Network', href: '/alumni.html' },
+   112→        { label: 'Testimonials', href: '/testimonials.html' },
+   113→        { label: 'News & Updates', href: '/news.html' },
+   114→        { label: 'Careers at GU', href: '/careers.html' },
+   115→      ]},
+   116→    ]
+   117→  },
+   118→  admissions: {
+   119→    label: 'Admissions',
+   120→    href: '/admissions.html',
+   121→    cols: [
+   122→      { title: 'Apply', links: [
+   123→        { label: 'How to Apply', href: '/admissions.html#process' },
+   124→        { label: 'Eligibility Criteria', href: '/admissions.html#eligibility' },
+   125→        { label: 'Important Dates', href: '/admissions.html#dates' },
+   126→        { label: 'Application Form', href: '/admissions.html#apply' },
+   127→      ]},
+   128→      { title: 'Financial', links: [
+   129→        { label: 'Fee Structure', href: '/admissions.html#fees' },
+   130→        { label: 'Scholarships', href: '/admissions.html#scholarships' },
+   131→        { label: 'Education Loans', href: '/admissions.html#loans' },
+   132→        { label: 'Fee Payment', href: '/portal.html' },
+   133→      ]},
+   134→      { title: 'Help', links: [
+   135→        { label: 'FAQs', href: '/admissions.html#faq' },
+   136→        { label: 'Contact Admissions', href: '/contact.html' },
+   137→        { label: 'Campus Visit', href: '/contact.html#visit' },
+   138→        { label: 'Virtual Tour', href: '/campus-life.html' },
+   139→      ]},
+   140→    ]
+   141→  },
+   142→  connect: {
+   143→    label: 'Connect',
+   144→    href: '/contact.html',
+   145→    cols: [
+   146→      { title: 'Reach Us', links: [
+   147→        { label: 'Contact Us', href: '/contact.html' },
+   148→        { label: 'Campus Map', href: '/contact.html#map' },
+   149→        { label: 'Department Contacts', href: '/contact.html#departments' },
+   150→        { label: 'Social Media', href: '/contact.html#social' },
+   151→      ]},
+   152→      { title: 'Network', links: [
+   153→        { label: 'Alumni Network', href: '/alumni.html' },
+   154→        { label: 'Placement Cell', href: '/careers.html' },
+   155→        { label: 'Industry Partners', href: '/careers.html#partners' },
+   156→        { label: 'International Office', href: '/about.html#international' },
+   157→      ]},
+   158→      { title: 'Info', links: [
+   159→        { label: 'News & Updates', href: '/news.html' },
+   160→        { label: 'Events', href: '/events.html' },
+   161→        { label: 'Testimonials', href: '/testimonials.html' },
+   162→        { label: 'Student Portal', href: '/portal.html' },
+   163→      ]},
+   164→    ]
+   165→  },
+   166→};
+   167→
+   168→// Get current page filename for active state
+   169→function getCurrentPage() {
+   170→  const path = window.location.pathname;
+   171→  const filename = path.split('/').pop() || 'index.html';
+   172→  return filename === '/' ? 'index.html' : filename;
+   173→}
+   174→
+   175→// Render mega menu HTML
+   176→function renderMegaMenu(key) {
+   177→  const m = megaMenuData[key];
+   178→  if (!m) return '';
+   179→  let colsHTML = '';
+   180→  m.cols.forEach(col => {
+   181→    let linksHTML = '';
+   182→    col.links.forEach(link => {
+   183→      linksHTML += `<li><a href="${link.href}">${link.label}</a></li>`;
+   184→    });
+   185→    colsHTML += `<div class="mega-col"><h4>${col.title}</h4><ul>${linksHTML}</ul></div>`;
+   186→  });
+   187→  return `<div class="mega-menu"><div class="mega-menu-inner">${colsHTML}</div></div>`;
+   188→}
+   189→
+   190→// Render full header
+   191→function renderHeader() {
+   192→  const currentPage = getCurrentPage();
+   193→  const isActive = (href) => {
+   194→    if (href === '/') return currentPage === 'index.html';
+   195→    return currentPage === href.split('/').pop();
+   196→  };
+   197→
+   198→  let navLinksHTML = `<li><a href="/" class="nav-link ${isActive('/') ? 'active' : ''}">Home</a></li>`;
+   199→  Object.entries(megaMenuData).forEach(([key, m]) => {
+   200→    navLinksHTML += `
+   201→      <li class="has-mega">
+   202→        <a href="${m.href}" class="nav-link ${isActive(m.href) ? 'active' : ''} mega-trigger">
+   203→          ${m.label} ${icons.chevronDown}
+   204→        </a>
+   205→        ${renderMegaMenu(key)}
+   206→      </li>`;
+   207→  });
+   208→
+   209→  // Mobile menu
+   210→  let mobileNavHTML = `<li><a href="/" class="${isActive('/') ? 'active' : ''}">Home</a></li>`;
+   211→  Object.entries(megaMenuData).forEach(([key, m]) => {
+   212→    let mobileLinks = '';
+   213→    m.cols.forEach(col => {
+   214→      col.links.forEach(link => {
+   215→        mobileLinks += `<a href="${link.href}">${link.label}</a>`;
+   216→      });
+   217→    });
+   218→    mobileNavHTML += `
+   219→      <li class="mobile-mega-section">
+   220→        <button class="mobile-mega-toggle">${m.label} ${icons.chevronDown}</button>
+   221→        <div class="mobile-mega-dropdown">${mobileLinks}</div>
+   222→      </li>`;
+   223→  });
+   224→
+   225→  const html = `
+   226→    <header class="site-header" id="siteHeader">
+   227→      <div class="top-bar">
+   228→        <div class="top-bar-inner">
+   229→          <div class="top-bar-items">
+   230→            <span class="top-bar-item">${icons.phone} +91 1234 567 890</span>
+   231→            <span class="top-bar-item">${icons.mail} info@greenfield.edu</span>
+   232→          </div>
+   233→          <span class="top-bar-item">${icons.mapPin} University Road, Academic City</span>
+   234→        </div>
+   235→      </div>
+   236→      <nav class="navbar">
+   237→        <a href="/" class="logo-link">
+   238→          <div class="logo-icon">G</div>
+   239→          <div class="logo-text">
+   240→            <span class="logo-name">Greenfield</span>
+   241→            <span class="logo-sub">University</span>
+   242→          </div>
+   243→        </a>
+   244→        <ul class="nav-links">${navLinksHTML}</ul>
+   245→        <a href="/admissions.html#apply" class="nav-cta nav-cta-desktop">Apply Now</a>
+   246→        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">${icons.menu}</button>
+   247→      </nav>
+   248→    </header>
+   249→    <div class="mobile-menu" id="mobileMenu">
+   250→      <div class="mobile-menu-panel">
+   251→        <div class="mobile-menu-close"><button id="mobileClose">${icons.x}</button></div>
+   252→        <ul class="mobile-nav-links">${mobileNavHTML}</ul>
+   253→        <div class="mobile-cta-section">
+   254→          <a href="/admissions.html#apply" class="mobile-cta">Apply Now</a>
+   255→        </div>
+   256→      </div>
+   257→    </div>`;
+   258→  document.getElementById('site-header').innerHTML = html;
+   259→}
+   260→
+   261→// Render footer
+   262→function renderFooter() {
+   263→  const year = new Date().getFullYear();
+   264→  const html = `
+   265→    <footer class="site-footer">
+   266→      <div class="footer-ticker">
+   267→        <div class="footer-ticker-inner">
+   268→          <span class="footer-ticker-item"><span class="dot"></span>Admissions Open 2025-26 — Apply Now!</span>
+   269→          <span class="footer-ticker-item"><span class="dot"></span>CodeStorm 2025 — National Hackathon Registrations Open</span>
+   270→          <span class="footer-ticker-item"><span class="dot"></span>94% Placement Record — 300+ Companies Recruited</span>
+   271→          <span class="footer-ticker-item"><span class="dot"></span>NAAC A++ Accredited — Among Top Universities</span>
+   272→          <span class="footer-ticker-item"><span class="dot"></span>Admissions Open 2025-26 — Apply Now!</span>
+   273→          <span class="footer-ticker-item"><span class="dot"></span>CodeStorm 2025 — National Hackathon Registrations Open</span>
+   274→          <span class="footer-ticker-item"><span class="dot"></span>94% Placement Record — 300+ Companies Recruited</span>
+   275→          <span class="footer-ticker-item"><span class="dot"></span>NAAC A++ Accredited — Among Top Universities</span>
+   276→        </div>
+   277→      </div>
+   278→      <div class="footer-main">
+   279→        <div class="footer-brand">
+   280→          <a href="/" class="logo-link">
+   281→            <div class="logo-icon">G</div>
+   282→            <div class="logo-text">
+   283→              <span class="logo-name" style="color:white">Greenfield</span>
+   284→              <span class="logo-sub" style="color:var(--emerald-400)">University</span>
+   285→            </div>
+   286→          </a>
+   287→          <p>Shaping futures through academic excellence, innovation, and holistic development since 2003.</p>
+   288→          <div class="footer-socials">
+   289→            <a href="#" class="footer-social-link" aria-label="Facebook">${icons.facebook}</a>
+   290→            <a href="#" class="footer-social-link" aria-label="Twitter">${icons.twitter}</a>
+   291→            <a href="#" class="footer-social-link" aria-label="Instagram">${icons.instagram}</a>
+   292→            <a href="#" class="footer-social-link" aria-label="LinkedIn">${icons.linkedin}</a>
+   293→            <a href="#" class="footer-social-link" aria-label="YouTube">${icons.youtube}</a>
+   294→          </div>
+   295→        </div>
+   296→        <div class="footer-col">
+   297→          <h4>Quick Links</h4>
+   298→          <ul>
+   299→            <li><a href="/about.html">About Us</a></li>
+   300→            <li><a href="/academics.html">Programs</a></li>
+   301→            <li><a href="/faculty.html">Faculty</a></li>
+   302→            <li><a href="/campus-life.html">Campus Life</a></li>
+   303→            <li><a href="/events.html">Events</a></li>
+   304→            <li><a href="/contact.html">Contact</a></li>
+   305→          </ul>
+   306→        </div>
+   307→        <div class="footer-col">
+   308→          <h4>Resources</h4>
+   309→          <ul>
+   310→            <li><a href="/academics.html#calendar">Academic Calendar</a></li>
+   311→            <li><a href="/campus-life.html#library">Library Portal</a></li>
+   312→            <li><a href="/portal.html">Student Portal</a></li>
+   313→            <li><a href="/admissions.html#scholarships">Scholarships</a></li>
+   314→            <li><a href="/careers.html">Placement Cell</a></li>
+   315→            <li><a href="/research.html">Research Portal</a></li>
+   316→          </ul>
+   317→        </div>
+   318→        <div class="footer-col">
+   319→          <h4>Contact</h4>
+   320→          <div class="footer-contact-item">${icons.mapPin}<span>University Road, Academic City, State 123456, India</span></div>
+   321→          <div class="footer-contact-item">${icons.phone}<span>+91 1234 567 890<br>+91 9876 543 210</span></div>
+   322→          <div class="footer-contact-item">${icons.mail}<span>info@greenfield.edu<br>admissions@greenfield.edu</span></div>
+   323→        </div>
+   324→      </div>
+   325→      <div class="footer-bottom">
+   326→        <p>&copy; ${year} Greenfield University. All rights reserved.</p>
+   327→        <div class="footer-bottom-links">
+   328→          <a href="#">Privacy Policy</a>
+   329→          <a href="#">Terms of Service</a>
+   330→          <a href="#">Sitemap</a>
+   331→          <a href="#">Accessibility</a>
+   332→        </div>
+   333→      </div>
+   334→    </footer>`;
+   335→  document.getElementById('site-footer').innerHTML = html;
+   336→}
+   337→
+   338→// Render floating dock
+   339→function renderFloatingDock() {
+   340→  const html = `
+   341→    <div class="floating-dock" id="floatingDock">
+   342→      <div class="floating-dock-inner">
+   343→        <div class="dock-pill-bg" id="dockPill"></div>
+   344→        <a href="/academics.html" class="dock-link" data-dock="0">
+   345→          ${icons.compass} <span class="dock-link-text">Programs</span>
+   346→        </a>
+   347→        <a href="/admissions.html#apply" class="dock-link" data-dock="1">
+   348→          ${icons.fileText} <span class="dock-link-text">Apply Now</span>
+   349→        </a>
+   350→        <a href="/campus-life.html" class="dock-link" data-dock="2">
+   351→          ${icons.globe} <span class="dock-link-text">Campus Tour</span>
+   352→        </a>
+   353→      </div>
+   354→    </div>
+   355→    <button class="back-to-top" id="backToTop" aria-label="Back to top">${icons.arrowUp}</button>`;
+   356→  document.getElementById('floating-dock').innerHTML = html;
+   357→}
+   358→
+   359→// Initialize scroll-based header
+   360→function initHeader() {
+   361→  const header = document.getElementById('siteHeader');
+   362→  let lastScrollY = 0;
+   363→  const onScroll = () => {
+   364→    const scrollY = window.scrollY;
+   365→    if (scrollY > 60) {
+   366→      header.classList.add('scrolled');
+   367→    } else {
+   368→      header.classList.remove('scrolled');
+   369→    }
+   370→    lastScrollY = scrollY;
+   371→  };
+   372→  window.addEventListener('scroll', onScroll, { passive: true });
+   373→  onScroll();
+   374→}
+   375→
+   376→// Initialize mobile menu
+   377→function initMobileMenu() {
+   378→  const toggle = document.getElementById('mobileToggle');
+   379→  const menu = document.getElementById('mobileMenu');
+   380→  const close = document.getElementById('mobileClose');
+   381→
+   382→  toggle.addEventListener('click', () => menu.classList.add('open'));
+   383→  close.addEventListener('click', () => menu.classList.remove('open'));
+   384→  menu.addEventListener('click', (e) => {
+   385→    if (e.target === menu) menu.classList.remove('open');
+   386→  });
+   387→
+   388→  // Mobile mega toggles
+   389→  document.querySelectorAll('.mobile-mega-toggle').forEach(btn => {
+   390→    btn.addEventListener('click', () => {
+   391→      btn.classList.toggle('open');
+   392→      const dropdown = btn.nextElementSibling;
+   393→      dropdown.classList.toggle('open');
+   394→    });
+   395→  });
+   396→
+   397→  // Close on link click
+   398→  menu.querySelectorAll('a').forEach(a => {
+   399→    a.addEventListener('click', () => menu.classList.remove('open'));
+   400→  });
+   401→}
+   402→
+   403→// Initialize floating dock
+   404→function initFloatingDock() {
+   405→  const dock = document.getElementById('floatingDock');
+   406→  const backToTop = document.getElementById('backToTop');
+   407→  const dockLinks = dock.querySelectorAll('.dock-link');
+   408→  const pill = document.getElementById('dockPill');
+   409→  const total = dockLinks.length;
+   410→
+   411→  let lastScrollY = 0;
+   412→  const onScroll = () => {
+   413→    const scrollY = window.scrollY;
+   414→    const velocity = Math.abs(scrollY - lastScrollY);
+   415→
+   416→    if (scrollY > window.innerHeight * 0.6) {
+   417→      dock.classList.add('visible');
+   418→    } else {
+   419→      dock.classList.remove('visible');
+   420→    }
+   421→
+   422→    if (velocity > 15) {
+   423→      dock.style.transform = 'translateX(-50%) translateY(0) scale(0.95)';
+   424→      dock.style.opacity = '0.85';
+   425→    } else {
+   426→      dock.style.transform = '';
+   427→      dock.style.opacity = '';
+   428→    }
+   429→
+   430→    if (scrollY > 400) {
+   431→      backToTop.classList.add('visible');
+   432→    } else {
+   433→      backToTop.classList.remove('visible');
+   434→    }
+   435→
+   436→    lastScrollY = scrollY;
+   437→  };
+   438→  window.addEventListener('scroll', onScroll, { passive: true });
+   439→
+   440→  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+   441→
+   442→  // Pill hover
+   443→  dockLinks.forEach((link, i) => {
+   444→    link.addEventListener('mouseenter', () => {
+   445→      const pct = 100 / total;
+   446→      pill.style.left = `${i * pct}%`;
+   447→      pill.style.width = `${pct}%`;
+   448→    });
+   449→  });
+   450→  dock.addEventListener('mouseleave', () => {
+   451→    pill.style.left = '-100%';
+   452→  });
+   453→}
+   454→
+   455→// Initialize GSAP ScrollTrigger animations
+   456→function initAnimations() {
+   457→  gsap.registerPlugin(ScrollTrigger);
+   458→
+   459→  // Common reveals
+   460→  gsap.utils.toArray('.gsap-reveal').forEach(el => {
+   461→    gsap.fromTo(el,
+   462→      { opacity: 0, y: 40 },
+   463→      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+   464→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   465→      }
+   466→    );
+   467→  });
+   468→
+   469→  gsap.utils.toArray('.gsap-reveal-left').forEach(el => {
+   470→    gsap.fromTo(el,
+   471→      { opacity: 0, x: -50 },
+   472→      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+   473→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   474→      }
+   475→    );
+   476→  });
+   477→
+   478→  gsap.utils.toArray('.gsap-reveal-right').forEach(el => {
+   479→    gsap.fromTo(el,
+   480→      { opacity: 0, x: 50 },
+   481→      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+   482→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   483→      }
+   484→    );
+   485→  });
+   486→
+   487→  gsap.utils.toArray('.gsap-reveal-scale').forEach(el => {
+   488→    gsap.fromTo(el,
+   489→      { opacity: 0, scale: 0.92 },
+   490→      { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out',
+   491→        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+   492→      }
+   493→    );
+   494→  });
+   495→
+   496→  // Section headers
+   497→  gsap.utils.toArray('.section-header').forEach(el => {
+   498→    gsap.fromTo(el.children,
+   499→      { opacity: 0, y: 30 },
+   500→      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+   501→        scrollTrigger: { trigger: el, start: 'top 82%' }
+   502→      }
+   503→    );
+   504→  });
+   505→
+   506→  // Cards with stagger
+   507→  gsap.utils.toArray('.card-stagger').forEach(container => {
+   508→    gsap.fromTo(container.children,
+   509→      { opacity: 0, y: 40 },
+   510→      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out',
+   511→        scrollTrigger: { trigger: container, start: 'top 88%' }
+   512→      }
+   513→    );
+   514→  });
+   515→
+   516→  // Stat counters
+   517→  gsap.utils.toArray('[data-counter]').forEach(el => {
+   518→    const target = parseFloat(el.getAttribute('data-counter'));
+   519→    const suffix = el.getAttribute('data-suffix') || '';
+   520→    const obj = { val: 0 };
+   521→    gsap.to(obj, {
+   522→      val: target, duration: 2, ease: 'power2.out',
+   523→      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+   524→      onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString() + suffix; }
+   525→    });
+   526→  });
+   527→
+   528→  // Hero scroll scale
+   529→  const heroBg = document.querySelector('.page-hero-bg');
+   530→  if (heroBg) {
+   531→    gsap.to(heroBg, {
+   532→      scrollTrigger: {
+   533→        trigger: '.page-hero',
+   534→        start: 'top top',
+   535→        end: 'bottom top',
+   536→        scrub: 1.2,
+   537→      },
+   538→      scale: 1.1,
+   539→      borderRadius: '24px',
+   540→      ease: 'power2.out',
+   541→    });
+   542→  }
+   543→
+   544→  // Hero parallax
+   545→  const heroContent = document.querySelector('.page-hero-content');
+   546→  if (heroContent) {
+   547→    gsap.to(heroContent, {
+   548→      scrollTrigger: {
+   549→        trigger: '.page-hero',
+   550→        start: 'top top',
+   551→        end: 'bottom top',
+   552→        scrub: 1,
+   553→      },
+   554→      y: -80, opacity: 0,
+   555→    });
+   556→  }
+   557→}
+   558→
+   559→// Initialize Lenis smooth scroll
+   560→function initLenis() {
+   561→  if (typeof Lenis === 'undefined') return;
+   562→  const lenis = new Lenis({
+   563→    duration: 1.2,
+   564→    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+   565→    smoothWheel: true,
+   566→  });
+   567→
+   568→  lenis.on('scroll', ScrollTrigger.update);
+   569→
+   570→  gsap.ticker.add((time) => {
+   571→    lenis.raf(time * 1000);
+   572→  });
+   573→  gsap.ticker.lagSmoothing(0);
+   574→
+   575→  // Smooth scroll for anchor links
+   576→  document.querySelectorAll('a[href^="#"]').forEach(a => {
+   577→    a.addEventListener('click', (e) => {
+   578→      const href = a.getAttribute('href');
+   579→      if (href === '#') return;
+   580→      e.preventDefault();
+   581→      const target = document.querySelector(href);
+   582→      if (target) lenis.scrollTo(target, { offset: -80 });
+   583→    });
+   584→  });
+   585→}
+   586→
+   587→// Initialize accordion
+   588→function initAccordions() {
+   589→  document.querySelectorAll('.accordion-header').forEach(header => {
+   590→    header.addEventListener('click', () => {
+   591→      const body = header.nextElementSibling;
+   592→      const inner = body.querySelector('.accordion-body-inner');
+   593→      const isOpen = header.classList.contains('open');
+   594→
+   595→      // Close all others
+   596→      document.querySelectorAll('.accordion-header.open').forEach(h => {
+   597→        if (h !== header) {
+   598→          h.classList.remove('open');
+   599→          h.nextElementSibling.style.maxHeight = '0';
+   600→        }
+   601→      });
+   602→
+   603→      if (isOpen) {
+   604→        header.classList.remove('open');
+   605→        body.style.maxHeight = '0';
+   606→      } else {
+   607→        header.classList.add('open');
+   608→        body.style.maxHeight = inner.scrollHeight + 20 + 'px';
+   609→      }
+   610→    });
+   611→  });
+   612→}
+   613→
+   614→// Initialize tabs
+   615→function initTabs() {
+   616→  document.querySelectorAll('.tab-bar').forEach(bar => {
+   617→    const btns = bar.querySelectorAll('.tab-btn');
+   618→    btns.forEach(btn => {
+   619→      btn.addEventListener('click', () => {
+   620→        btns.forEach(b => b.classList.remove('active'));
+   621→        btn.classList.add('active');
+   622→        const tabId = btn.getAttribute('data-tab');
+   623→        if (tabId) {
+   624→          document.querySelectorAll('.tab-panel').forEach(p => {
+   625→            p.style.display = p.id === tabId ? 'block' : 'none';
+   626→          });
+   627→        }
+   628→      });
+   629→    });
+   630→  });
+   631→}
+   632→
+   633→// Initialize lightbox
+   634→function initLightbox() {
+   635→  const lightbox = document.createElement('div');
+   636→  lightbox.className = 'lightbox';
+   637→  lightbox.id = 'lightbox';
+   638→  lightbox.innerHTML = `<button class="lightbox-close" id="lightboxClose">${icons.x}</button><img src="" alt="Gallery image" id="lightboxImg">`;
+   639→  document.body.appendChild(lightbox);
+   640→
+   641→  document.querySelectorAll('.masonry-item').forEach(item => {
+   642→    item.addEventListener('click', () => {
+   643→      const img = item.querySelector('img');
+   644→      if (img) {
+   645→        document.getElementById('lightboxImg').src = img.src;
+   646→        lightbox.classList.add('open');
+   647→      }
+   648→    });
+   649→  });
+   650→
+   651→  lightbox.addEventListener('click', (e) => {
+   652→    if (e.target === lightbox || e.target.id === 'lightboxClose' || e.target.closest('#lightboxClose')) {
+   653→      lightbox.classList.remove('open');
+   654→    }
+   655→  });
+   656→}
+   657→
+   658→// MAIN INIT
+   659→document.addEventListener('DOMContentLoaded', () => {
+   660→  renderHeader();
+   661→  renderFooter();
+   662→  renderFloatingDock();
+   663→  initHeader();
+   664→  initMobileMenu();
+   665→  initFloatingDock();
+   666→  initAnimations();
+   667→  initLenis();
+   668→  initAccordions();
+   669→  initTabs();
+   670→  initLightbox();
+   671→});

@@ -1,0 +1,440 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Careers & Placements - Greenfield University</title>
+     7→  <meta name="description" content="Explore career opportunities, placement records, and top recruiters at Greenfield University. 94% placement rate with 300+ recruiting companies.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→</head>
+    15→<body class="min-h-screen flex flex-col">
+    16→  <div id="site-header"></div>
+    17→  <main class="flex-1">
+    18→
+    19→    <!-- Hero -->
+    20→    <section class="page-hero noise">
+    21→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80')"></div>
+    22→      <div class="page-hero-overlay"></div>
+    23→      <div class="page-hero-content">
+    24→        <div class="hero-breadcrumbs">
+    25→          <a href="/">Home</a>
+    26→          <span class="sep">/</span>
+    27→          <span>Careers</span>
+    28→        </div>
+    29→        <h1>Careers & Placements</h1>
+    30→        <p class="hero-sub">Your gateway to a thriving career. Industry-leading placement records, world-class recruiters, and dedicated career support from day one.</p>
+    31→        <div class="flex gap-4 mt-8">
+    32→          <a href="#partners" class="btn btn-primary btn-lg">Top Recruiters</a>
+    33→          <a href="#counseling" class="btn btn-outline btn-lg">Career Support</a>
+    34→        </div>
+    35→      </div>
+    36→    </section>
+    37→
+    38→    <!-- Placement Stats -->
+    39→    <section class="section bg-light">
+    40→      <div class="container">
+    41→        <div class="grid-6 card-stagger">
+    42→          <div class="stat-card">
+    43→            <div class="stat-icon">📊</div>
+    44→            <div class="stat-number" data-counter="94" data-suffix="%">0</div>
+    45→            <div class="stat-label">Placement Rate</div>
+    46→          </div>
+    47→          <div class="stat-card">
+    48→            <div class="stat-icon">🏢</div>
+    49→            <div class="stat-number" data-counter="300" data-suffix="+">0</div>
+    50→            <div class="stat-label">Recruiting Companies</div>
+    51→          </div>
+    52→          <div class="stat-card">
+    53→            <div class="stat-icon">💰</div>
+    54→            <div class="stat-number" data-counter="12" data-suffix=" LPA">0</div>
+    55→            <div class="stat-label">Average Package</div>
+    56→          </div>
+    57→          <div class="stat-card">
+    58→            <div class="stat-icon">🏆</div>
+    59→            <div class="stat-number" data-counter="45" data-suffix=" LPA">0</div>
+    60→            <div class="stat-label">Highest Package</div>
+    61→          </div>
+    62→          <div class="stat-card">
+    63→            <div class="stat-icon">📋</div>
+    64→            <div class="stat-number" data-counter="500" data-suffix="+">0</div>
+    65→            <div class="stat-label">Offers in 2024</div>
+    66→          </div>
+    67→          <div class="stat-card">
+    68→            <div class="stat-icon">⭐</div>
+    69→            <div class="stat-number" data-counter="150" data-suffix="+">0</div>
+    70→            <div class="stat-label">Dream Offers</div>
+    71→          </div>
+    72→        </div>
+    73→      </div>
+    74→    </section>
+    75→
+    76→    <!-- Top Recruiters -->
+    77→    <section class="section" id="partners">
+    78→      <div class="container">
+    79→        <div class="section-header gsap-reveal">
+    80→          <span class="section-label">Our Hiring Partners</span>
+    81→          <h2 class="section-title">Top Recruiters</h2>
+    82→          <p class="section-desc">Over 300 companies across technology, finance, consulting, and other industries recruit from Greenfield University every year.</p>
+    83→        </div>
+    84→        <div class="grid-4 card-stagger">
+    85→          <div class="card text-center gsap-reveal">
+    86→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm mx-auto mb-3">G</div>
+    87→            <h4 class="font-semibold text-dark">Google</h4>
+    88→            <span class="badge badge-emerald mt-2">Technology</span>
+    89→          </div>
+    90→          <div class="card text-center gsap-reveal">
+    91→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm mx-auto mb-3">M</div>
+    92→            <h4 class="font-semibold text-dark">Microsoft</h4>
+    93→            <span class="badge badge-emerald mt-2">Technology</span>
+    94→          </div>
+    95→          <div class="card text-center gsap-reveal">
+    96→            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 font-bold text-sm mx-auto mb-3">A</div>
+    97→            <h4 class="font-semibold text-dark">Amazon</h4>
+    98→            <span class="badge badge-emerald mt-2">E-Commerce</span>
+    99→          </div>
+   100→          <div class="card text-center gsap-reveal">
+   101→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-800 font-bold text-sm mx-auto mb-3">GS</div>
+   102→            <h4 class="font-semibold text-dark">Goldman Sachs</h4>
+   103→            <span class="badge badge-gold mt-2">Finance</span>
+   104→          </div>
+   105→          <div class="card text-center gsap-reveal">
+   106→            <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-700 font-bold text-sm mx-auto mb-3">D</div>
+   107→            <h4 class="font-semibold text-dark">Deloitte</h4>
+   108→            <span class="badge badge-gold mt-2">Consulting</span>
+   109→          </div>
+   110→          <div class="card text-center gsap-reveal">
+   111→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm mx-auto mb-3">Inf</div>
+   112→            <h4 class="font-semibold text-dark">Infosys</h4>
+   113→            <span class="badge badge-emerald mt-2">IT Services</span>
+   114→          </div>
+   115→          <div class="card text-center gsap-reveal">
+   116→            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold text-sm mx-auto mb-3">T</div>
+   117→            <h4 class="font-semibold text-dark">TCS</h4>
+   118→            <span class="badge badge-emerald mt-2">IT Services</span>
+   119→          </div>
+   120→          <div class="card text-center gsap-reveal">
+   121→            <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-sm mx-auto mb-3">W</div>
+   122→            <h4 class="font-semibold text-dark">Wipro</h4>
+   123→            <span class="badge badge-emerald mt-2">IT Services</span>
+   124→          </div>
+   125→          <div class="card text-center gsap-reveal">
+   126→            <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-600 font-bold text-sm mx-auto mb-3">Ac</div>
+   127→            <h4 class="font-semibold text-dark">Accenture</h4>
+   128→            <span class="badge badge-purple mt-2">Consulting</span>
+   129→          </div>
+   130→          <div class="card text-center gsap-reveal">
+   131→            <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-700 font-bold text-sm mx-auto mb-3">C</div>
+   132→            <h4 class="font-semibold text-dark">Cognizant</h4>
+   133→            <span class="badge badge-emerald mt-2">IT Services</span>
+   134→          </div>
+   135→          <div class="card text-center gsap-reveal">
+   136→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm mx-auto mb-3">H</div>
+   137→            <h4 class="font-semibold text-dark">HDFC Bank</h4>
+   138→            <span class="badge badge-gold mt-2">Banking</span>
+   139→          </div>
+   140→          <div class="card text-center gsap-reveal">
+   141→            <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-700 font-bold text-sm mx-auto mb-3">IC</div>
+   142→            <h4 class="font-semibold text-dark">ICICI Bank</h4>
+   143→            <span class="badge badge-gold mt-2">Banking</span>
+   144→          </div>
+   145→          <div class="card text-center gsap-reveal">
+   146→            <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-600 font-bold text-sm mx-auto mb-3">F</div>
+   147→            <h4 class="font-semibold text-dark">Flipkart</h4>
+   148→            <span class="badge badge-cyan mt-2">E-Commerce</span>
+   149→          </div>
+   150→          <div class="card text-center gsap-reveal">
+   151→            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 font-bold text-sm mx-auto mb-3">Sw</div>
+   152→            <h4 class="font-semibold text-dark">Swiggy</h4>
+   153→            <span class="badge badge-cyan mt-2">Food Tech</span>
+   154→          </div>
+   155→          <div class="card text-center gsap-reveal">
+   156→            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm mx-auto mb-3">R</div>
+   157→            <h4 class="font-semibold text-dark">Razorpay</h4>
+   158→            <span class="badge badge-teal mt-2">Fintech</span>
+   159→          </div>
+   160→          <div class="card text-center gsap-reveal">
+   161→            <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-700 font-bold text-sm mx-auto mb-3">Z</div>
+   162→            <h4 class="font-semibold text-dark">Zoho</h4>
+   163→            <span class="badge badge-emerald mt-2">SaaS</span>
+   164→          </div>
+   165→        </div>
+   166→      </div>
+   167→    </section>
+   168→
+   169→    <!-- Job Openings -->
+   170→    <section class="section bg-light">
+   171→      <div class="container">
+   172→        <div class="section-header gsap-reveal">
+   173→          <span class="section-label">Current Openings</span>
+   174→          <h2 class="section-title">Featured Job Openings</h2>
+   175→          <p class="section-desc">Handpicked opportunities from our top recruiting partners exclusively for Greenfield students and recent graduates.</p>
+   176→        </div>
+   177→        <div class="grid-2 card-stagger" style="gap:1.25rem">
+   178→          <!-- Job 1 -->
+   179→          <div class="card gsap-reveal flex flex-col">
+   180→            <div class="flex items-start justify-between mb-3">
+   181→              <div>
+   182→                <h3 class="font-semibold text-lg text-dark">Software Developer</h3>
+   183→                <p class="text-emerald font-medium text-sm">Tata Consultancy Services</p>
+   184→              </div>
+   185→              <span class="badge badge-emerald">Active</span>
+   186→            </div>
+   187→            <p class="text-muted text-sm flex-1">Work on enterprise-scale applications for global clients. Requires strong proficiency in Java, Python, or C++. TCS offers comprehensive training, clear career growth paths, and exposure to cutting-edge projects in banking, healthcare, and retail domains.</p>
+   188→            <div class="flex flex-wrap gap-3 mt-4 text-sm text-muted">
+   189→              <span class="flex items-center gap-1">💰 <strong class="text-dark">₹8 LPA</strong></span>
+   190→              <span class="flex items-center gap-1">📍 <strong class="text-dark">Bangalore</strong></span>
+   191→              <span class="flex items-center gap-1">🎯 <strong class="text-dark">Full-Time</strong></span>
+   192→            </div>
+   193→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Apply Now</a>
+   194→          </div>
+   195→          <!-- Job 2 -->
+   196→          <div class="card gsap-reveal flex flex-col">
+   197→            <div class="flex items-start justify-between mb-3">
+   198→              <div>
+   199→                <h3 class="font-semibold text-lg text-dark">Business Analyst</h3>
+   200→                <p class="text-emerald font-medium text-sm">Deloitte</p>
+   201→              </div>
+   202→              <span class="badge badge-emerald">Active</span>
+   203→            </div>
+   204→            <p class="text-muted text-sm flex-1">Join Deloitte's consulting practice to analyze business processes, identify improvement opportunities, and deliver data-driven solutions to Fortune 500 clients. Strong analytical thinking, communication skills, and familiarity with tools like SQL and Tableau are preferred.</p>
+   205→            <div class="flex flex-wrap gap-3 mt-4 text-sm text-muted">
+   206→              <span class="flex items-center gap-1">💰 <strong class="text-dark">₹10 LPA</strong></span>
+   207→              <span class="flex items-center gap-1">📍 <strong class="text-dark">Mumbai</strong></span>
+   208→              <span class="flex items-center gap-1">🎯 <strong class="text-dark">Full-Time</strong></span>
+   209→            </div>
+   210→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Apply Now</a>
+   211→          </div>
+   212→          <!-- Job 3 -->
+   213→          <div class="card gsap-reveal flex flex-col">
+   214→            <div class="flex items-start justify-between mb-3">
+   215→              <div>
+   216→                <h3 class="font-semibold text-lg text-dark">Data Scientist</h3>
+   217→                <p class="text-emerald font-medium text-sm">Amazon</p>
+   218→              </div>
+   219→              <span class="badge badge-gold">Hot</span>
+   220→            </div>
+   221→            <p class="text-muted text-sm flex-1">Build machine learning models that power Amazon's recommendation engine, supply chain optimization, and customer experience improvements. Requires expertise in Python, TensorFlow/PyTorch, and strong statistical foundations. PhD or equivalent research experience is a plus.</p>
+   222→            <div class="flex flex-wrap gap-3 mt-4 text-sm text-muted">
+   223→              <span class="flex items-center gap-1">💰 <strong class="text-dark">₹15 LPA</strong></span>
+   224→              <span class="flex items-center gap-1">📍 <strong class="text-dark">Hyderabad</strong></span>
+   225→              <span class="flex items-center gap-1">🎯 <strong class="text-dark">Full-Time</strong></span>
+   226→            </div>
+   227→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Apply Now</a>
+   228→          </div>
+   229→          <!-- Job 4 -->
+   230→          <div class="card gsap-reveal flex flex-col">
+   231→            <div class="flex items-start justify-between mb-3">
+   232→              <div>
+   233→                <h3 class="font-semibold text-lg text-dark">Product Manager</h3>
+   234→                <p class="text-emerald font-medium text-sm">Flipkart</p>
+   235→              </div>
+   236→              <span class="badge badge-gold">Hot</span>
+   237→            </div>
+   238→            <p class="text-muted text-sm flex-1">Own and drive product strategy for one of India's largest e-commerce platforms. Lead cross-functional teams of engineers, designers, and analysts. Requires a strong product sense, data-driven decision-making ability, and prior internship or project experience in product management.</p>
+   239→            <div class="flex flex-wrap gap-3 mt-4 text-sm text-muted">
+   240→              <span class="flex items-center gap-1">💰 <strong class="text-dark">₹18 LPA</strong></span>
+   241→              <span class="flex items-center gap-1">📍 <strong class="text-dark">Bangalore</strong></span>
+   242→              <span class="flex items-center gap-1">🎯 <strong class="text-dark">Full-Time</strong></span>
+   243→            </div>
+   244→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Apply Now</a>
+   245→          </div>
+   246→          <!-- Job 5 -->
+   247→          <div class="card gsap-reveal flex flex-col" style="grid-column:1/-1;max-width:600px;margin:0 auto;width:100%">
+   248→            <div class="flex items-start justify-between mb-3">
+   249→              <div>
+   250→                <h3 class="font-semibold text-lg text-dark">Financial Analyst</h3>
+   251→                <p class="text-emerald font-medium text-sm">Goldman Sachs</p>
+   252→              </div>
+   253→              <span class="badge badge-rose">Dream</span>
+   254→            </div>
+   255→            <p class="text-muted text-sm flex-1">Join Goldman Sachs' investment banking division as a financial analyst. Work on mergers and acquisitions, capital market transactions, and financial modeling for high-profile clients. Requires exceptional analytical skills, CFA Level 1 cleared or equivalent, and advanced Excel proficiency.</p>
+   256→            <div class="flex flex-wrap gap-3 mt-4 text-sm text-muted">
+   257→              <span class="flex items-center gap-1">💰 <strong class="text-dark">₹20 LPA</strong></span>
+   258→              <span class="flex items-center gap-1">📍 <strong class="text-dark">Delhi</strong></span>
+   259→              <span class="flex items-center gap-1">🎯 <strong class="text-dark">Full-Time</strong></span>
+   260→            </div>
+   261→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Apply Now</a>
+   262→          </div>
+   263→        </div>
+   264→      </div>
+   265→    </section>
+   266→
+   267→    <!-- Placement Process -->
+   268→    <section class="section">
+   269→      <div class="container">
+   270→        <div class="section-header gsap-reveal">
+   271→          <span class="section-label">How It Works</span>
+   272→          <h2 class="section-title">Placement Process</h2>
+   273→          <p class="section-desc">Our streamlined four-step placement process ensures every student is industry-ready and gets the best opportunities.</p>
+   274→        </div>
+   275→        <div class="steps-grid gsap-reveal">
+   276→          <div class="step-card card">
+   277→            <div class="step-number">1</div>
+   278→            <h4>Registration</h4>
+   279→            <p>Students register with the Placement Cell at the start of their final year. Profile building, resume workshops, and eligibility checks are completed in this phase.</p>
+   280→          </div>
+   281→          <div class="step-card card">
+   282→            <div class="step-number">2</div>
+   283→            <h4>Pre-Placement Talk</h4>
+   284→            <p>Companies visit campus to present their organization, role descriptions, compensation packages, and growth opportunities. Students gain direct insights into each company's culture.</p>
+   285→          </div>
+   286→          <div class="step-card card">
+   287→            <div class="step-number">3</div>
+   288→            <h4>Aptitude Test & Interviews</h4>
+   289→            <p>Shortlisted students appear for online assessments, technical rounds, and HR interviews. The Career Development Cell provides mock tests and interview practice sessions beforehand.</p>
+   290→          </div>
+   291→          <div class="step-card card">
+   292→            <div class="step-number">4</div>
+   293→            <h4>Offer Letter</h4>
+   294→            <p>Selected candidates receive offer letters with detailed compensation breakdowns, joining dates, and onboarding information. The Placement Cell assists with negotiation and decision-making.</p>
+   295→          </div>
+   296→        </div>
+   297→      </div>
+   298→    </section>
+   299→
+   300→    <!-- Internship Programs -->
+   301→    <section class="section bg-emerald-tint">
+   302→      <div class="container">
+   303→        <div class="section-header gsap-reveal">
+   304→          <span class="section-label">Learn By Doing</span>
+   305→          <h2 class="section-title">Internship Programs</h2>
+   306→          <p class="section-desc">Gain real-world experience through our partnerships with leading organizations offering competitive internships.</p>
+   307→        </div>
+   308→        <div class="grid-3 card-stagger">
+   309→          <div class="card gsap-reveal">
+   310→            <div class="badge badge-emerald mb-3">Open Source</div>
+   311→            <h3 class="font-semibold text-dark">Google Summer of Code</h3>
+   312→            <p class="text-muted text-sm mt-2">Contribute to open-source projects mentored by Google engineers. Students receive a stipend of $3,000–$6,600 depending on project complexity and duration.</p>
+   313→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   314→              <span class="badge badge-outline">3 Months</span>
+   315→              <span class="badge badge-outline">$3,000–$6,600</span>
+   316→              <span class="badge badge-outline">Remote</span>
+   317→            </div>
+   318→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: BCA/B.Tech students with strong programming skills and GitHub portfolio.</p>
+   319→          </div>
+   320→          <div class="card gsap-reveal">
+   321→            <div class="badge badge-purple mb-3">Exploratory</div>
+   322→            <h3 class="font-semibold text-dark">Microsoft Explore</h3>
+   323→            <p class="text-muted text-sm mt-2">A 12-week internship program designed for first and second-year students to explore different roles in software engineering, program management, and data science at Microsoft.</p>
+   324→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   325→              <span class="badge badge-outline">12 Weeks</span>
+   326→              <span class="badge badge-outline">₹80,000/month</span>
+   327→              <span class="badge badge-outline">Hyderabad</span>
+   328→            </div>
+   329→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: 1st or 2nd year BCA/B.Tech students with passion for technology.</p>
+   330→          </div>
+   331→          <div class="card gsap-reveal">
+   332→            <div class="badge badge-cyan mb-3">Engineering</div>
+   333→            <h3 class="font-semibold text-dark">Amazon SDE Intern</h3>
+   334→            <p class="text-muted text-sm mt-2">Work on large-scale distributed systems powering Amazon's core infrastructure. Interns get a Pre-Placement Offer (PPO) based on performance, making this one of the most sought-after internships.</p>
+   335→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   336→              <span class="badge badge-outline">10–12 Weeks</span>
+   337→              <span class="badge badge-outline">₹1,00,000/month</span>
+   338→              <span class="badge badge-outline">Bangalore/Hyderabad</span>
+   339→            </div>
+   340→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: 3rd year B.Tech/BCA students with strong DSA and system design fundamentals.</p>
+   341→          </div>
+   342→          <div class="card gsap-reveal">
+   343→            <div class="badge badge-gold mb-3">Finance</div>
+   344→            <h3 class="font-semibold text-dark">Goldman Sachs Winter Intern</h3>
+   345→            <p class="text-muted text-sm mt-2">A highly competitive 8-week winter program in investment banking, asset management, or risk analysis. Interns work on live deals and get exposure to global financial markets.</p>
+   346→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   347→              <span class="badge badge-outline">8 Weeks</span>
+   348→              <span class="badge badge-outline">₹1,50,000/month</span>
+   349→              <span class="badge badge-outline">Mumbai/Bangalore</span>
+   350→            </div>
+   351→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: Final year B.Com/BBA students with strong finance and accounting knowledge.</p>
+   352→          </div>
+   353→          <div class="card gsap-reveal">
+   354→            <div class="badge badge-rose mb-3">Entrepreneurship</div>
+   355→            <h3 class="font-semibold text-dark">Startup Incubation</h3>
+   356→            <p class="text-muted text-sm mt-2">Greenfield's incubation center supports student startups with seed funding up to ₹5 lakhs, mentorship from industry veterans, co-working space, and access to a network of angel investors and VCs.</p>
+   357→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   358→              <span class="badge badge-outline">6–12 Months</span>
+   359→              <span class="badge badge-outline">Up to ₹5 Lakh</span>
+   360→              <span class="badge badge-outline">On-Campus</span>
+   361→            </div>
+   362→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: Students from any program with a validated startup idea and business plan.</p>
+   363→          </div>
+   364→          <div class="card gsap-reveal">
+   365→            <div class="badge badge-teal mb-3">Research</div>
+   366→            <h3 class="font-semibold text-dark">Research Assistantships</h3>
+   367→            <p class="text-muted text-sm mt-2">Work alongside faculty on funded research projects in AI, biotechnology, environmental science, and social sciences. Outstanding assistantships lead to co-authored publications in peer-reviewed journals.</p>
+   368→            <div class="flex flex-wrap gap-2 mt-4 text-xs text-muted">
+   369→              <span class="badge badge-outline">3–6 Months</span>
+   370→              <span class="badge badge-outline">₹15,000–25,000/month</span>
+   371→              <span class="badge badge-outline">On-Campus</span>
+   372→            </div>
+   373→            <p class="text-emerald text-xs font-medium mt-3">Eligibility: Students with strong academic records and research aptitude across all programs.</p>
+   374→          </div>
+   375→        </div>
+   376→      </div>
+   377→    </section>
+   378→
+   379→    <!-- Career Counseling -->
+   380→    <section class="section" id="counseling">
+   381→      <div class="container">
+   382→        <div class="section-header gsap-reveal">
+   383→          <span class="section-label">Career Development Cell</span>
+   384→          <h2 class="section-title">Career Counseling & Support</h2>
+   385→          <p class="section-desc">The Career Development Cell at Greenfield provides comprehensive support to prepare students for the professional world, starting from their very first semester.</p>
+   386→        </div>
+   387→        <div class="grid-3 card-stagger">
+   388→          <div class="card text-center gsap-reveal">
+   389→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">📄</div>
+   390→            <h3 class="font-semibold text-dark">Resume Building</h3>
+   391→            <p class="text-muted text-sm mt-2">One-on-one resume reviews with industry professionals. Learn to craft ATS-friendly resumes that highlight your strengths, projects, and achievements for maximum impact.</p>
+   392→          </div>
+   393→          <div class="card text-center gsap-reveal">
+   394→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">🎤</div>
+   395→            <h3 class="font-semibold text-dark">Mock Interviews</h3>
+   396→            <p class="text-muted text-sm mt-2">Practice technical, HR, and case-based interviews with alumni and hiring managers from top companies. Receive detailed feedback and personalized improvement plans.</p>
+   397→          </div>
+   398→          <div class="card text-center gsap-reveal">
+   399→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">🛠️</div>
+   400→            <h3 class="font-semibold text-dark">Skill Workshops</h3>
+   401→            <p class="text-muted text-sm mt-2">Regular workshops on emerging technologies, data analytics, financial modeling, communication skills, and leadership — conducted by industry experts and certified trainers.</p>
+   402→          </div>
+   403→          <div class="card text-center gsap-reveal">
+   404→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">🏢</div>
+   405→            <h3 class="font-semibold text-dark">Industry Visits</h3>
+   406→            <p class="text-muted text-sm mt-2">Quarterly visits to company offices, manufacturing plants, and tech parks. Students observe real-world operations and interact directly with professionals in their field of interest.</p>
+   407→          </div>
+   408→          <div class="card text-center gsap-reveal">
+   409→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">🧠</div>
+   410→            <h3 class="font-semibold text-dark">Aptitude Training</h3>
+   411→            <p class="text-muted text-sm mt-2">Structured programs for quantitative, logical reasoning, and verbal ability preparation. Includes weekly practice tests, shortcut techniques, and timed assessments aligned with company test patterns.</p>
+   412→          </div>
+   413→          <div class="card text-center gsap-reveal">
+   414→            <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald text-2xl mx-auto mb-4">🤝</div>
+   415→            <h3 class="font-semibold text-dark">Soft Skills Development</h3>
+   416→            <p class="text-muted text-sm mt-2">Comprehensive training in communication, teamwork, presentation, negotiation, and emotional intelligence. These skills are integrated into every semester through dedicated modules and activities.</p>
+   417→          </div>
+   418→        </div>
+   419→      </div>
+   420→    </section>
+   421→
+   422→    <!-- CTA -->
+   423→    <section class="cta-section">
+   424→      <h2 class="gsap-reveal">Launch Your Career at Greenfield</h2>
+   425→      <p class="gsap-reveal">Join a university where 94% of graduates land their dream job. Admissions are now open for 2025-26.</p>
+   426→      <div class="flex justify-center gap-4 gsap-reveal">
+   427→        <a href="/admissions.html" class="btn btn-primary btn-lg">Apply for Admissions</a>
+   428→        <a href="/contact.html" class="btn btn-outline btn-lg">Contact Placement Cell</a>
+   429→      </div>
+   430→    </section>
+   431→
+   432→  </main>
+   433→  <div id="site-footer"></div>
+   434→  <div id="floating-dock"></div>
+   435→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   436→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   437→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   438→  <script src="/js/college-base.js"></script>
+   439→</body>
+   440→</html>

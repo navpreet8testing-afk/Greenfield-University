@@ -1,0 +1,604 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Campus Life - Greenfield University</title>
+     7→  <meta name="description" content="Discover vibrant campus life at Greenfield University — hostels, sports, clubs, cafeterias, library, and state-of-the-art laboratories.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Cinzel:wght@700;900&family=Space+Grotesk:wght@400;700&family=Chakra+Petch:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Great+Vibes&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→</head>
+    15→<body class="min-h-screen flex flex-col">
+    16→  <div id="site-header"></div>
+    17→  <main class="flex-1">
+    18→
+    19→    <!-- ====== HERO ====== -->
+    20→    <section class="page-hero noise">
+    21→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80')"></div>
+    22→      <div class="page-hero-overlay"></div>
+    23→      <div class="page-hero-content">
+    24→        <div class="hero-breadcrumbs">
+    25→          <a href="/">Home</a>
+    26→          <span class="sep">/</span>
+    27→          <span>Campus Life</span>
+    28→        </div>
+    29→        <h1>Life at Greenfield</h1>
+    30→        <p class="hero-sub">Experience a vibrant campus culture where academics meet adventure, friendships flourish, and every day brings new opportunities to grow, learn, and thrive.</p>
+    31→      </div>
+    32→    </section>
+    33→
+    34→    <!-- ====== CAMPUS OVERVIEW ====== -->
+    35→    <section class="section bg-white">
+    36→      <div class="container">
+    37→        <div class="section-header gsap-reveal">
+    38→          <span class="section-label">Campus Overview</span>
+    39→          <h2 class="section-title">A World-Class Campus Awaits You</h2>
+    40→          <p class="section-desc">Spread across lush green acres, our campus is designed to inspire learning with modern infrastructure and vibrant community spaces.</p>
+    41→        </div>
+    42→        <div class="flex flex-col lg:flex-row gap-8 items-center">
+    43→          <div class="flex-1 img-rounded gsap-reveal-left overflow-hidden" style="border-radius:var(--radius-xl)">
+    44→            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="Greenfield University campus overview" class="w-full" style="border-radius:var(--radius-xl);display:block">
+    45→          </div>
+    46→          <div class="flex-1 grid-3 card-stagger" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+    47→            <div class="stat-card">
+    48→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=120&q=80" alt="" aria-hidden="true"></div>
+    49→              <div class="stat-number" data-counter="50" data-suffix="+">0</div>
+    50→              <div class="stat-label">Acres Campus</div>
+    51→            </div>
+    52→            <div class="stat-card">
+    53→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=120&q=80" alt="" aria-hidden="true"></div>
+    54→              <div class="stat-number" data-counter="8">0</div>
+    55→              <div class="stat-label">Hostels</div>
+    56→            </div>
+    57→            <div class="stat-card">
+    58→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=120&q=80" alt="" aria-hidden="true"></div>
+    59→              <div class="stat-number" data-counter="12">0</div>
+    60→              <div class="stat-label">Sports Courts</div>
+    61→            </div>
+    62→            <div class="stat-card">
+    63→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=120&q=80" alt="" aria-hidden="true"></div>
+    64→              <div class="stat-number" data-counter="50" data-suffix="+">0</div>
+    65→              <div class="stat-label">Student Clubs</div>
+    66→            </div>
+    67→            <div class="stat-card">
+    68→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=120&q=80" alt="" aria-hidden="true"></div>
+    69→              <div class="stat-number" data-counter="5">0</div>
+    70→              <div class="stat-label">Cafeterias</div>
+    71→            </div>
+    72→            <div class="stat-card">
+    73→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=120&q=80" alt="" aria-hidden="true"></div>
+    74→              <div class="stat-number" data-counter="24" data-suffix="/7">0</div>
+    75→              <div class="stat-label">Medical Center</div>
+    76→            </div>
+    77→          </div>
+    78→        </div>
+    79→      </div>
+    80→    </section>
+    81→
+    82→    <!-- ====== HOSTEL & ACCOMMODATION ====== -->
+    83→    <section class="section bg-light" id="hostel">
+    84→      <div class="container">
+    85→        <div class="section-header gsap-reveal">
+    86→          <span class="section-label">Accommodation</span>
+    87→          <h2 class="section-title">Hostel & Living</h2>
+    88→          <p class="section-desc">Comfortable, safe, and well-equipped residential facilities that make you feel at home from day one.</p>
+    89→        </div>
+    90→        <div class="grid-3 card-stagger">
+    91→          <!-- Boys Hostel -->
+    92→          <div class="card">
+    93→            <div style="font-size:2.5rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+    94→            <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.5rem">Boys Hostel</h3>
+    95→            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:1rem">Spacious twin-sharing rooms with modern amenities in a secure, supervised environment. Four hostel blocks with wardens on every floor.</p>
+    96→            <ul style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem">
+    97→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Twin-sharing AC rooms</li>
+    98→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> High-speed WiFi</li>
+    99→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Attached mess hall</li>
+   100→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> 24/7 hot water & laundry</li>
+   101→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Recreation room & gym</li>
+   102→            </ul>
+   103→            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--slate-100)">
+   104→              <div>
+   105→                <div style="font-size:0.75rem;color:var(--muted)">Capacity</div>
+   106→                <div style="font-weight:600;color:var(--slate-dark)">1,200 Students</div>
+   107→              </div>
+   108→              <div style="text-align:right">
+   109→                <div style="font-size:0.75rem;color:var(--muted)">Annual Fees</div>
+   110→                <div style="font-weight:700;color:var(--emerald)">₹85,000</div>
+   111→              </div>
+   112→            </div>
+   113→          </div>
+   114→          <!-- Girls Hostel -->
+   115→          <div class="card">
+   116→            <div style="font-size:2.5rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   117→            <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.5rem">Girls Hostel</h3>
+   118→            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:1rem">Safe and comfortable twin-sharing rooms with round-the-clock security, CCTV surveillance, and female wardens on each floor.</p>
+   119→            <ul style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem">
+   120→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Twin-sharing AC rooms</li>
+   121→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> High-speed WiFi</li>
+   122→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Dedicated mess & kitchen</li>
+   123→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> 24/7 security & CCTV</li>
+   124→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Indoor games & common room</li>
+   125→            </ul>
+   126→            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--slate-100)">
+   127→              <div>
+   128→                <div style="font-size:0.75rem;color:var(--muted)">Capacity</div>
+   129→                <div style="font-weight:600;color:var(--slate-dark)">1,000 Students</div>
+   130→              </div>
+   131→              <div style="text-align:right">
+   132→                <div style="font-size:0.75rem;color:var(--muted)">Annual Fees</div>
+   133→                <div style="font-weight:700;color:var(--emerald)">₹85,000</div>
+   134→              </div>
+   135→            </div>
+   136→          </div>
+   137→          <!-- PG Option -->
+   138→          <div class="card">
+   139→            <div style="font-size:2.5rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   140→            <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.5rem">PG Accommodation</h3>
+   141→            <p style="font-size:0.875rem;color:var(--muted);line-height:1.7;margin-bottom:1rem">University-approved PG accommodations located within 2 km of campus. Verified and listed on the student portal for easy selection.</p>
+   142→            <ul style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.25rem">
+   143→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Single & double occupancy</li>
+   144→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> University-approved list</li>
+   145→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Meals included options</li>
+   146→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Within 2 km radius</li>
+   147→              <li style="display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--slate-600)"><span style="color:var(--emerald)">✓</span> Transport shuttle available</li>
+   148→            </ul>
+   149→            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--slate-100)">
+   150→              <div>
+   151→                <div style="font-size:0.75rem;color:var(--muted)">Available</div>
+   152→                <div style="font-weight:600;color:var(--slate-dark)">50+ Properties</div>
+   153→              </div>
+   154→              <div style="text-align:right">
+   155→                <div style="font-size:0.75rem;color:var(--muted)">Starting From</div>
+   156→                <div style="font-weight:700;color:var(--emerald)">₹5,000/mo</div>
+   157→              </div>
+   158→            </div>
+   159→          </div>
+   160→        </div>
+   161→      </div>
+   162→    </section>
+   163→
+   164→    <!-- ====== SPORTS & FITNESS ====== -->
+   165→    <section class="section bg-white" id="sports">
+   166→      <div class="container">
+   167→        <div class="section-header gsap-reveal">
+   168→          <span class="section-label">Sports & Fitness</span>
+   169→          <h2 class="section-title">Play Hard, Stay Strong</h2>
+   170→          <p class="section-desc">Our world-class sports facilities encourage every student to pursue fitness and competitive athletics alongside academics.</p>
+   171→        </div>
+   172→        <div class="flex flex-col lg:flex-row gap-8 items-start mb-12">
+   173→          <div class="flex-1">
+   174→            <div class="grid-3 card-stagger" style="gap:1rem">
+   175→              <div class="card" style="text-align:center;padding:1.25rem">
+   176→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   177→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Cricket</h4>
+   178→                <p style="font-size:0.75rem;color:var(--muted)">2 grounds, nets, turf wickets</p>
+   179→              </div>
+   180→              <div class="card" style="text-align:center;padding:1.25rem">
+   181→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   182→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Basketball</h4>
+   183→                <p style="font-size:0.75rem;color:var(--muted)">3 courts, indoor & outdoor</p>
+   184→              </div>
+   185→              <div class="card" style="text-align:center;padding:1.25rem">
+   186→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   187→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Football</h4>
+   188→                <p style="font-size:0.75rem;color:var(--muted)">FIFA-size ground, floodlights</p>
+   189→              </div>
+   190→              <div class="card" style="text-align:center;padding:1.25rem">
+   191→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   192→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Badminton</h4>
+   193→                <p style="font-size:0.75rem;color:var(--muted)">4 synthetic courts, indoor</p>
+   194→              </div>
+   195→              <div class="card" style="text-align:center;padding:1.25rem">
+   196→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   197→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Tennis</h4>
+   198→                <p style="font-size:0.75rem;color:var(--muted)">2 hard courts, coaching</p>
+   199→              </div>
+   200→              <div class="card" style="text-align:center;padding:1.25rem">
+   201→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   202→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Swimming</h4>
+   203→                <p style="font-size:0.75rem;color:var(--muted)">Olympic-size pool, heated</p>
+   204→              </div>
+   205→              <div class="card" style="text-align:center;padding:1.25rem">
+   206→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   207→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Athletics</h4>
+   208→                <p style="font-size:0.75rem;color:var(--muted)">400m track, long jump pit</p>
+   209→              </div>
+   210→              <div class="card" style="text-align:center;padding:1.25rem">
+   211→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   212→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Table Tennis</h4>
+   213→                <p style="font-size:0.75rem;color:var(--muted)">8 tables, tournament grade</p>
+   214→              </div>
+   215→              <div class="card" style="text-align:center;padding:1.25rem">
+   216→                <div style="font-size:2rem;margin-bottom:0.5rem">♟️</div>
+   217→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Chess</h4>
+   218→                <p style="font-size:0.75rem;color:var(--muted)">Dedicated chess room, coaching</p>
+   219→              </div>
+   220→              <div class="card" style="text-align:center;padding:1.25rem">
+   221→                <div style="font-size:2rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   222→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Yoga</h4>
+   223→                <p style="font-size:0.75rem;color:var(--muted)">Dedicated studio, daily sessions</p>
+   224→              </div>
+   225→              <div class="card" style="text-align:center;padding:1.25rem">
+   226→                <div style="font-size:2rem;margin-bottom:0.5rem">🏋️</div>
+   227→                <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark);margin-bottom:0.25rem">Gym</h4>
+   228→                <p style="font-size:0.75rem;color:var(--muted)">2 gyms, cardio & strength</p>
+   229→              </div>
+   230→            </div>
+   231→          </div>
+   232→          <div class="lg:w-96 gsap-reveal-right">
+   233→            <div class="img-rounded overflow-hidden" style="border-radius:var(--radius-xl)">
+   234→              <img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=800&q=80" alt="Sports facilities at Greenfield University" style="width:100%;display:block;border-radius:var(--radius-xl)">
+   235→            </div>
+   236→            <div class="card mt-4" style="border-left:3px solid var(--emerald)">
+   237→              <h4 style="font-weight:600;color:var(--slate-dark);margin-bottom:0.5rem">National-Level Achievements</h4>
+   238→              <p style="font-size:0.875rem;color:var(--muted);line-height:1.7">Our athletes have won 40+ medals at state and national-level competitions in the past three years, with dedicated coaches for every sport.</p>
+   239→            </div>
+   240→          </div>
+   241→        </div>
+   242→      </div>
+   243→    </section>
+   244→
+   245→    <!-- ====== CLUBS & SOCIETIES ====== -->
+   246→    <section class="section bg-light" id="clubs">
+   247→      <div class="container">
+   248→        <div class="section-header gsap-reveal">
+   249→          <span class="section-label">Student Organizations</span>
+   250→          <h2 class="section-title">Clubs & Societies</h2>
+   251→          <p class="section-desc">Join any of our 50+ active clubs and societies to pursue your passion, build leadership skills, and create lasting memories.</p>
+   252→        </div>
+   253→
+   254→        <!-- Technical -->
+   255→        <div class="mb-10 gsap-reveal">
+   256→          <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem">
+   257→            <span class="badge badge-emerald">Technical</span>
+   258→          </h3>
+   259→          <div class="grid-4 card-stagger" style="margin-top:1rem">
+   260→            <div class="card" style="padding:1.25rem">
+   261→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   262→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Coding Club</h4>
+   263→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Competitive programming, hackathons, and weekly coding challenges.</p>
+   264→            </div>
+   265→            <div class="card" style="padding:1.25rem">
+   266→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   267→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Robotics Society</h4>
+   268→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Build robots, compete in RoboWars, and explore automation.</p>
+   269→            </div>
+   270→            <div class="card" style="padding:1.25rem">
+   271→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   272→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">AI Club</h4>
+   273→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Machine learning projects, AI research, and Kaggle competitions.</p>
+   274→            </div>
+   275→            <div class="card" style="padding:1.25rem">
+   276→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   277→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Web Dev Club</h4>
+   278→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Full-stack development, open-source contributions, and tech talks.</p>
+   279→            </div>
+   280→          </div>
+   281→        </div>
+   282→
+   283→        <!-- Cultural -->
+   284→        <div class="mb-10 gsap-reveal">
+   285→          <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem">
+   286→            <span class="badge badge-gold">Cultural</span>
+   287→          </h3>
+   288→          <div class="grid-5 card-stagger" style="margin-top:1rem">
+   289→            <div class="card" style="padding:1.25rem">
+   290→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   291→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Music Club</h4>
+   292→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Band performances, jam sessions, and music production.</p>
+   293→            </div>
+   294→            <div class="card" style="padding:1.25rem">
+   295→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   296→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Dance Society</h4>
+   297→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Classical, contemporary, and hip-hop dance troupes.</p>
+   298→            </div>
+   299→            <div class="card" style="padding:1.25rem">
+   300→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1507924538820-ede94a04019d?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   301→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Drama Club</h4>
+   302→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Theatre productions, street plays, and acting workshops.</p>
+   303→            </div>
+   304→            <div class="card" style="padding:1.25rem">
+   305→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   306→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Art Society</h4>
+   307→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Painting, sculpture, and digital art exhibitions.</p>
+   308→            </div>
+   309→            <div class="card" style="padding:1.25rem">
+   310→              <div style="font-size:1.5rem;margin-bottom:0.5rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   311→              <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Photography Club</h4>
+   312→              <p style="font-size:0.8125rem;color:var(--muted);margin-top:0.25rem">Photo walks, exhibitions, and visual storytelling.</p>
+   313→            </div>
+   314→          </div>
+   315→        </div>
+   316→
+   317→        <!-- Sports & Academic -->
+   318→        <div class="grid-2 gsap-reveal" style="gap:2.5rem">
+   319→          <div>
+   320→            <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
+   321→              <span class="badge badge-rose">Sports</span>
+   322→            </h3>
+   323→            <div class="card-stagger" style="display:flex;flex-direction:column;gap:0.75rem">
+   324→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   325→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   326→                <div>
+   327→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Cricket Club</h4>
+   328→                  <p style="font-size:0.8125rem;color:var(--muted)">Inter-college tournaments & coaching camps</p>
+   329→                </div>
+   330→              </div>
+   331→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   332→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   333→                <div>
+   334→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Basketball Team</h4>
+   335→                  <p style="font-size:0.8125rem;color:var(--muted)">State-level competitive basketball squad</p>
+   336→                </div>
+   337→              </div>
+   338→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   339→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1461896836934-bd45ba8fcf9b?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   340→                <div>
+   341→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Athletic Club</h4>
+   342→                  <p style="font-size:0.8125rem;color:var(--muted)">Track & field, cross-country, and marathons</p>
+   343→                </div>
+   344→              </div>
+   345→            </div>
+   346→          </div>
+   347→          <div>
+   348→            <h3 style="font-size:1.125rem;font-weight:700;color:var(--slate-dark);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
+   349→              <span class="badge badge-purple">Academic</span>
+   350→            </h3>
+   351→            <div class="card-stagger" style="display:flex;flex-direction:column;gap:0.75rem">
+   352→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   353→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   354→                <div>
+   355→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Debate Society</h4>
+   356→                  <p style="font-size:0.8125rem;color:var(--muted)">MUNs, parliamentary debates, public speaking</p>
+   357→                </div>
+   358→              </div>
+   359→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   360→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   361→                <div>
+   362→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Quiz Club</h4>
+   363→                  <p style="font-size:0.8125rem;color:var(--muted)">Inter-college quiz competitions and trivia nights</p>
+   364→                </div>
+   365→              </div>
+   366→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   367→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   368→                <div>
+   369→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Literary Society</h4>
+   370→                  <p style="font-size:0.8125rem;color:var(--muted)">Creative writing, poetry slams, and book clubs</p>
+   371→                </div>
+   372→              </div>
+   373→              <div class="card" style="padding:1rem;display:flex;align-items:center;gap:1rem">
+   374→                <span style="font-size:1.5rem;display:inline-block;width:1.5rem;height:1.5rem;border-radius:0.375rem;overflow:hidden;vertical-align:middle"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></span>
+   375→                <div>
+   376→                  <h4 style="font-weight:600;font-size:0.875rem;color:var(--slate-dark)">Science Club</h4>
+   377→                  <p style="font-size:0.8125rem;color:var(--muted)">Experiments, science fairs, and research projects</p>
+   378→                </div>
+   379→              </div>
+   380→            </div>
+   381→          </div>
+   382→        </div>
+   383→      </div>
+   384→    </section>
+   385→
+   386→    <!-- ====== CAFETERIA & DINING ====== -->
+   387→    <section class="section bg-white" id="cafeteria">
+   388→      <div class="container">
+   389→        <div class="section-header gsap-reveal">
+   390→          <span class="section-label">Food & Dining</span>
+   391→          <h2 class="section-title">Cafeteria & Dining</h2>
+   392→          <p class="section-desc">From multi-cuisine meals to quick coffee bites, our dining options cater to every taste and dietary preference.</p>
+   393→        </div>
+   394→        <div class="grid-4 card-stagger">
+   395→          <!-- Main Cafeteria -->
+   396→          <div class="card">
+   397→            <div style="width:100%;height:140px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:1rem">🍽️</div>
+   398→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Main Cafeteria</h3>
+   399→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem">Our largest dining hall serving North Indian, South Indian, Chinese, and Continental cuisines. Seating capacity for 500 students at a time.</p>
+   400→            <div style="display:flex;flex-direction:column;gap:0.375rem">
+   401→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   402→                <span style="color:var(--muted)">Timings</span>
+   403→                <span style="font-weight:500;color:var(--slate-dark)">7:00 AM – 10:00 PM</span>
+   404→              </div>
+   405→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   406→                <span style="color:var(--muted)">Special</span>
+   407→                <span style="font-weight:500;color:var(--emerald)">Thali combos from ₹80</span>
+   408→              </div>
+   409→            </div>
+   410→          </div>
+   411→          <!-- Green Kitchen -->
+   412→          <div class="card">
+   413→            <div style="width:100%;height:140px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1rem"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   414→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Green Kitchen</h3>
+   415→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem">Dedicated vegetarian and vegan kitchen with organic produce sourced from local farms. Fresh salads, smoothie bowls, and plant-based meals.</p>
+   416→            <div style="display:flex;flex-direction:column;gap:0.375rem">
+   417→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   418→                <span style="color:var(--muted)">Timings</span>
+   419→                <span style="font-weight:500;color:var(--slate-dark)">8:00 AM – 9:00 PM</span>
+   420→              </div>
+   421→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   422→                <span style="color:var(--muted)">Special</span>
+   423→                <span style="font-weight:500;color:var(--emerald)">100% vegetarian & vegan</span>
+   424→              </div>
+   425→            </div>
+   426→          </div>
+   427→          <!-- Café Express -->
+   428→          <div class="card">
+   429→            <div style="width:100%;height:140px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1rem"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   430→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Café Express</h3>
+   431→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem">Premium coffee bar with espresso, cappuccino, and cold brew. Paired with sandwiches, pastries, and quick snacks for between-class refuels.</p>
+   432→            <div style="display:flex;flex-direction:column;gap:0.375rem">
+   433→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   434→                <span style="color:var(--muted)">Timings</span>
+   435→                <span style="font-weight:500;color:var(--slate-dark)">7:30 AM – 11:00 PM</span>
+   436→              </div>
+   437→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   438→                <span style="color:var(--muted)">Special</span>
+   439→                <span style="font-weight:500;color:var(--emerald)">Student discount 15%</span>
+   440→              </div>
+   441→            </div>
+   442→          </div>
+   443→          <!-- Night Canteen -->
+   444→          <div class="card">
+   445→            <div style="width:100%;height:140px;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1rem"><img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   446→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Night Canteen</h3>
+   447→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem">Late-night dining spot for hostel residents. Hot maggi, wraps, biryani, and beverages served until the early hours during exam season.</p>
+   448→            <div style="display:flex;flex-direction:column;gap:0.375rem">
+   449→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   450→                <span style="color:var(--muted)">Timings</span>
+   451→                <span style="font-weight:500;color:var(--slate-dark)">9:00 PM – 2:00 AM</span>
+   452→              </div>
+   453→              <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+   454→                <span style="color:var(--muted)">Special</span>
+   455→                <span style="font-weight:500;color:var(--emerald)">Budget-friendly meals</span>
+   456→              </div>
+   457→            </div>
+   458→          </div>
+   459→        </div>
+   460→      </div>
+   461→    </section>
+   462→
+   463→    <!-- ====== LIBRARY ====== -->
+   464→    <section class="section bg-light" id="library">
+   465→      <div class="container">
+   466→        <div class="flex flex-col lg:flex-row gap-12 items-center">
+   467→          <div class="flex-1 gsap-reveal-left">
+   468→            <div class="section-label">Knowledge Hub</div>
+   469→            <h2 class="section-title">Central Library</h2>
+   470→            <p class="section-desc" style="margin-bottom:2rem">Our state-of-the-art central library is the intellectual heart of the university, offering vast resources in both physical and digital formats to support research and learning.</p>
+   471→            <div class="grid-4 card-stagger" style="gap:1rem;margin-bottom:2rem">
+   472→              <div class="stat-card">
+   473→                <div class="stat-number" data-counter="100000" data-suffix="+">0</div>
+   474→                <div class="stat-label">Books</div>
+   475→              </div>
+   476→              <div class="stat-card">
+   477→                <div class="stat-number" data-counter="5000" data-suffix="+">0</div>
+   478→                <div class="stat-label">Journals</div>
+   479→              </div>
+   480→              <div class="stat-card">
+   481→                <div class="stat-number" data-counter="24" data-suffix="/7">0</div>
+   482→                <div class="stat-label">Digital Access</div>
+   483→              </div>
+   484→              <div class="stat-card">
+   485→                <div class="stat-number" data-counter="200" data-suffix="+">0</div>
+   486→                <div class="stat-label">Seating</div>
+   487→              </div>
+   488→            </div>
+   489→            <ul style="display:flex;flex-direction:column;gap:0.75rem">
+   490→              <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--slate-600)"><span style="width:1.5rem;height:1.5rem;border-radius:50%;background:var(--emerald-50);color:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">✓</span> OPAC system for quick book search and reservation</li>
+   491→              <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--slate-600)"><span style="width:1.5rem;height:1.5rem;border-radius:50%;background:var(--emerald-50);color:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">✓</span> E-resources: IEEE, Springer, JSTOR, and 30+ databases</li>
+   492→              <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--slate-600)"><span style="width:1.5rem;height:1.5rem;border-radius:50%;background:var(--emerald-50);color:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">✓</span> Silent reading rooms and individual study carrels</li>
+   493→              <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.875rem;color:var(--slate-600)"><span style="width:1.5rem;height:1.5rem;border-radius:50%;background:var(--emerald-50);color:var(--emerald);display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0">✓</span> Group study rooms with projectors and whiteboards</li>
+   494→            </ul>
+   495→          </div>
+   496→          <div class="flex-1 gsap-reveal-right">
+   497→            <div class="img-rounded overflow-hidden" style="border-radius:var(--radius-xl)">
+   498→              <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80" alt="Central Library at Greenfield University" style="width:100%;display:block;border-radius:var(--radius-xl)">
+   499→            </div>
+   500→          </div>
+   501→        </div>
+   502→      </div>
+   503→    </section>
+   504→
+   505→    <!-- ====== LABORATORIES ====== -->
+   506→    <section class="section bg-white" id="labs">
+   507→      <div class="container">
+   508→        <div class="section-header gsap-reveal">
+   509→          <span class="section-label">Infrastructure</span>
+   510→          <h2 class="section-title">Laboratories & Facilities</h2>
+   511→          <p class="section-desc">Cutting-edge labs equipped with the latest technology, enabling hands-on learning and groundbreaking research across disciplines.</p>
+   512→        </div>
+   513→        <div class="grid-3 card-stagger">
+   514→          <!-- Computer Lab -->
+   515→          <div class="card">
+   516→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--emerald-50);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem">🖥️</div>
+   517→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Computer Lab</h3>
+   518→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Fully air-conditioned lab with 200 high-performance workstations running Windows and Linux dual-boot. Dedicated servers for project hosting.</p>
+   519→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   520→              <span class="badge badge-emerald">200 PCs</span>
+   521→              <span class="badge badge-outline">120 Students</span>
+   522→              <span class="badge badge-outline">CS, IT, BCA</span>
+   523→            </div>
+   524→          </div>
+   525→          <!-- AI/ML Lab -->
+   526→          <div class="card">
+   527→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--gold-100);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   528→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">AI / ML Lab</h3>
+   529→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">GPU clusters with NVIDIA A100 and RTX 4090 cards for deep learning model training. Cloud-connected for distributed computing workloads.</p>
+   530→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   531→              <span class="badge badge-gold">GPU Clusters</span>
+   532→              <span class="badge badge-outline">40 Students</span>
+   533→              <span class="badge badge-outline">AI, Data Science</span>
+   534→            </div>
+   535→          </div>
+   536→          <!-- IoT Lab -->
+   537→          <div class="card">
+   538→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--emerald-50);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   539→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">IoT Lab</h3>
+   540→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Arduino, Raspberry Pi, and ESP32 development boards with sensor kits. Dedicated 5G testbed for IoT protocol research and prototyping.</p>
+   541→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   542→              <span class="badge badge-emerald">5G Testbed</span>
+   543→              <span class="badge badge-outline">30 Students</span>
+   544→              <span class="badge badge-outline">ECE, IoT</span>
+   545→            </div>
+   546→          </div>
+   547→          <!-- Electronics Lab -->
+   548→          <div class="card">
+   549→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--gold-100);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1606204280238-1bfb3a2b0e65?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   550→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Electronics Lab</h3>
+   551→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Oscilloscopes, signal generators, soldering stations, and PCB fabrication units. VLSI design workstations with FPGA boards.</p>
+   552→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   553→              <span class="badge badge-gold">VLSI Design</span>
+   554→              <span class="badge badge-outline">60 Students</span>
+   555→              <span class="badge badge-outline">ECE, EE</span>
+   556→            </div>
+   557→          </div>
+   558→          <!-- Physics Lab -->
+   559→          <div class="card">
+   560→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--emerald-50);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   561→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Physics Lab</h3>
+   562→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Optics bench, spectrometers, laser apparatus, and advanced mechanics setups. Dark room for optical and holography experiments.</p>
+   563→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   564→              <span class="badge badge-emerald">Laser Lab</span>
+   565→              <span class="badge badge-outline">40 Students</span>
+   566→              <span class="badge badge-outline">All B.Sc./B.Tech</span>
+   567→            </div>
+   568→          </div>
+   569→          <!-- Chemistry Lab -->
+   570→          <div class="card">
+   571→            <div style="width:3rem;height:3rem;border-radius:0.75rem;background:var(--gold-100);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;overflow:hidden"><img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   572→            <h3 style="font-size:1rem;font-weight:700;color:var(--slate-dark);margin-bottom:0.375rem">Chemistry Lab</h3>
+   573→            <p style="font-size:0.8125rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">Fume hoods, analytical balances, UV-Vis spectrophotometer, and chromatography units. Safety-compliant with emergency shower stations.</p>
+   574→            <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+   575→              <span class="badge badge-gold">Spectrophotometer</span>
+   576→              <span class="badge badge-outline">50 Students</span>
+   577→              <span class="badge badge-outline">All Science</span>
+   578→            </div>
+   579→          </div>
+   580→        </div>
+   581→      </div>
+   582→    </section>
+   583→
+   584→    <!-- ====== CTA ====== -->
+   585→    <section class="cta-section">
+   586→      <div class="container gsap-reveal-scale">
+   587→        <h2>Experience Campus Life</h2>
+   588→        <p>Words can't capture the energy of Greenfield. Browse our gallery or plan a visit to see it for yourself.</p>
+   589→        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+   590→          <a href="/gallery.html" class="btn btn-primary btn-lg">Explore Gallery</a>
+   591→          <a href="/admissions.html" class="btn btn-outline btn-lg">Apply for Admission</a>
+   592→        </div>
+   593→      </div>
+   594→    </section>
+   595→
+   596→  </main>
+   597→  <div id="site-footer"></div>
+   598→  <div id="floating-dock"></div>
+   599→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   600→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   601→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   602→  <script src="/js/college-base.js"></script>
+   603→</body>
+   604→</html>

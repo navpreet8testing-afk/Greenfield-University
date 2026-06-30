@@ -1,0 +1,907 @@
+     1→     1→'use client';
+     2→     2→
+     3→     3→import { useCallback, useEffect, useRef, useState } from 'react';
+     4→     4→import gsap from 'gsap';
+     5→     5→import { ScrollTrigger } from 'gsap/ScrollTrigger';
+     6→     6→import { useQuery } from '@tanstack/react-query';
+     7→     7→import {
+     8→     8→  Send, CheckCircle, Loader2, Download, FileText, X,
+     9→     9→  CloudUpload, Check, GraduationCap, ClipboardList,
+    10→    10→  Upload, BellRing, IndianRupee, Award, BookOpen,
+    11→    11→  Trophy, Heart, FlaskConical, ArrowRight, CalendarCheck,
+    12→    12→  FileCheck, CircleCheckBig,
+    13→    13→} from 'lucide-react';
+    14→    14→import { Button } from '@/components/ui/button';
+    15→    15→import { Input } from '@/components/ui/input';
+    16→    16→import { Textarea } from '@/components/ui/textarea';
+    17→    17→import { Label } from '@/components/ui/label';
+    18→    18→import { Badge } from '@/components/ui/badge';
+    19→    19→import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+    20→    20→import { Navbar } from '@/components/college/Navbar';
+    21→    21→import { Footer } from '@/components/college/Footer';
+    22→    22→import { useToast } from '@/hooks/use-toast';
+    23→    23→import { isSupabaseConfigured } from '@/lib/supabase';
+    24→    24→import { IMAGES } from '@/lib/images';
+    25→    25→
+    26→    26→gsap.registerPlugin(ScrollTrigger);
+    27→    27→
+    28→    28→interface Program {
+    29→    29→  id: string;
+    30→    30→  name: string;
+    31→    31→  shortName: string;
+    32→    32→}
+    33→    33→
+    34→    34→/* ─────────────────────────────────────────── Data ─────────────────────────────────────────── */
+    35→    35→
+    36→    36→const steps = [
+    37→    37→  { icon: BookOpen, title: 'Choose Program', description: 'Browse our diverse range of undergraduate, postgraduate, and doctoral programs to find the perfect fit for your aspirations.' },
+    38→    38→  { icon: ClipboardList, title: 'Fill Application', description: 'Complete the online application form with your personal and academic details. The process takes under 5 minutes.' },
+    39→    39→  { icon: Upload, title: 'Upload Documents', description: 'Submit your academic transcripts, ID proof, and other required documents in PDF format.' },
+    40→    40→  { icon: CircleCheckBig, title: 'Receive Confirmation', description: 'Get instant confirmation with your application tracking ID. Our team will reach out within 48 hours.' },
+    41→    41→];
+    42→    42→
+    43→    43→const eligibilityCriteria = [
+    44→    44→  { level: 'Undergraduate (UG)', icon: GraduationCap, criteria: '10+2 with minimum 50% aggregate marks from a recognized board. Valid entrance score preferred but not mandatory.', color: 'emerald' as const },
+    45→    45→  { level: 'Postgraduate (PG)', icon: BookOpen, criteria: "Bachelor's degree with minimum 50% aggregate marks from a recognized university. Relevant discipline preferred.", color: 'gold' as const },
+    46→    46→  { level: 'Doctoral (PhD)', icon: FlaskConical, criteria: "Master's degree with minimum 55% aggregate marks. Research proposal and interview required for final selection.", color: 'emerald-dark' as const },
+    47→    47→];
+    48→    48→
+    49→    49→const importantDates = [
+    50→    50→  { date: 'January 15, 2025', label: 'Application Start', icon: CalendarCheck, highlight: false },
+    51→    51→  { date: 'March 31, 2025', label: 'Early Bird Deadline', icon: BellRing, highlight: true },
+    52→    52→  { date: 'June 15, 2025', label: 'Regular Deadline', icon: BellRing, highlight: false },
+    53→    53→  { date: 'July 1-10, 2025', label: 'Counseling Dates', icon: FileCheck, highlight: false },
+    54→    54→  { date: 'August 1, 2025', label: 'Classes Begin', icon: GraduationCap, highlight: false },
+    55→    55→];
+    56→    56→
+    57→    57→const feeStructure = [
+    58→    58→  { program: 'BCA (Bachelor of Computer Applications)', fee: '₹45,000', year: '/year' },
+    59→    59→  { program: 'B.Com (Bachelor of Commerce)', fee: '₹40,000', year: '/year' },
+    60→    60→  { program: 'BBA (Bachelor of Business Administration)', fee: '₹50,000', year: '/year' },
+    61→    61→  { program: 'B.Sc (Bachelor of Science)', fee: '₹45,000', year: '/year' },
+    62→    62→  { program: 'BA (Bachelor of Arts)', fee: '₹35,000', year: '/year' },
+    63→    63→  { program: 'MCA (Master of Computer Applications)', fee: '₹75,000', year: '/year' },
+    64→    64→  { program: 'MBA (Master of Business Administration)', fee: '₹95,000', year: '/year' },
+    65→    65→  { program: 'M.Sc (Master of Science)', fee: '₹60,000', year: '/year' },
+    66→    66→];
+    67→    67→
+    68→    68→const scholarships = [
+    69→    69→  { title: 'Merit Scholarship', description: 'Awarded to students with exceptional academic records. Up to 100% tuition waiver for top performers.', icon: Trophy, percentage: '100%', tag: 'Up to', color: 'emerald' as const },
+    70→    70→  { title: 'Sports Scholarship', description: 'For students who have represented at state or national level in recognized sports. Includes coaching support.', icon: Award, percentage: '50%', tag: 'Up to', color: 'gold' as const },
+    71→    71→  { title: 'Need-based Financial Aid', description: 'Supporting students from economically weaker sections to ensure education is accessible to all deserving candidates.', icon: Heart, percentage: '30%', tag: 'Up to', color: 'emerald-dark' as const },
+    72→    72→  { title: 'Research Fellowship', description: 'Full tuition waiver plus monthly stipend for doctoral candidates engaged in approved research projects.', icon: FlaskConical, percentage: '100%', tag: 'Full + Stipend', color: 'gold' as const },
+    73→    73→];
+    74→    74→
+    75→    75→/* ─────────────────────────────────────────── Page ─────────────────────────────────────────── */
+    76→    76→
+    77→    77→export default function AdmissionsPage() {
+    78→    78→  const pageRef = useRef<HTMLDivElement>(null);
+    79→    79→  const { toast } = useToast();
+    80→    80→
+    81→    81→  // ── Fetch programs ────────────────────────────────────────────────
+    82→    82→  const { data: programs = [] } = useQuery<Program[]>({
+    83→    83→    queryKey: ['programs'],
+    84→    84→    queryFn: () => fetch('/api/programs').then((r) => r.json()),
+    85→    85→  });
+    86→    86→
+    87→    87→  // ── Form state ────────────────────────────────────────────────────
+    88→    88→  const [submitting, setSubmitting] = useState(false);
+    89→    89→  const [submitted, setSubmitted] = useState(false);
+    90→    90→
+    91→    91→  // ── Upload state ──────────────────────────────────────────────────
+    92→    92→  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    93→    93→  const [isDragOver, setIsDragOver] = useState(false);
+    94→    94→  const [uploading, setUploading] = useState(false);
+    95→    95→  const [uploadComplete, setUploadComplete] = useState(false);
+    96→    96→  const [uploadRef, setUploadRef] = useState<string | null>(null);
+    97→    97→  const fileInputRef = useRef<HTMLInputElement>(null);
+    98→    98→
+    99→    99→  // ── GSAP Animations ───────────────────────────────────────────────
+   100→   100→  useEffect(() => {
+   101→   101→    const ctx = gsap.context(() => {
+   102→   102→      // Hero animations
+   103→   103→      gsap.fromTo('.hero-title', { opacity: 0, y: 60, scale: 0.95 }, {
+   104→   104→        opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power3.out', delay: 0.2,
+   105→   105→      });
+   106→   106→      gsap.fromTo('.hero-subtitle', { opacity: 0, y: 30 }, {
+   107→   107→        opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.5,
+   108→   108→      });
+   109→   109→      gsap.fromTo('.hero-cta', { opacity: 0, y: 20 }, {
+   110→   110→        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.8,
+   111→   111→      });
+   112→   112→
+   113→   113→      // Section animations
+   114→   114→      const sections = [
+   115→   115→        { trigger: '.steps-section', els: '.step-card' },
+   116→   116→        { trigger: '.eligibility-section', els: '.eligibility-card' },
+   117→   117→        { trigger: '.dates-section', els: '.date-card' },
+   118→   118→        { trigger: '.fees-section', els: '.fees-table' },
+   119→   119→        { trigger: '.scholarships-section', els: '.scholarship-card' },
+   120→   120→      ];
+   121→   121→
+   122→   122→      sections.forEach(({ trigger, els }) => {
+   123→   123→        gsap.fromTo(`${trigger} .section-label`, { opacity: 0, y: 20 }, {
+   124→   124→          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+   125→   125→          scrollTrigger: { trigger, start: 'top 80%' },
+   126→   126→        });
+   127→   127→        gsap.fromTo(`${trigger} .section-title`, { opacity: 0, y: 30 }, {
+   128→   128→          opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.15,
+   129→   129→          scrollTrigger: { trigger, start: 'top 80%' },
+   130→   130→        });
+   131→   131→        gsap.fromTo(els, { opacity: 0, y: 40 }, {
+   132→   132→          opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.25,
+   133→   133→          scrollTrigger: { trigger, start: 'top 80%' },
+   134→   134→        });
+   135→   135→      });
+   136→   136→
+   137→   137→      // Application form animations
+   138→   138→      gsap.fromTo('.admission-heading', { opacity: 0, y: 40 }, {
+   139→   139→        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+   140→   140→        scrollTrigger: { trigger: '.application-section', start: 'top 80%' },
+   141→   141→      });
+   142→   142→      gsap.fromTo('.admission-form', { opacity: 0, y: 40, scale: 0.98 }, {
+   143→   143→        opacity: 1, y: 0, scale: 1, duration: 0.8, delay: 0.3, ease: 'power3.out',
+   144→   144→        scrollTrigger: { trigger: '.admission-form', start: 'top 85%' },
+   145→   145→      });
+   146→   146→      gsap.fromTo('.admission-features', { opacity: 0, x: 40 }, {
+   147→   147→        opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: 'power3.out',
+   148→   148→        scrollTrigger: { trigger: '.admission-features', start: 'top 85%' },
+   149→   149→      });
+   150→   150→    }, pageRef);
+   151→   151→    return () => ctx.revert();
+   152→   152→  }, []);
+   153→   153→
+   154→   154→  // ── Form Submit ───────────────────────────────────────────────────
+   155→   155→  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+   156→   156→    e.preventDefault();
+   157→   157→    setSubmitting(true);
+   158→   158→    try {
+   159→   159→      const form = e.currentTarget;
+   160→   160→      const data = {
+   161→   161→        fullName: (form.fullName as HTMLInputElement).value,
+   162→   162→        email: (form.email as HTMLInputElement).value,
+   163→   163→        phone: (form.phone as HTMLInputElement).value,
+   164→   164→        program: (form.program as HTMLSelectElement).value,
+   165→   165→        previousQualification: (form.qualification as HTMLInputElement).value,
+   166→   166→        message: (form.message as HTMLTextAreaElement).value,
+   167→   167→        documentRef: uploadRef || undefined,
+   168→   168→      };
+   169→   169→
+   170→   170→      const res = await fetch('/api/applications', {
+   171→   171→        method: 'POST',
+   172→   172→        headers: { 'Content-Type': 'application/json' },
+   173→   173→        body: JSON.stringify(data),
+   174→   174→      });
+   175→   175→
+   176→   176→      if (res.ok) {
+   177→   177→        setSubmitted(true);
+   178→   178→        toast({ title: 'Application Submitted!', description: 'We will contact you shortly with next steps.', variant: 'default' });
+   179→   179→      } else {
+   180→   180→        const err = await res.json();
+   181→   181→        toast({ title: 'Error', description: err.error || 'Something went wrong', variant: 'destructive' });
+   182→   182→      }
+   183→   183→    } catch {
+   184→   184→      toast({ title: 'Network Error', description: 'Please check your connection and try again.', variant: 'destructive' });
+   185→   185→    } finally {
+   186→   186→      setSubmitting(false);
+   187→   187→    }
+   188→   188→  }
+   189→   189→
+   190→   190→  // ── PDF Download via Print ────────────────────────────────────────
+   191→   191→  function handleDownloadForm() {
+   192→   192→    const printWindow = window.open('', '_blank');
+   193→   193→    if (!printWindow) {
+   194→   194→      toast({ title: 'Pop-up Blocked', description: 'Please allow pop-ups to download the application form.', variant: 'destructive' });
+   195→   195→      return;
+   196→   196→    }
+   197→   197→
+   198→   198→    printWindow.document.write(`<!DOCTYPE html>
+   199→   199→<html>
+   200→   200→<head>
+   201→   201→  <title>Greenfield University — Application Form 2025-26</title>
+   202→   202→  <style>
+   203→   203→    * { margin: 0; padding: 0; box-sizing: border-box; }
+   204→   204→    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; color: #1e293b; }
+   205→   205→    .header { text-align: center; border-bottom: 3px solid #059669; padding-bottom: 20px; margin-bottom: 30px; }
+   206→   206→    .header h1 { font-size: 24px; color: #059669; margin-bottom: 4px; }
+   207→   207→    .header p { font-size: 13px; color: #64748b; }
+   208→   208→    .form-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #334155; }
+   209→   209→    .field { margin-bottom: 18px; }
+   210→   210→    .field label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+   211→   211→    .field .line { border-bottom: 1px dashed #cbd5e1; height: 28px; }
+   212→   212→    .row { display: flex; gap: 24px; }
+   213→   213→    .row .field { flex: 1; }
+   214→   214→    .instructions { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin-top: 30px; font-size: 12px; color: #166534; }
+   215→   215→    .instructions h3 { font-size: 14px; margin-bottom: 8px; }
+   216→   216→    .instructions ol { padding-left: 20px; }
+   217→   217→    .instructions li { margin-bottom: 4px; }
+   218→   218→    @media print { body { padding: 20px; } }
+   219→   219→  </style>
+   220→   220→</head>
+   221→   221→<body>
+   222→   222→  <div class="header">
+   223→   223→    <h1>GREENFIELD UNIVERSITY</h1>
+   224→   224→    <p>University Road, Academic City • admissions@greenfield.edu • +91 7973290805</p>
+   225→   225→    <p style="margin-top: 8px; font-size: 14px; font-weight: 600; color: #1e293b;">APPLICATION FORM — ADMISSION 2025–26</p>
+   226→   226→  </div>
+   227→   227→  <div class="form-title">Applicant Information</div>
+   228→   228→  <div class="row">
+   229→   229→    <div class="field"><label>Full Name *</label><div class="line"></div></div>
+   230→   230→    <div class="field"><label>Email Address *</label><div class="line"></div></div>
+   231→   231→  </div>
+   232→   232→  <div class="row">
+   233→   233→    <div class="field"><label>Phone Number *</label><div class="line"></div></div>
+   234→   234→    <div class="field"><label>Date of Birth</label><div class="line"></div></div>
+   235→   235→  </div>
+   236→   236→  <div class="form-title" style="margin-top: 24px;">Academic Information</div>
+   237→   237→  <div class="row">
+   238→   238→    <div class="field"><label>Program Applied For *</label><div class="line" style="margin-top: 4px;"></div></div>
+   239→   239→    <div class="field"><label>Previous Qualification *</label><div class="line"></div></div>
+   240→   240→  </div>
+   241→   241→  <div class="row">
+   242→   242→    <div class="field"><label>University / Board Name</label><div class="line"></div></div>
+   243→   243→    <div class="field"><label>Percentage / CGPA</label><div class="line"></div></div>
+   244→   244→  </div>
+   245→   245→  <div class="form-title" style="margin-top: 24px;">Additional Information</div>
+   246→   246→  <div class="field"><label>Message / Statement of Purpose (Optional)</label><div class="line" style="height: 80px;"></div></div>
+   247→   247→  <div class="instructions">
+   248→   248→    <h3>Submission Instructions</h3>
+   249→   249→    <ol>
+   250→   250→      <li>Fill out all required fields marked with an asterisk (*).</li>
+   251→   251→      <li>You may also submit this application online at greenfield.edu/admissions.</li>
+   252→   252→      <li>Attach a copy of your most recent academic transcript and a valid photo ID.</li>
+   253→   253→      <li>Submit the completed form to the Admissions Office or email it to admissions@greenfield.edu.</li>
+   254→   254→      <li>You will receive an acknowledgment with your application tracking ID within 24 hours.</li>
+   255→   255→    </ol>
+   256→   256→  </div>
+   257→   257→  <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: end;">
+   258→   258→    <div>
+   259→   259→      <label style="font-size: 12px; font-weight: 600; color: #475569;">Applicant's Signature</label>
+   260→   260→      <div class="line" style="width: 200px; margin-top: 4px;"></div>
+   261→   261→    </div>
+   262→   262→    <div style="text-align: right;">
+   263→   263→      <label style="font-size: 12px; font-weight: 600; color: #475569;">Date</label>
+   264→   264→      <div class="line" style="width: 180px; margin-top: 4px;"></div>
+   265→   265→    </div>
+   266→   266→  </div>
+   267→   267→</body>
+   268→   268→</html>`);
+   269→   269→    printWindow.document.close();
+   270→   270→    printWindow.onload = () => { printWindow.print(); };
+   271→   271→  }
+   272→   272→
+   273→   273→  // ── File Upload ───────────────────────────────────────────────────
+   274→   274→  function validateFile(file: File): boolean {
+   275→   275→    if (file.type !== 'application/pdf') {
+   276→   276→      toast({ title: 'Invalid File', description: 'Only PDF files are accepted.', variant: 'destructive' });
+   277→   277→      return false;
+   278→   278→    }
+   279→   279→    if (file.size > 10 * 1024 * 1024) {
+   280→   280→      toast({ title: 'File Too Large', description: 'Maximum file size is 10 MB.', variant: 'destructive' });
+   281→   281→      return false;
+   282→   282→    }
+   283→   283→    return true;
+   284→   284→  }
+   285→   285→
+   286→   286→  async function handleFileUpload(file: File) {
+   287→   287→    if (!validateFile(file)) return;
+   288→   288→    setUploadedFile(file);
+   289→   289→    setUploadComplete(false);
+   290→   290→    setUploadRef(null);
+   291→   291→
+   292→   292→    if (isSupabaseConfigured()) {
+   293→   293→      setUploading(true);
+   294→   294→      try {
+   295→   295→        const { supabase } = await import('@/lib/supabase');
+   296→   296→        const fileName = `applications/${Date.now()}_${file.name}`;
+   297→   297→        const { data, error } = await supabase!
+   298→   298→          .storage
+   299→   299→          .from('documents')
+   300→   300→          .upload(fileName, file, { upsert: false });
+   301→   301→
+   302→   302→        if (error) {
+   303→   303→          toast({ title: 'Upload Failed', description: error.message, variant: 'destructive' });
+   304→   304→        } else {
+   305→   305→          setUploadRef(data.path);
+   306→   306→          setUploadComplete(true);
+   307→   307→          toast({ title: 'Document Uploaded', description: 'Your document has been saved successfully.', variant: 'default' });
+   308→   308→        }
+   309→   309→      } catch {
+   310→   310→        toast({ title: 'Upload Error', description: 'Could not upload to cloud storage. File is selected locally.', variant: 'destructive' });
+   311→   311→      } finally {
+   312→   312→        setUploading(false);
+   313→   313→      }
+   314→   314→    } else {
+   315→   315→      setUploadComplete(true);
+   316→   316→      toast({ title: 'File Selected', description: 'File is ready. Submit your application to include it.', variant: 'default' });
+   317→   317→    }
+   318→   318→  }
+   319→   319→
+   320→   320→  function handleRemoveFile() {
+   321→   321→    setUploadedFile(null);
+   322→   322→    setUploadComplete(false);
+   323→   323→    setUploadRef(null);
+   324→   324→    if (fileInputRef.current) fileInputRef.current.value = '';
+   325→   325→  }
+   326→   326→
+   327→   327→  const handleDragOver = useCallback((e: React.DragEvent) => {
+   328→   328→    e.preventDefault();
+   329→   329→    e.stopPropagation();
+   330→   330→    setIsDragOver(true);
+   331→   331→  }, []);
+   332→   332→
+   333→   333→  const handleDragLeave = useCallback((e: React.DragEvent) => {
+   334→   334→    e.preventDefault();
+   335→   335→    e.stopPropagation();
+   336→   336→    setIsDragOver(false);
+   337→   337→  }, []);
+   338→   338→
+   339→   339→  const handleDrop = useCallback((e: React.DragEvent) => {
+   340→   340→    e.preventDefault();
+   341→   341→    e.stopPropagation();
+   342→   342→    setIsDragOver(false);
+   343→   343→    const file = e.dataTransfer.files[0];
+   344→   344→    if (file) handleFileUpload(file);
+   345→   345→  }, []);
+   346→   346→
+   347→   347→  // ── Application form benefits ─────────────────────────────────────
+   348→   348→  const benefits = [
+   349→   349→    { title: 'Easy Online Process', description: 'Complete your application in under 5 minutes with our streamlined digital form.' },
+   350→   350→    { title: 'Instant Confirmation', description: 'Receive immediate acknowledgment and application tracking ID via email.' },
+   351→   351→    { title: 'Scholarship Eligibility', description: 'Merit-based and need-based scholarships automatically evaluated for all applicants.' },
+   352→   352→    { title: 'Counseling Support', description: 'Free academic counseling sessions to help you choose the right program.' },
+   353→   353→  ];
+   354→   354→
+   355→   355→  return (
+   356→   356→    <div ref={pageRef} className="min-h-screen flex flex-col bg-background">
+   357→   357→      <Navbar />
+   358→   358→
+   359→   359→      <main className="flex-1">
+   360→   360→        {/* ═══════════════════ HERO SECTION ═══════════════════ */}
+   361→   361→        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+   362→   362→          <div
+   363→   363→            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+   364→   364→            style={{ backgroundImage: `url(${IMAGES.graduation})` }}
+   365→   365→            aria-hidden="true"
+   366→   366→          />
+   367→   367→          <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+   368→   368→          <div className="noise-overlay absolute inset-0" />
+   369→   369→
+   370→   370→          <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+   371→   371→            <span className="hero-title inline-block font-section-label text-emerald-light text-sm font-semibold tracking-[0.2em] mb-4">
+   372→   372→              Session 2025–26
+   373→   373→            </span>
+   374→   374→            <h1 className="hero-title font-hero-word text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+   375→   375→              Admissions 2025-26
+   376→   376→            </h1>
+   377→   377→            <p className="hero-subtitle font-body-alt text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+   378→   378→              Your journey to excellence starts here. Apply now and join our community of achievers.
+   379→   379→            </p>
+   380→   380→            <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
+   381→   381→              <a
+   382→   382→                href="#apply"
+   383→   383→                className="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald hover:bg-emerald-dark text-white font-semibold rounded-full shadow-lg shadow-emerald/25 transition-all duration-300 hover:shadow-emerald/40 hover:scale-105"
+   384→   384→              >
+   385→   385→                Apply Now <ArrowRight className="w-4 h-4" />
+   386→   386→              </a>
+   387→   387→              <a
+   388→   388→                href="#dates"
+   389→   389→                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-medium rounded-full border border-white/20 transition-all duration-300"
+   390→   390→              >
+   391→   391→                View Important Dates
+   392→   392→              </a>
+   393→   393→            </div>
+   394→   394→          </div>
+   395→   395→
+   396→   396→          {/* Decorative bottom gradient */}
+   397→   397→          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+   398→   398→        </section>
+   399→   399→
+   400→   400→        {/* ═══════════════════ HOW TO APPLY ═══════════════════ */}
+   401→   401→        <section className="steps-section py-20 sm:py-28 bg-background">
+   402→   402→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   403→   403→            <div className="text-center mb-16">
+   404→   404→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   405→   405→                Application Process
+   406→   406→              </span>
+   407→   407→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   408→   408→                How to Apply
+   409→   409→              </h2>
+   410→   410→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   411→   411→                Follow these simple steps to complete your application and secure your place at Greenfield University.
+   412→   412→              </p>
+   413→   413→            </div>
+   414→   414→
+   415→   415→            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+   416→   416→              {steps.map((step, i) => (
+   417→   417→                <div
+   418→   418→                  key={step.title}
+   419→   419→                  className="step-card group relative bg-white dark:bg-card rounded-2xl p-6 sm:p-8 border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1"
+   420→   420→                >
+   421→   421→                  {/* Step number */}
+   422→   422→                  <div className="absolute -top-4 -left-2 w-10 h-10 rounded-xl bg-emerald text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-emerald/30 group-hover:scale-110 transition-transform duration-300">
+   423→   423→                    {i + 1}
+   424→   424→                  </div>
+   425→   425→
+   426→   426→                  {/* Icon */}
+   427→   427→                  <div className="w-14 h-14 rounded-2xl bg-emerald/10 dark:bg-emerald/20 flex items-center justify-center mb-5 group-hover:bg-emerald group-hover:scale-110 transition-all duration-300 mt-2">
+   428→   428→                    <step.icon className="w-7 h-7 text-emerald group-hover:text-white transition-colors duration-300" />
+   429→   429→                  </div>
+   430→   430→
+   431→   431→                  <h3 className="font-feature-title text-lg font-bold text-foreground mb-3">{step.title}</h3>
+   432→   432→                  <p className="font-body-alt text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+   433→   433→
+   434→   434→                  {/* Connector line (hidden on last card and mobile) */}
+   435→   435→                  {i < steps.length - 1 && (
+   436→   436→                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-emerald/20" />
+   437→   437→                  )}
+   438→   438→                </div>
+   439→   439→              ))}
+   440→   440→            </div>
+   441→   441→          </div>
+   442→   442→        </section>
+   443→   443→
+   444→   444→        {/* Section divider */}
+   445→   445→        <div className="section-divider-gradient h-px" />
+   446→   446→
+   447→   447→        {/* ═══════════════════ ELIGIBILITY CRITERIA ═══════════════════ */}
+   448→   448→        <section className="eligibility-section py-20 sm:py-28 bg-emerald/[0.03] dark:bg-emerald/[0.02]">
+   449→   449→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   450→   450→            <div className="text-center mb-16">
+   451→   451→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   452→   452→                Requirements
+   453→   453→              </span>
+   454→   454→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   455→   455→                Eligibility Criteria
+   456→   456→              </h2>
+   457→   457→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   458→   458→                Check the minimum requirements for each program level before applying.
+   459→   459→              </p>
+   460→   460→            </div>
+   461→   461→
+   462→   462→            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+   463→   463→              {eligibilityCriteria.map((item) => (
+   464→   464→                <Card
+   465→   465→                  key={item.level}
+   466→   466→                  className="eligibility-card rounded-2xl border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1 bg-white dark:bg-card overflow-hidden group"
+   467→   467→                >
+   468→   468→                  <CardHeader className="pb-4">
+   469→   469→                    <div className="flex items-center gap-4">
+   470→   470→                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+   471→   471→                        item.color === 'gold'
+   472→   472→                          ? 'bg-gold/10 group-hover:bg-gold'
+   473→   473→                          : 'bg-emerald/10 group-hover:bg-emerald'
+   474→   474→                      }`}>
+   475→   475→                        <item.icon className={`w-7 h-7 transition-colors duration-300 ${
+   476→   476→                          item.color === 'gold'
+   477→   477→                            ? 'text-gold group-hover:text-white'
+   478→   478→                            : 'text-emerald group-hover:text-white'
+   479→   479→                        }`} />
+   480→   480→                      </div>
+   481→   481→                      <CardTitle className="font-feature-title text-lg font-bold text-foreground">{item.level}</CardTitle>
+   482→   482→                    </div>
+   483→   483→                  </CardHeader>
+   484→   484→                  <CardContent>
+   485→   485→                    <p className="font-body-alt text-muted-foreground leading-relaxed text-sm">{item.criteria}</p>
+   486→   486→                    <div className="mt-5 flex items-center gap-2">
+   487→   487→                      <Badge variant="secondary" className={`text-xs font-medium ${
+   488→   488→                        item.color === 'gold'
+   489→   489→                          ? 'bg-gold/10 text-gold-dark hover:bg-gold/20'
+   490→   490→                          : 'bg-emerald/10 text-emerald-dark hover:bg-emerald/20'
+   491→   491→                      }`}>
+   492→   492→                        {item.level === 'Undergraduate (UG)' ? 'Min. 50% in 10+2' : item.level === 'Postgraduate (PG)' ? "Min. 50% in Bachelor's" : "Min. 55% in Master's"}
+   493→   493→                      </Badge>
+   494→   494→                    </div>
+   495→   495→                  </CardContent>
+   496→   496→                </Card>
+   497→   497→              ))}
+   498→   498→            </div>
+   499→   499→          </div>
+   500→   500→        </section>
+   501→   501→
+   502→   502→        {/* Section divider */}
+   503→   503→        <div className="section-divider-gradient h-px" />
+   504→   504→
+   505→   505→        {/* ═══════════════════ IMPORTANT DATES ═══════════════════ */}
+   506→   506→        <section id="dates" className="dates-section py-20 sm:py-28 bg-background">
+   507→   507→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   508→   508→            <div className="text-center mb-16">
+   509→   509→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   510→   510→                Mark Your Calendar
+   511→   511→              </span>
+   512→   512→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   513→   513→                Important Dates
+   514→   514→              </h2>
+   515→   515→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   516→   516→                Stay on track with key admission deadlines and milestones.
+   517→   517→              </p>
+   518→   518→            </div>
+   519→   519→
+   520→   520→            <div className="max-w-3xl mx-auto">
+   521→   521→              <div className="relative">
+   522→   522→                {/* Timeline line */}
+   523→   523→                <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-emerald/10" />
+   524→   524→
+   525→   525→                <div className="space-y-6">
+   526→   526→                  {importantDates.map((item, i) => (
+   527→   527→                    <div
+   528→   528→                      key={item.label}
+   529→   529→                      className="date-card relative flex items-start gap-5 sm:gap-6 group"
+   530→   530→                    >
+   531→   531→                      {/* Timeline dot */}
+   532→   532→                      <div className={`relative z-10 shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+   533→   533→                        item.highlight
+   534→   534→                          ? 'bg-emerald shadow-lg shadow-emerald/30'
+   535→   535→                          : 'bg-emerald/10 dark:bg-emerald/20 group-hover:bg-emerald group-hover:shadow-lg group-hover:shadow-emerald/20'
+   536→   536→                      }`}>
+   537→   537→                        <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300 ${
+   538→   538→                          item.highlight ? 'text-white' : 'text-emerald group-hover:text-white'
+   539→   539→                        }`} />
+   540→   540→                      </div>
+   541→   541→
+   542→   542→                      {/* Content card */}
+   543→   543→                      <div className={`flex-1 p-4 sm:p-5 rounded-2xl border transition-all duration-300 ${
+   544→   544→                        item.highlight
+   545→   545→                          ? 'bg-emerald/5 border-emerald/20 shadow-md shadow-emerald/5'
+   546→   546→                          : 'bg-white dark:bg-card border-border hover:border-emerald/30 hover:shadow-lg hover:shadow-emerald/5'
+   547→   547→                      }`}>
+   548→   548→                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+   549→   549→                          <div>
+   550→   550→                            <h3 className={`font-feature-title font-bold text-base sm:text-lg ${
+   551→   551→                              item.highlight ? 'text-emerald' : 'text-foreground'
+   552→   552→                            }`}>
+   553→   553→                              {item.label}
+   554→   554→                            </h3>
+   555→   555→                            <p className="font-body-alt text-sm text-muted-foreground mt-1">{item.date}</p>
+   556→   556→                          </div>
+   557→   557→                          {item.highlight && (
+   558→   558→                            <Badge className="bg-emerald text-white w-fit">Early Bird</Badge>
+   559→   559→                          )}
+   560→   560→                        </div>
+   561→   561→                      </div>
+   562→   562→                    </div>
+   563→   563→                  ))}
+   564→   564→                </div>
+   565→   565→              </div>
+   566→   566→            </div>
+   567→   567→          </div>
+   568→   568→        </section>
+   569→   569→
+   570→   570→        {/* Section divider */}
+   571→   571→        <div className="section-divider-gradient h-px" />
+   572→   572→
+   573→   573→        {/* ═══════════════════ FEE STRUCTURE ═══════════════════ */}
+   574→   574→        <section className="fees-section py-20 sm:py-28 bg-emerald/[0.03] dark:bg-emerald/[0.02]">
+   575→   575→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   576→   576→            <div className="text-center mb-16">
+   577→   577→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   578→   578→                Transparent Pricing
+   579→   579→              </span>
+   580→   580→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   581→   581→                Fee Structure
+   582→   582→              </h2>
+   583→   583→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   584→   584→                Competitive fees with flexible payment options and scholarship support.
+   585→   585→              </p>
+   586→   586→            </div>
+   587→   587→
+   588→   588→            <div className="fees-table max-w-4xl mx-auto">
+   589→   589→              <Card className="rounded-2xl border border-border overflow-hidden shadow-sm bg-white dark:bg-card">
+   590→   590→                {/* UG Header */}
+   591→   591→                <div className="bg-emerald/5 dark:bg-emerald/10 px-6 py-3 border-b border-border">
+   592→   592→                  <h3 className="font-feature-title font-bold text-emerald flex items-center gap-2">
+   593→   593→                    <GraduationCap className="w-5 h-5" />
+   594→   594→                    Undergraduate Programs
+   595→   595→                  </h3>
+   596→   596→                </div>
+   597→   597→                <div className="divide-y divide-border">
+   598→   598→                  {feeStructure.filter(f => f.program.startsWith('B')).map((item) => (
+   599→   599→                    <div key={item.program} className="flex items-center justify-between px-6 py-4 hover:bg-emerald/[0.02] transition-colors">
+   600→   600→                      <span className="font-body-alt text-sm sm:text-base text-foreground">{item.program}</span>
+   601→   601→                      <span className="font-feature-title font-bold text-emerald whitespace-nowrap ml-4">
+   602→   602→                        {item.fee}<span className="text-muted-foreground font-normal text-xs">{item.year}</span>
+   603→   603→                      </span>
+   604→   604→                    </div>
+   605→   605→                  ))}
+   606→   606→                </div>
+   607→   607→
+   608→   608→                {/* PG Header */}
+   609→   609→                <div className="bg-gold/5 dark:bg-gold/10 px-6 py-3 border-y border-border">
+   610→   610→                  <h3 className="font-feature-title font-bold text-gold-dark flex items-center gap-2">
+   611→   611→                    <BookOpen className="w-5 h-5" />
+   612→   612→                    Postgraduate Programs
+   613→   613→                  </h3>
+   614→   614→                </div>
+   615→   615→                <div className="divide-y divide-border">
+   616→   616→                  {feeStructure.filter(f => f.program.startsWith('M')).map((item) => (
+   617→   617→                    <div key={item.program} className="flex items-center justify-between px-6 py-4 hover:bg-emerald/[0.02] transition-colors">
+   618→   618→                      <span className="font-body-alt text-sm sm:text-base text-foreground">{item.program}</span>
+   619→   619→                      <span className="font-feature-title font-bold text-emerald whitespace-nowrap ml-4">
+   620→   620→                        {item.fee}<span className="text-muted-foreground font-normal text-xs">{item.year}</span>
+   621→   621→                      </span>
+   622→   622→                    </div>
+   623→   623→                  ))}
+   624→   624→                </div>
+   625→   625→
+   626→   626→                {/* Note */}
+   627→   627→                <div className="bg-muted/50 px-6 py-3 border-t border-border">
+   628→   628→                  <p className="text-xs text-muted-foreground">
+   629→   629→                    <IndianRupee className="w-3 h-3 inline mr-1" />
+   630→   630→                    Fees are indicative and may vary. Additional laboratory and hostel charges apply. EMI options available.
+   631→   631→                  </p>
+   632→   632→                </div>
+   633→   633→              </Card>
+   634→   634→            </div>
+   635→   635→          </div>
+   636→   636→        </section>
+   637→   637→
+   638→   638→        {/* Section divider */}
+   639→   639→        <div className="section-divider-gradient h-px" />
+   640→   640→
+   641→   641→        {/* ═══════════════════ SCHOLARSHIPS ═══════════════════ */}
+   642→   642→        <section className="scholarships-section py-20 sm:py-28 bg-background">
+   643→   643→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   644→   644→            <div className="text-center mb-16">
+   645→   645→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   646→   646→                Financial Support
+   647→   647→              </span>
+   648→   648→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   649→   649→                Scholarships & Aid
+   650→   650→              </h2>
+   651→   651→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   652→   652→                We believe in nurturing talent regardless of financial background. Explore our scholarship programs.
+   653→   653→              </p>
+   654→   654→            </div>
+   655→   655→
+   656→   656→            <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
+   657→   657→              {scholarships.map((s) => (
+   658→   658→                <Card
+   659→   659→                  key={s.title}
+   660→   660→                  className="scholarship-card group rounded-2xl border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1 bg-white dark:bg-card overflow-hidden"
+   661→   661→                >
+   662→   662→                  <CardContent className="p-6 sm:p-8">
+   663→   663→                    <div className="flex items-start gap-5">
+   664→   664→                      <div className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+   665→   665→                        s.color === 'gold'
+   666→   666→                          ? 'bg-gold/10 group-hover:bg-gold'
+   667→   667→                          : 'bg-emerald/10 group-hover:bg-emerald'
+   668→   668→                      }`}>
+   669→   669→                        <s.icon className={`w-7 h-7 transition-colors duration-300 ${
+   670→   670→                          s.color === 'gold'
+   671→   671→                            ? 'text-gold group-hover:text-white'
+   672→   672→                            : 'text-emerald group-hover:text-white'
+   673→   673→                        }`} />
+   674→   674→                      </div>
+   675→   675→                      <div className="flex-1 min-w-0">
+   676→   676→                        <div className="flex items-start justify-between gap-3 mb-2">
+   677→   677→                          <h3 className="font-feature-title text-lg font-bold text-foreground">{s.title}</h3>
+   678→   678→                          <div className={`shrink-0 text-right`}>
+   679→   679→                            <span className={`block text-2xl font-bold ${
+   680→   680→                              s.color === 'gold' ? 'text-gold' : 'text-emerald'
+   681→   681→                            }`}>
+   682→   682→                              {s.percentage}
+   683→   683→                            </span>
+   684→   684→                            <span className="text-xs text-muted-foreground">{s.tag}</span>
+   685→   685→                          </div>
+   686→   686→                        </div>
+   687→   687→                        <p className="font-body-alt text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+   688→   688→                      </div>
+   689→   689→                    </div>
+   690→   690→                  </CardContent>
+   691→   691→                </Card>
+   692→   692→              ))}
+   693→   693→            </div>
+   694→   694→          </div>
+   695→   695→        </section>
+   696→   696→
+   697→   697→        {/* Section divider */}
+   698→   698→        <div className="section-divider-gradient h-px" />
+   699→   699→
+   700→   700→        {/* ═══════════════════ APPLICATION FORM ═══════════════════ */}
+   701→   701→        <section id="apply" className="application-section py-20 sm:py-28 bg-slate-dark dark:bg-slate-900 relative overflow-hidden">
+   702→   702→          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald/5 rounded-full blur-3xl -translate-y-1/2" />
+   703→   703→
+   704→   704→          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+   705→   705→            <div className="text-center mb-16 admission-heading">
+   706→   706→              <span className="font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   707→   707→                Begin Your Journey
+   708→   708→              </span>
+   709→   709→              <h2 className="font-cta-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+   710→   710→                Apply for Admission 2025–26
+   711→   711→              </h2>
+   712→   712→              <p className="text-white/50 max-w-2xl mx-auto text-lg font-body-alt">
+   713→   713→                Take the first step towards an extraordinary academic career. Apply now and join our community of achievers.
+   714→   714→              </p>
+   715→   715→            </div>
+   716→   716→
+   717→   717→            <div className="grid lg:grid-cols-5 gap-12 items-start">
+   718→   718→              {/* Benefits */}
+   719→   719→              <div className="lg:col-span-2 admission-features">
+   720→   720→                <div className="space-y-6">
+   721→   721→                  {benefits.map((b, i) => (
+   722→   722→                    <div key={b.title} className="flex gap-4 group">
+   723→   723→                      <div className="shrink-0 w-8 h-8 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald text-sm font-bold group-hover:bg-emerald group-hover:text-white transition-all duration-300">
+   724→   724→                        {i + 1}
+   725→   725→                      </div>
+   726→   726→                      <div>
+   727→   727→                        <h4 className="text-white font-semibold text-sm mb-1">{b.title}</h4>
+   728→   728→                        <p className="text-white/40 text-sm leading-relaxed">{b.description}</p>
+   729→   729→                      </div>
+   730→   730→                    </div>
+   731→   731→                  ))}
+   732→   732→                </div>
+   733→   733→              </div>
+   734→   734→
+   735→   735→              {/* Form */}
+   736→   736→              <div className="lg:col-span-3 admission-form">
+   737→   737→                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 sm:p-8">
+   738→   738→                  {submitted ? (
+   739→   739→                    <div className="text-center py-12">
+   740→   740→                      <CheckCircle className="w-16 h-16 text-emerald mx-auto mb-4" />
+   741→   741→                      <h3 className="text-2xl font-bold text-white mb-2">Application Received!</h3>
+   742→   742→                      <p className="text-white/50 mb-6">Thank you for your interest. Our admissions team will reach out to you within 48 hours.</p>
+   743→   743→                      <Button
+   744→   744→                        variant="outline"
+   745→   745→                        className="border-white/20 text-white hover:bg-white/10 rounded-full"
+   746→   746→                        onClick={() => { setSubmitted(false); handleRemoveFile(); }}
+   747→   747→                      >
+   748→   748→                        Submit Another Application
+   749→   749→                      </Button>
+   750→   750→                    </div>
+   751→   751→                  ) : (
+   752→   752→                    <>
+   753→   753→                      {/* Download Application Form Button */}
+   754→   754→                      <button
+   755→   755→                        type="button"
+   756→   756→                        onClick={handleDownloadForm}
+   757→   757→                        className="w-full mb-6 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border border-dashed border-white/20 text-white/70 hover:text-white hover:border-emerald/50 hover:bg-emerald/5 transition-all duration-300 text-sm font-medium group"
+   758→   758→                      >
+   759→   759→                        <Download className="w-4 h-4 group-hover:text-emerald transition-colors" />
+   760→   760→                        <span>Download Application Form (PDF)</span>
+   761→   761→                        <FileText className="w-3.5 h-3.5 opacity-50" />
+   762→   762→                      </button>
+   763→   763→
+   764→   764→                      <form onSubmit={handleSubmit} className="space-y-5">
+   765→   765→                        <div className="grid sm:grid-cols-2 gap-5">
+   766→   766→                          <div className="space-y-2">
+   767→   767→                            <Label htmlFor="fullName" className="text-white/70 text-sm">Full Name *</Label>
+   768→   768→                            <Input id="fullName" name="fullName" required placeholder="John Doe"
+   769→   769→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   770→   770→                          </div>
+   771→   771→                          <div className="space-y-2">
+   772→   772→                            <Label htmlFor="email" className="text-white/70 text-sm">Email Address *</Label>
+   773→   773→                            <Input id="email" name="email" type="email" required placeholder="john@example.com"
+   774→   774→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   775→   775→                          </div>
+   776→   776→                        </div>
+   777→   777→                        <div className="grid sm:grid-cols-2 gap-5">
+   778→   778→                          <div className="space-y-2">
+   779→   779→                            <Label htmlFor="phone" className="text-white/70 text-sm">Phone Number *</Label>
+   780→   780→                            <Input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210"
+   781→   781→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   782→   782→                          </div>
+   783→   783→                          <div className="space-y-2">
+   784→   784→                            <Label htmlFor="program" className="text-white/70 text-sm">Program *</Label>
+   785→   785→                            <select
+   786→   786→                              id="program"
+   787→   787→                              name="program"
+   788→   788→                              required
+   789→   789→                              className="w-full bg-white/5 border border-white/10 text-white rounded-xl h-11 px-3 text-sm focus:outline-none focus:border-emerald/50 focus:ring-emerald/20 [&>option]:bg-slate-dark [&>option]:text-white"
+   790→   790→                            >
+   791→   791→                              <option value="">Select a program</option>
+   792→   792→                              {programs.map((p) => (
+   793→   793→                                <option key={p.id} value={p.name}>{p.shortName} — {p.name}</option>
+   794→   794→                              ))}
+   795→   795→                            </select>
+   796→   796→                          </div>
+   797→   797→                        </div>
+   798→   798→                        <div className="space-y-2">
+   799→   799→                          <Label htmlFor="qualification" className="text-white/70 text-sm">Previous Qualification</Label>
+   800→   800→                          <Input id="qualification" name="qualification" placeholder="e.g., 12th Standard, B.Sc., Diploma..."
+   801→   801→                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   802→   802→                        </div>
+   803→   803→                        <div className="space-y-2">
+   804→   804→                          <Label htmlFor="message" className="text-white/70 text-sm">Message (Optional)</Label>
+   805→   805→                          <Textarea id="message" name="message" rows={3} placeholder="Tell us about your goals and aspirations..."
+   806→   806→                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl resize-none" />
+   807→   807→                        </div>
+   808→   808→
+   809→   809→                        {/* Drag-and-Drop Upload Zone */}
+   810→   810→                        <div className="space-y-2">
+   811→   811→                          <Label className="text-white/70 text-sm">Upload Document (PDF, max 10 MB)</Label>
+   812→   812→                          <div
+   813→   813→                            onDragOver={handleDragOver}
+   814→   814→                            onDragLeave={handleDragLeave}
+   815→   815→                            onDrop={handleDrop}
+   816→   816→                            onClick={() => !uploadedFile && fileInputRef.current?.click()}
+   817→   817→                            className={`relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 cursor-pointer transition-all duration-300 ${
+   818→   818→                              isDragOver
+   819→   819→                                ? 'border-emerald bg-emerald/10 scale-[1.01]'
+   820→   820→                                : uploadedFile
+   821→   821→                                  ? 'border-emerald/40 bg-emerald/5'
+   822→   822→                                  : 'border-white/15 hover:border-white/30 hover:bg-white/5'
+   823→   823→                            }`}
+   824→   824→                          >
+   825→   825→                            <input
+   826→   826→                              ref={fileInputRef}
+   827→   827→                              type="file"
+   828→   828→                              accept=".pdf,application/pdf"
+   829→   829→                              className="hidden"
+   830→   830→                              onChange={(e) => {
+   831→   831→                                const file = e.target.files?.[0];
+   832→   832→                                if (file) handleFileUpload(file);
+   833→   833→                              }}
+   834→   834→                            />
+   835→   835→
+   836→   836→                            {uploading ? (
+   837→   837→                              <>
+   838→   838→                                <Loader2 className="w-8 h-8 text-emerald animate-spin" />
+   839→   839→                                <p className="text-sm text-white/60">Uploading document...</p>
+   840→   840→                              </>
+   841→   841→                            ) : uploadedFile ? (
+   842→   842→                              <>
+   843→   843→                                <div className="flex items-center gap-3 w-full">
+   844→   844→                                  <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald/20 flex items-center justify-center">
+   845→   845→                                    {uploadComplete ? (
+   846→   846→                                      <Check className="w-5 h-5 text-emerald" />
+   847→   847→                                    ) : (
+   848→   848→                                      <FileText className="w-5 h-5 text-emerald" />
+   849→   849→                                    )}
+   850→   850→                                  </div>
+   851→   851→                                  <div className="min-w-0 flex-1">
+   852→   852→                                    <p className="text-sm text-white font-medium truncate">{uploadedFile.name}</p>
+   853→   853→                                    <p className="text-xs text-white/40">
+   854→   854→                                      {(uploadedFile.size / 1024).toFixed(1)} KB
+   855→   855→                                      {uploadComplete && ' • Ready'}
+   856→   856→                                      {uploadRef && ' • Cloud saved'}
+   857→   857→                                    </p>
+   858→   858→                                  </div>
+   859→   859→                                  <button
+   860→   860→                                    type="button"
+   861→   861→                                    onClick={(e) => { e.stopPropagation(); handleRemoveFile(); }}
+   862→   862→                                    className="shrink-0 w-8 h-8 rounded-lg hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white transition-colors"
+   863→   863→                                    aria-label="Remove file"
+   864→   864→                                  >
+   865→   865→                                    <X className="w-4 h-4" />
+   866→   866→                                  </button>
+   867→   867→                                </div>
+   868→   868→                              </>
+   869→   869→                            ) : (
+   870→   870→                              <>
+   871→   871→                                <CloudUpload className={`w-8 h-8 transition-colors ${isDragOver ? 'text-emerald' : 'text-white/30'}`} />
+   872→   872→                                <div className="text-center">
+   873→   873→                                  <p className="text-sm text-white/60">
+   874→   874→                                    <span className="text-emerald font-medium">Click to upload</span> or drag and drop
+   875→   875→                                  </p>
+   876→   876→                                  <p className="text-xs text-white/30 mt-1">PDF files only, up to 10 MB</p>
+   877→   877→                                </div>
+   878→   878→                              </>
+   879→   879→                            )}
+   880→   880→                          </div>
+   881→   881→                        </div>
+   882→   882→
+   883→   883→                        <Button
+   884→   884→                          type="submit"
+   885→   885→                          disabled={submitting}
+   886→   886→                          className="w-full bg-emerald hover:bg-emerald-dark text-white rounded-xl h-12 text-base font-semibold shadow-lg shadow-emerald/20 hover:shadow-emerald/40 transition-all"
+   887→   887→                        >
+   888→   888→                          {submitting ? (
+   889→   889→                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Submitting...</>
+   890→   890→                          ) : (
+   891→   891→                            <><Send className="w-4 h-4 mr-2" /> Submit Application</>
+   892→   892→                          )}
+   893→   893→                        </Button>
+   894→   894→                      </form>
+   895→   895→                    </>
+   896→   896→                  )}
+   897→   897→                </div>
+   898→   898→              </div>
+   899→   899→            </div>
+   900→   900→          </div>
+   901→   901→        </section>
+   902→   902→      </main>
+   903→   903→
+   904→   904→      <Footer />
+   905→   905→    </div>
+   906→   906→  );
+   907→   907→}

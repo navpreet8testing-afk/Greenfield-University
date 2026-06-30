@@ -1,0 +1,451 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Alumni Network - Greenfield University</title>
+     7→  <meta name="description" content="Join 25,000+ Greenfield University alumni across 80+ countries. Connect, network, and grow with our thriving community of achievers.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Cinzel:wght@700;900&family=Space+Grotesk:wght@400;700&family=Chakra+Petch:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Great+Vibes&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→</head>
+    15→<body class="min-h-screen flex flex-col">
+    16→  <div id="site-header"></div>
+    17→  <main class="flex-1">
+    18→
+    19→    <!-- Hero -->
+    20→    <section class="page-hero noise">
+    21→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c476?w=1200&q=80')"></div>
+    22→      <div class="page-hero-overlay"></div>
+    23→      <div class="page-hero-content">
+    24→        <div class="hero-breadcrumbs">
+    25→          <a href="/">Home</a>
+    26→          <span class="sep">/</span>
+    27→          <span>Alumni</span>
+    28→        </div>
+    29→        <h1>Alumni Network</h1>
+    30→        <p class="hero-sub">25,000+ strong community of achievers, leaders, and innovators making their mark across the globe.</p>
+    31→        <div class="flex gap-4 mt-8">
+    32→          <a href="#register" class="btn btn-primary btn-lg">Join the Network</a>
+    33→          <a href="#notable" class="btn btn-outline btn-lg">Meet Our Alumni</a>
+    34→        </div>
+    35→      </div>
+    36→    </section>
+    37→
+    38→    <!-- Alumni Stats -->
+    39→    <section class="section bg-light">
+    40→      <div class="container">
+    41→        <div class="grid-6 card-stagger">
+    42→          <div class="stat-card">
+    43→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c476?w=120&q=80" alt="" aria-hidden="true"></div>
+    44→            <div class="stat-number" data-counter="25000" data-suffix="+">0</div>
+    45→            <div class="stat-label">Alumni Worldwide</div>
+    46→          </div>
+    47→          <div class="stat-card">
+    48→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" aria-hidden="true"></div>
+    49→            <div class="stat-number" data-counter="80" data-suffix="+">0</div>
+    50→            <div class="stat-label">Countries Represented</div>
+    51→          </div>
+    52→          <div class="stat-card">
+    53→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" aria-hidden="true"></div>
+    54→            <div class="stat-number" data-counter="500" data-suffix="+">0</div>
+    55→            <div class="stat-label">Entrepreneurs Founded</div>
+    56→          </div>
+    57→          <div class="stat-card">
+    58→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&q=80" alt="" aria-hidden="true"></div>
+    59→            <div class="stat-number" data-counter="94" data-suffix="%">0</div>
+    60→            <div class="stat-label">Placement Rate</div>
+    61→          </div>
+    62→          <div class="stat-card">
+    63→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&q=80" alt="" aria-hidden="true"></div>
+    64→            <div class="stat-number" data-counter="150" data-suffix="+">0</div>
+    65→            <div class="stat-label">CXOs & Directors</div>
+    66→          </div>
+    67→          <div class="stat-card">
+    68→            <div class="stat-icon"><img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=120&q=80" alt="" aria-hidden="true"></div>
+    69→            <div class="stat-number" data-counter="50" data-suffix="+">0</div>
+    70→            <div class="stat-label">Patents by Alumni</div>
+    71→          </div>
+    72→        </div>
+    73→      </div>
+    74→    </section>
+    75→
+    76→    <!-- Notable Alumni -->
+    77→    <section class="section" id="notable">
+    78→      <div class="container">
+    79→        <div class="section-header gsap-reveal">
+    80→          <span class="section-label">Distinguished Graduates</span>
+    81→          <h2 class="section-title">Notable Alumni</h2>
+    82→          <p class="section-desc">Our graduates are shaping industries and leading organizations across the world. Here are some of our stand-out achievers.</p>
+    83→        </div>
+    84→        <div class="grid-3 card-stagger">
+    85→          <!-- Arjun Patel -->
+    86→          <div class="card text-center">
+    87→            <div class="flex justify-center mb-4">
+    88→              <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xl">AP</div>
+    89→            </div>
+    90→            <h3 class="font-semibold text-lg text-dark">Arjun Patel</h3>
+    91→            <p class="text-emerald font-medium text-sm mt-1">Software Engineer at Google</p>
+    92→            <p class="text-muted text-sm">BCA 2022 Batch</p>
+    93→            <p class="text-muted text-sm mt-3">Built machine learning pipelines used by millions of Gmail users. Published two research papers during his time at Greenfield.</p>
+    94→            <span class="badge badge-emerald mt-4">Technology</span>
+    95→          </div>
+    96→          <!-- Sneha Gupta -->
+    97→          <div class="card text-center">
+    98→            <div class="flex justify-center mb-4">
+    99→              <div class="w-16 h-16 rounded-full bg-gold-light flex items-center justify-center text-gold-dark font-bold text-xl">SG</div>
+   100→            </div>
+   101→            <h3 class="font-semibold text-lg text-dark">Sneha Gupta</h3>
+   102→            <p class="text-emerald font-medium text-sm mt-1">Financial Analyst at Goldman Sachs</p>
+   103→            <p class="text-muted text-sm">B.Com 2021 Batch</p>
+   104→            <p class="text-muted text-sm mt-3">Cleared CFA Level III on first attempt. Now manages a portfolio worth over $50 million in the investment banking division.</p>
+   105→            <span class="badge badge-gold mt-4">Finance</span>
+   106→          </div>
+   107→          <!-- Rohit Verma -->
+   108→          <div class="card text-center">
+   109→            <div class="flex justify-center mb-4">
+   110→              <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-xl">RV</div>
+   111→            </div>
+   112→            <h3 class="font-semibold text-lg text-dark">Rohit Verma</h3>
+   113→            <p class="text-emerald font-medium text-sm mt-1">Product Manager at Microsoft</p>
+   114→            <p class="text-muted text-sm">BBA 2020 Batch</p>
+   115→            <p class="text-muted text-sm mt-3">Led the launch of Microsoft Teams features used by 300 million users. Youngest PM to lead a cross-functional team at Microsoft India.</p>
+   116→            <span class="badge badge-purple mt-4">Product</span>
+   117→          </div>
+   118→          <!-- Priya Das -->
+   119→          <div class="card text-center">
+   120→            <div class="flex justify-center mb-4">
+   121→              <div class="w-16 h-16 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold text-xl">PD</div>
+   122→            </div>
+   123→            <h3 class="font-semibold text-lg text-dark">Priya Das</h3>
+   124→            <p class="text-emerald font-medium text-sm mt-1">Data Scientist at Amazon</p>
+   125→            <p class="text-muted text-sm">BCA 2022 Batch</p>
+   126→            <p class="text-muted text-sm mt-3">Developed recommendation algorithms that improved customer engagement by 18%. Holds a patent in natural language processing.</p>
+   127→            <span class="badge badge-cyan mt-4">Data Science</span>
+   128→          </div>
+   129→          <!-- Karthik Iyer -->
+   130→          <div class="card text-center">
+   131→            <div class="flex justify-center mb-4">
+   132→              <div class="w-16 h-16 rounded-full bg-rose-100 flex items-center justify-center text-rose-700 font-bold text-xl">KI</div>
+   133→            </div>
+   134→            <h3 class="font-semibold text-lg text-dark">Karthik Iyer</h3>
+   135→            <p class="text-emerald font-medium text-sm mt-1">EdTech Founder & CEO</p>
+   136→            <p class="text-muted text-sm">BBA 2019 Batch</p>
+   137→            <p class="text-muted text-sm mt-3">Founded LearnPath, an EdTech startup that raised $5 million in Series A funding. Featured in Forbes 30 Under 30 India list.</p>
+   138→            <span class="badge badge-rose mt-4">Entrepreneurship</span>
+   139→          </div>
+   140→          <!-- Ananya Reddy -->
+   141→          <div class="card text-center">
+   142→            <div class="flex justify-center mb-4">
+   143→              <div class="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold text-xl">AR</div>
+   144→            </div>
+   145→            <h3 class="font-semibold text-lg text-dark">Ananya Reddy</h3>
+   146→            <p class="text-emerald font-medium text-sm mt-1">Chartered Accountant at Deloitte</p>
+   147→            <p class="text-muted text-sm">B.Com 2021 Batch</p>
+   148→            <p class="text-muted text-sm mt-3">Ranked All India 12th in CA Final exams. Now leads the audit team for Fortune 500 clients across South Asia at Deloitte.</p>
+   149→            <span class="badge badge-teal mt-4">Accounting</span>
+   150→          </div>
+   151→        </div>
+   152→      </div>
+   153→    </section>
+   154→
+   155→    <!-- Alumni Stories -->
+   156→    <section class="section bg-light">
+   157→      <div class="container">
+   158→        <div class="section-header gsap-reveal">
+   159→          <span class="section-label">In Their Own Words</span>
+   160→          <h2 class="section-title">Alumni Stories</h2>
+   161→          <p class="section-desc">Hear directly from our alumni about how Greenfield University shaped their careers and lives.</p>
+   162→        </div>
+   163→        <div class="grid-3 card-stagger">
+   164→          <div class="card gsap-reveal" style="padding:2rem">
+   165→            <div class="text-emerald text-3xl mb-4">"</div>
+   166→            <p class="text-muted text-sm leading-relaxed mb-6">Greenfield did not just give me a degree — it gave me a mindset. The professors pushed me to think beyond textbooks. The incubation center helped me turn my final-year project into a real business. Without the mentorship of Dr. Sharma and the entrepreneurial ecosystem at Greenfield, LearnPath would still be an idea on a napkin. The alumni network has been invaluable for hiring and fundraising alike.</p>
+   167→            <div class="flex items-center gap-3">
+   168→              <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-rose-700 font-bold text-sm">KI</div>
+   169→              <div>
+   170→                <p class="font-semibold text-sm text-dark">Karthik Iyer</p>
+   171→                <p class="text-muted text-xs">Founder & CEO, LearnPath | BBA 2019</p>
+   172→              </div>
+   173→            </div>
+   174→            <p class="text-emerald text-xs font-medium mt-4">Advice: Start building while you are still in college. The resources and safety net you have as a student are irreplaceable.</p>
+   175→          </div>
+   176→          <div class="card gsap-reveal" style="padding:2rem">
+   177→            <div class="text-emerald text-3xl mb-4">"</div>
+   178→            <p class="text-muted text-sm leading-relaxed mb-6">The data science program at Greenfield was years ahead of its time. When I joined Amazon, I realized that the curriculum had already covered 80% of what I use daily. The research paper I co-authored with Prof. Mehta during my third year was directly responsible for getting me interviewed at three top companies. Greenfield taught me that learning never stops — it only accelerates.</p>
+   179→            <div class="flex items-center gap-3">
+   180→              <div class="w-12 h-12 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold text-sm">PD</div>
+   181→              <div>
+   182→                <p class="font-semibold text-sm text-dark">Priya Das</p>
+   183→                <p class="text-muted text-xs">Data Scientist, Amazon | BCA 2022</p>
+   184→              </div>
+   185→            </div>
+   186→            <p class="text-emerald text-xs font-medium mt-4">Advice: Focus on fundamentals and real-world projects. A strong portfolio speaks louder than any certificate.</p>
+   187→          </div>
+   188→          <div class="card gsap-reveal" style="padding:2rem">
+   189→            <div class="text-emerald text-3xl mb-4">"</div>
+   190→            <p class="text-muted text-sm leading-relaxed mb-6">Clearing CA on the first attempt while managing college was one of the toughest challenges of my life. The discipline instilled by Greenfield's academic rigor, combined with the support from the commerce faculty, made it possible. The mock interview sessions organized by the placement cell were so thorough that my Deloitte interview felt like another practice round. I owe my career launch to this university.</p>
+   191→            <div class="flex items-center gap-3">
+   192→              <div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold text-sm">AR</div>
+   193→              <div>
+   194→                <p class="font-semibold text-sm text-dark">Ananya Reddy</p>
+   195→                <p class="text-muted text-xs">CA, Deloitte | B.Com 2021</p>
+   196→              </div>
+   197→            </div>
+   198→            <p class="text-emerald text-xs font-medium mt-4">Advice: Consistency beats intensity. Study a little every day, and do not wait for motivation — build habits instead.</p>
+   199→          </div>
+   200→        </div>
+   201→      </div>
+   202→    </section>
+   203→
+   204→    <!-- Alumni Network Map -->
+   205→    <section class="section" id="network">
+   206→      <div class="container">
+   207→        <div class="section-header gsap-reveal">
+   208→          <span class="section-label">Global Presence</span>
+   209→          <h2 class="section-title">Alumni Network Map</h2>
+   210→          <p class="section-desc">Our alumni chapters span major cities and regions, fostering lifelong connections and professional opportunities.</p>
+   211→        </div>
+   212→        <div class="grid-3 card-stagger">
+   213→          <div class="card gsap-reveal">
+   214→            <div class="flex items-center gap-3 mb-3">
+   215→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg">🏙️</div>
+   216→              <div>
+   217→                <h3 class="font-semibold text-dark">Mumbai Chapter</h3>
+   218→                <p class="text-muted text-xs">Largest chapter in India</p>
+   219→              </div>
+   220→            </div>
+   221→            <p class="text-emerald font-bold text-2xl">2,500+</p>
+   222→            <p class="text-muted text-sm mt-1">Active Members</p>
+   223→            <div class="mt-4 pt-4 border-t border-slate-100">
+   224→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Rajesh Menon, VP at HDFC Bank</p>
+   225→            </div>
+   226→          </div>
+   227→          <div class="card gsap-reveal">
+   228→            <div class="flex items-center gap-3 mb-3">
+   229→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   230→              <div>
+   231→                <h3 class="font-semibold text-dark">Bangalore Tech Hub</h3>
+   232→                <p class="text-muted text-xs">Technology & startups</p>
+   233→              </div>
+   234→            </div>
+   235→            <p class="text-emerald font-bold text-2xl">1,800+</p>
+   236→            <p class="text-muted text-sm mt-1">Active Members</p>
+   237→            <div class="mt-4 pt-4 border-t border-slate-100">
+   238→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Divya Krishnan, CTO at Razorpay</p>
+   239→            </div>
+   240→          </div>
+   241→          <div class="card gsap-reveal">
+   242→            <div class="flex items-center gap-3 mb-3">
+   243→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg">🏛️</div>
+   244→              <div>
+   245→                <h3 class="font-semibold text-dark">Delhi NCR</h3>
+   246→                <p class="text-muted text-xs">Policy, finance & consulting</p>
+   247→              </div>
+   248→            </div>
+   249→            <p class="text-emerald font-bold text-2xl">3,200+</p>
+   250→            <p class="text-muted text-sm mt-1">Active Members</p>
+   251→            <div class="mt-4 pt-4 border-t border-slate-100">
+   252→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Amit Sharma, Partner at EY</p>
+   253→            </div>
+   254→          </div>
+   255→          <div class="card gsap-reveal">
+   256→            <div class="flex items-center gap-3 mb-3">
+   257→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   258→              <div>
+   259→                <h3 class="font-semibold text-dark">Hyderabad</h3>
+   260→                <p class="text-muted text-xs">Pharma, tech & research</p>
+   261→              </div>
+   262→            </div>
+   263→            <p class="text-emerald font-bold text-2xl">1,200+</p>
+   264→            <p class="text-muted text-sm mt-1">Active Members</p>
+   265→            <div class="mt-4 pt-4 border-t border-slate-100">
+   266→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Sravan Kumar, Director at Microsoft</p>
+   267→            </div>
+   268→          </div>
+   269→          <div class="card gsap-reveal">
+   270→            <div class="flex items-center gap-3 mb-3">
+   271→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   272→              <div>
+   273→                <h3 class="font-semibold text-dark">International</h3>
+   274→                <p class="text-muted text-xs">US, UK, Europe, Singapore</p>
+   275→              </div>
+   276→            </div>
+   277→            <p class="text-emerald font-bold text-2xl">800+</p>
+   278→            <p class="text-muted text-sm mt-1">Active Members</p>
+   279→            <div class="mt-4 pt-4 border-t border-slate-100">
+   280→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Neha Patel, VP at JP Morgan (New York)</p>
+   281→            </div>
+   282→          </div>
+   283→          <div class="card gsap-reveal">
+   284→            <div class="flex items-center gap-3 mb-3">
+   285→              <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald text-lg" style="overflow:hidden"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=120&q=80" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+   286→              <div>
+   287→                <h3 class="font-semibold text-dark">Chennai</h3>
+   288→                <p class="text-muted text-xs">Manufacturing & IT services</p>
+   289→              </div>
+   290→            </div>
+   291→            <p class="text-emerald font-bold text-2xl">900+</p>
+   292→            <p class="text-muted text-sm mt-1">Active Members</p>
+   293→            <div class="mt-4 pt-4 border-t border-slate-100">
+   294→              <p class="text-xs text-muted"><span class="font-medium text-dark">Chapter Head:</span> Lakshmi Narayan, GM at TCS</p>
+   295→            </div>
+   296→          </div>
+   297→        </div>
+   298→      </div>
+   299→    </section>
+   300→
+   301→    <!-- Alumni Events -->
+   302→    <section class="section bg-emerald-tint">
+   303→      <div class="container">
+   304→        <div class="section-header gsap-reveal">
+   305→          <span class="section-label">Upcoming Gatherings</span>
+   306→          <h2 class="section-title">Alumni Events</h2>
+   307→          <p class="section-desc">Reconnect with old friends, build new connections, and give back to the community that shaped you.</p>
+   308→        </div>
+   309→        <div class="grid-4 card-stagger">
+   310→          <div class="card gsap-reveal">
+   311→            <div class="badge badge-emerald mb-4">Flagship Event</div>
+   312→            <h3 class="font-semibold text-dark text-lg">Annual Alumni Meet</h3>
+   313→            <p class="text-muted text-sm mt-2">The biggest gathering of Greenfield graduates featuring keynote speakers, panel discussions, cultural performances, and the Distinguished Alumni Awards ceremony.</p>
+   314→            <div class="flex items-center gap-2 mt-4 text-sm text-muted">
+   315→              <span class="text-emerald font-medium font-body-alt">Date:</span> August 15, 2025
+   316→            </div>
+   317→            <div class="flex items-center gap-2 mt-1 text-sm text-muted">
+   318→              <span class="text-emerald font-medium font-body-alt">Location:</span> Main Auditorium, Greenfield Campus
+   319→            </div>
+   320→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Register Now</a>
+   321→          </div>
+   322→          <div class="card gsap-reveal">
+   323→            <div class="badge badge-gold mb-4">Celebration</div>
+   324→            <h3 class="font-semibold text-dark text-lg">Homecoming Weekend</h3>
+   325→            <p class="text-muted text-sm mt-2">A nostalgic two-day event where alumni return to campus with families. Includes campus tours, department reunions, sports matches, and a grand gala dinner.</p>
+   326→            <div class="flex items-center gap-2 mt-4 text-sm text-muted">
+   327→              <span class="text-emerald font-medium font-body-alt">Date:</span> December 20–21, 2025
+   328→            </div>
+   329→            <div class="flex items-center gap-2 mt-1 text-sm text-muted">
+   330→              <span class="text-emerald font-medium font-body-alt">Location:</span> Greenfield University Campus
+   331→            </div>
+   332→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Save the Date</a>
+   333→          </div>
+   334→          <div class="card gsap-reveal">
+   335→            <div class="badge badge-cyan mb-4">Monthly Series</div>
+   336→            <h3 class="font-semibold text-dark text-lg">Industry Mentorship Series</h3>
+   337→            <p class="text-muted text-sm mt-2">Senior alumni from top companies mentor current students and recent graduates. Topics rotate between tech, finance, consulting, and entrepreneurship every month.</p>
+   338→            <div class="flex items-center gap-2 mt-4 text-sm text-muted">
+   339→              <span class="text-emerald font-medium font-body-alt">Date:</span> First Saturday of every month
+   340→            </div>
+   341→            <div class="flex items-center gap-2 mt-1 text-sm text-muted">
+   342→              <span class="text-emerald font-medium font-body-alt">Location:</span> Virtual + Campus Hybrid
+   343→            </div>
+   344→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">View Schedule</a>
+   345→          </div>
+   346→          <div class="card gsap-reveal">
+   347→            <div class="badge badge-purple mb-4">Regional</div>
+   348→            <h3 class="font-semibold text-dark text-lg">Regional Chapter Meetups</h3>
+   349→            <p class="text-muted text-sm mt-2">Local chapter events in Mumbai, Bangalore, Delhi, Hyderabad, and Chennai. Casual networking evenings with alumni from your city working across diverse industries.</p>
+   350→            <div class="flex items-center gap-2 mt-4 text-sm text-muted">
+   351→              <span class="text-emerald font-medium font-body-alt">Date:</span> Quarterly in each city
+   352→            </div>
+   353→            <div class="flex items-center gap-2 mt-1 text-sm text-muted">
+   354→              <span class="text-emerald font-medium font-body-alt">Location:</span> Various city venues
+   355→            </div>
+   356→            <a href="#" class="btn btn-primary btn-sm mt-4 w-full">Find Your Chapter</a>
+   357→          </div>
+   358→        </div>
+   359→      </div>
+   360→    </section>
+   361→
+   362→    <!-- Alumni Registration CTA -->
+   363→    <section class="section" id="register">
+   364→      <div class="container-narrow">
+   365→        <div class="section-header gsap-reveal">
+   366→          <span class="section-label">Stay Connected</span>
+   367→          <h2 class="section-title">Join the Alumni Network</h2>
+   368→          <p class="section-desc">Register to access exclusive alumni benefits including mentoring opportunities, networking events, career resources, and more.</p>
+   369→        </div>
+   370→        <div class="card gsap-reveal" style="padding:2.5rem">
+   371→          <form onsubmit="event.preventDefault(); alert('Registration submitted successfully! We will contact you shortly.');">
+   372→            <div class="form-grid">
+   373→              <div class="form-group">
+   374→                <label class="form-label">Full Name</label>
+   375→                <input type="text" class="form-input" placeholder="Enter your full name" required>
+   376→              </div>
+   377→              <div class="form-group">
+   378→                <label class="form-label">Email Address</label>
+   379→                <input type="email" class="form-input" placeholder="you@example.com" required>
+   380→              </div>
+   381→              <div class="form-group">
+   382→                <label class="form-label">Phone Number</label>
+   383→                <input type="tel" class="form-input" placeholder="+91 98765 43210">
+   384→              </div>
+   385→              <div class="form-group">
+   386→                <label class="form-label">Batch Year</label>
+   387→                <select class="form-select">
+   388→                  <option value="">Select your batch year</option>
+   389→                  <option>2024</option>
+   390→                  <option>2023</option>
+   391→                  <option>2022</option>
+   392→                  <option>2021</option>
+   393→                  <option>2020</option>
+   394→                  <option>2019</option>
+   395→                  <option>2018</option>
+   396→                  <option>2017</option>
+   397→                  <option>2016</option>
+   398→                  <option>2015 or earlier</option>
+   399→                </select>
+   400→              </div>
+   401→            </div>
+   402→            <div class="form-group">
+   403→              <label class="form-label">Current Company / Organization</label>
+   404→              <input type="text" class="form-input" placeholder="Where do you currently work?">
+   405→            </div>
+   406→            <div class="form-group">
+   407→              <label class="form-label">Areas of Interest</label>
+   408→              <div class="flex flex-wrap gap-4 mt-2">
+   409→                <label class="flex items-center gap-2 cursor-pointer text-sm text-dark">
+   410→                  <input type="checkbox" class="w-4 h-4 rounded border-slate-300 text-emerald focus:ring-emerald">
+   411→                  Mentoring Students
+   412→                </label>
+   413→                <label class="flex items-center gap-2 cursor-pointer text-sm text-dark">
+   414→                  <input type="checkbox" class="w-4 h-4 rounded border-slate-300 text-emerald focus:ring-emerald">
+   415→                  Professional Networking
+   416→                </label>
+   417→                <label class="flex items-center gap-2 cursor-pointer text-sm text-dark">
+   418→                  <input type="checkbox" class="w-4 h-4 rounded border-slate-300 text-emerald focus:ring-emerald">
+   419→                  Donations & Fundraising
+   420→                </label>
+   421→                <label class="flex items-center gap-2 cursor-pointer text-sm text-dark">
+   422→                  <input type="checkbox" class="w-4 h-4 rounded border-slate-300 text-emerald focus:ring-emerald">
+   423→                  Alumni Events
+   424→                </label>
+   425→              </div>
+   426→            </div>
+   427→            <button type="submit" class="btn btn-primary btn-lg w-full mt-4">Submit Registration</button>
+   428→          </form>
+   429→        </div>
+   430→      </div>
+   431→    </section>
+   432→
+   433→    <!-- CTA -->
+   434→    <section class="cta-section">
+   435→      <h2 class="gsap-reveal">Your Journey Started Here. Stay Connected.</h2>
+   436→      <p class="gsap-reveal">Whether you graduated last year or a decade ago, the Greenfield Alumni Network is your lifelong community. Reconnect today.</p>
+   437→      <div class="flex justify-center gap-4 gsap-reveal">
+   438→        <a href="#register" class="btn btn-primary btn-lg">Register Now</a>
+   439→        <a href="/contact.html" class="btn btn-outline btn-lg">Contact Alumni Office</a>
+   440→      </div>
+   441→    </section>
+   442→
+   443→  </main>
+   444→  <div id="site-footer"></div>
+   445→  <div id="floating-dock"></div>
+   446→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   447→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   448→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   449→  <script src="/js/college-base.js"></script>
+   450→</body>
+   451→</html>

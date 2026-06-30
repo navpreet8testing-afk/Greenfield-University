@@ -1,0 +1,975 @@
+     1→'use client';
+     2→
+     3→import { useCallback, useEffect, useRef, useState } from 'react';
+     4→import gsap from 'gsap';
+     5→import { ScrollTrigger } from 'gsap/ScrollTrigger';
+     6→import { useQuery } from '@tanstack/react-query';
+     7→import {
+     8→  Send, CheckCircle, Loader2, Download, FileText, X,
+     9→  CloudUpload, Check, GraduationCap, ClipboardList,
+    10→  Upload, BellRing, IndianRupee, Award, BookOpen,
+    11→  Trophy, Heart, FlaskConical, ArrowRight, CalendarCheck,
+    12→  FileCheck, CircleCheckBig,
+    13→} from 'lucide-react';
+    14→import { Button } from '@/components/ui/button';
+    15→import { Input } from '@/components/ui/input';
+    16→import { Textarea } from '@/components/ui/textarea';
+    17→import { Label } from '@/components/ui/label';
+    18→import { Badge } from '@/components/ui/badge';
+    19→import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+    20→import { Navbar } from '@/components/college/Navbar';
+    21→import { Footer } from '@/components/college/Footer';
+    22→import { useToast } from '@/hooks/use-toast';
+    23→import { OtpModal } from '@/components/OtpModal';
+    24→import { isSupabaseConfigured } from '@/lib/supabase';
+    25→import { IMAGES, PAGE_PHOTOS } from '@/lib/images';
+    26→
+    27→gsap.registerPlugin(ScrollTrigger);
+    28→
+    29→interface Program {
+    30→  id: string;
+    31→  name: string;
+    32→  shortName: string;
+    33→}
+    34→
+    35→/* ─────────────────────────────────────────── Data ─────────────────────────────────────────── */
+    36→
+    37→const steps = [
+    38→  { icon: BookOpen, title: 'Choose Program', description: 'Browse our diverse range of undergraduate, postgraduate, and doctoral programs to find the perfect fit for your aspirations.' },
+    39→  { icon: ClipboardList, title: 'Fill Application', description: 'Complete the online application form with your personal and academic details. The process takes under 5 minutes.' },
+    40→  { icon: Upload, title: 'Upload Documents', description: 'Submit your academic transcripts, ID proof, and other required documents in PDF format.' },
+    41→  { icon: CircleCheckBig, title: 'Receive Confirmation', description: 'Get instant confirmation with your application tracking ID. Our team will reach out within 48 hours.' },
+    42→];
+    43→
+    44→const eligibilityCriteria = [
+    45→  { level: 'Undergraduate (UG)', icon: GraduationCap, criteria: '10+2 with minimum 50% aggregate marks from a recognized board. Valid entrance score preferred but not mandatory.', color: 'emerald' as const },
+    46→  { level: 'Postgraduate (PG)', icon: BookOpen, criteria: "Bachelor's degree with minimum 50% aggregate marks from a recognized university. Relevant discipline preferred.", color: 'gold' as const },
+    47→  { level: 'Doctoral (PhD)', icon: FlaskConical, criteria: "Master's degree with minimum 55% aggregate marks. Research proposal and interview required for final selection.", color: 'emerald-dark' as const },
+    48→];
+    49→
+    50→const importantDates = [
+    51→  { date: 'January 15, 2025', label: 'Application Start', icon: CalendarCheck, highlight: false },
+    52→  { date: 'March 31, 2025', label: 'Early Bird Deadline', icon: BellRing, highlight: true },
+    53→  { date: 'June 15, 2025', label: 'Regular Deadline', icon: BellRing, highlight: false },
+    54→  { date: 'July 1-10, 2025', label: 'Counseling Dates', icon: FileCheck, highlight: false },
+    55→  { date: 'August 1, 2025', label: 'Classes Begin', icon: GraduationCap, highlight: false },
+    56→];
+    57→
+    58→const feeStructure = [
+    59→  { program: 'BCA (Bachelor of Computer Applications)', fee: '₹45,000', year: '/year' },
+    60→  { program: 'B.Com (Bachelor of Commerce)', fee: '₹40,000', year: '/year' },
+    61→  { program: 'BBA (Bachelor of Business Administration)', fee: '₹50,000', year: '/year' },
+    62→  { program: 'B.Sc (Bachelor of Science)', fee: '₹45,000', year: '/year' },
+    63→  { program: 'BA (Bachelor of Arts)', fee: '₹35,000', year: '/year' },
+    64→  { program: 'MCA (Master of Computer Applications)', fee: '₹75,000', year: '/year' },
+    65→  { program: 'MBA (Master of Business Administration)', fee: '₹95,000', year: '/year' },
+    66→  { program: 'M.Sc (Master of Science)', fee: '₹60,000', year: '/year' },
+    67→];
+    68→
+    69→const scholarships = [
+    70→  { title: 'Merit Scholarship', description: 'Awarded to students with exceptional academic records. Up to 100% tuition waiver for top performers.', icon: Trophy, percentage: '100%', tag: 'Up to', color: 'emerald' as const },
+    71→  { title: 'Sports Scholarship', description: 'For students who have represented at state or national level in recognized sports. Includes coaching support.', icon: Award, percentage: '50%', tag: 'Up to', color: 'gold' as const },
+    72→  { title: 'Need-based Financial Aid', description: 'Supporting students from economically weaker sections to ensure education is accessible to all deserving candidates.', icon: Heart, percentage: '30%', tag: 'Up to', color: 'emerald-dark' as const },
+    73→  { title: 'Research Fellowship', description: 'Full tuition waiver plus monthly stipend for doctoral candidates engaged in approved research projects.', icon: FlaskConical, percentage: '100%', tag: 'Full + Stipend', color: 'gold' as const },
+    74→];
+    75→
+    76→/* ─────────────────────────────────────────── Page ─────────────────────────────────────────── */
+    77→
+    78→export default function AdmissionsPage() {
+    79→  const pageRef = useRef<HTMLDivElement>(null);
+    80→  const { toast } = useToast();
+    81→
+    82→  // ── Fetch programs ────────────────────────────────────────────────
+    83→  const { data: programs = [] } = useQuery<Program[]>({
+    84→    queryKey: ['programs'],
+    85→    queryFn: () => fetch('/api/programs').then((r) => r.json()),
+    86→  });
+    87→
+    88→  // ── Form state ────────────────────────────────────────────────────
+    89→  const [submitting, setSubmitting] = useState(false);
+    90→  const [submitted, setSubmitted] = useState(false);
+    91→  const [otpOpen, setOtpOpen] = useState(false);
+    92→  const [otpEmail, setOtpEmail] = useState('');
+    93→  const pendingFormRef = useRef<HTMLFormElement | null>(null);
+    94→
+    95→  // ── Upload state ──────────────────────────────────────────────────
+    96→  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    97→  const [isDragOver, setIsDragOver] = useState(false);
+    98→  const [uploading, setUploading] = useState(false);
+    99→  const [uploadComplete, setUploadComplete] = useState(false);
+   100→  const [uploadRef, setUploadRef] = useState<string | null>(null);
+   101→  const [pdfBase64Data, setPdfBase64Data] = useState<string | null>(null);
+   102→  const fileInputRef = useRef<HTMLInputElement>(null);
+   103→
+   104→  // ── GSAP Animations ───────────────────────────────────────────────
+   105→  useEffect(() => {
+   106→    const ctx = gsap.context(() => {
+   107→      // Hero animations
+   108→      gsap.from('.hero-title', {
+   109→        y: 60, scale: 0.95, duration: 1.2, ease: 'power3.out', delay: 0.2,
+   110→      });
+   111→      gsap.from('.hero-subtitle', {
+   112→        y: 30, duration: 1, ease: 'power3.out', delay: 0.5,
+   113→      });
+   114→      gsap.from('.hero-cta', {
+   115→        y: 20, duration: 0.8, ease: 'power3.out', delay: 0.8,
+   116→      });
+   117→
+   118→      // Section animations
+   119→      const sections = [
+   120→        { trigger: '.steps-section', els: '.step-card' },
+   121→        { trigger: '.eligibility-section', els: '.eligibility-card' },
+   122→        { trigger: '.dates-section', els: '.date-card' },
+   123→        { trigger: '.fees-section', els: '.fees-table' },
+   124→        { trigger: '.scholarships-section', els: '.scholarship-card' },
+   125→      ];
+   126→
+   127→      sections.forEach(({ trigger, els }) => {
+   128→        gsap.from(`${trigger} .section-label`, {
+   129→          y: 20, duration: 0.8, ease: 'power3.out',
+   130→          scrollTrigger: { trigger, start: 'top 80%', immediateRender: false },
+   131→        });
+   132→        gsap.from(`${trigger} .section-title`, {
+   133→          y: 30, duration: 0.9, ease: 'power3.out', delay: 0.15,
+   134→          scrollTrigger: { trigger, start: 'top 80%', immediateRender: false },
+   135→        });
+   136→        gsap.from(els, {
+   137→          y: 40, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.25,
+   138→          scrollTrigger: { trigger, start: 'top 80%', immediateRender: false },
+   139→        });
+   140→      });
+   141→
+   142→      // Application form animations
+   143→      gsap.from('.admission-heading', {
+   144→        y: 40, duration: 1, ease: 'power3.out',
+   145→        scrollTrigger: { trigger: '.application-section', start: 'top 80%', immediateRender: false },
+   146→      });
+   147→      gsap.from('.admission-form', {
+   148→        y: 40, scale: 0.98, duration: 0.8, delay: 0.3, ease: 'power3.out',
+   149→        scrollTrigger: { trigger: '.admission-form', start: 'top 85%', immediateRender: false },
+   150→      });
+   151→      gsap.from('.admission-features', {
+   152→        x: 40, duration: 0.8, delay: 0.2, ease: 'power3.out',
+   153→        scrollTrigger: { trigger: '.admission-features', start: 'top 85%', immediateRender: false },
+   154→      });
+   155→    }, pageRef);
+   156→    return () => ctx.revert();
+   157→  }, []);
+   158→
+   159→  // ── Form Submit ───────────────────────────────────────────────────
+   160→  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+   161→    e.preventDefault();
+   162→    const form = e.currentTarget;
+   163→    const email = (form.email as HTMLInputElement)?.value?.trim();
+   164→    if (!email) {
+   165→      toast({ title: 'Error', description: 'Email address is required', variant: 'destructive' });
+   166→      return;
+   167→    }
+   168→    pendingFormRef.current = form;
+   169→    setOtpEmail(email);
+   170→    setOtpOpen(true);
+   171→  }
+   172→
+   173→  async function handleOtpVerified() {
+   174→    setOtpOpen(false);
+   175→    setSubmitting(true);
+   176→    try {
+   177→      const form = pendingFormRef.current;
+   178→      if (!form) return;
+   179→      const data: Record<string, string | undefined> = {
+   180→        fullName: (form.fullName as HTMLInputElement).value,
+   181→        email: (form.email as HTMLInputElement).value,
+   182→        phone: (form.phone as HTMLInputElement).value,
+   183→        program: (form.program as HTMLSelectElement).value,
+   184→        previousQualification: (form.qualification as HTMLInputElement).value,
+   185→        message: (form.message as HTMLTextAreaElement).value,
+   186→        documentRef: uploadRef || undefined,
+   187→      };
+   188→
+   189→      // If PDF was read as base64 (no Supabase), attach it
+   190→      if (pdfBase64Data && uploadedFile) {
+   191→        data.pdfBase64 = pdfBase64Data;
+   192→        data.pdfFileName = uploadedFile.name;
+   193→      }
+   194→
+   195→      const res = await fetch('/api/applications', {
+   196→        method: 'POST',
+   197→        headers: { 'Content-Type': 'application/json' },
+   198→        body: JSON.stringify(data),
+   199→      });
+   200→
+   201→      if (res.ok) {
+   202→        setSubmitted(true);
+   203→        toast({ title: 'Application submitted successfully!' });
+   204→      } else {
+   205→        const err = await res.json();
+   206→        toast({ title: 'Error', description: err.error || 'Something went wrong', variant: 'destructive' });
+   207→      }
+   208→    } catch {
+   209→      toast({ title: 'Network Error', description: 'Please check your connection and try again.', variant: 'destructive' });
+   210→    } finally {
+   211→      setSubmitting(false);
+   212→    }
+   213→  }
+   214→
+   215→  // ── PDF Download ──────────────────────────────────────────────────
+   216→  async function handleDownloadForm() {
+   217→    const html2pdf = (await import('html2pdf.js')).default;
+   218→
+   219→    const container = document.createElement('div');
+   220→    container.innerHTML = `
+   221→  <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;padding:40px;color:#1e293b;">
+   222→    <div style="text-align:center;border-bottom:3px solid #059669;padding-bottom:20px;margin-bottom:30px;">
+   223→      <h1 style="font-size:24px;color:#059669;margin:0 0 4px;">GREENFIELD UNIVERSITY</h1>
+   224→      <p style="font-size:13px;color:#64748b;margin:0;">University Road, Academic City &bull; admissions@greenfield.edu &bull; +91 7973290805</p>
+   225→      <p style="margin-top:8px;font-size:14px;font-weight:600;color:#1e293b;">APPLICATION FORM &mdash; ADMISSION 2025&ndash;26</p>
+   226→    </div>
+   227→    <div style="font-size:18px;font-weight:600;margin-bottom:20px;color:#334155;">Applicant Information</div>
+   228→    <div style="display:flex;gap:24px;">
+   229→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Full Name *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   230→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Email Address *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   231→    </div>
+   232→    <div style="display:flex;gap:24px;">
+   233→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Phone Number *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   234→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Date of Birth</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   235→    </div>
+   236→    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;">Academic Information</div>
+   237→    <div style="display:flex;gap:24px;">
+   238→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Program Applied For *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;margin-top:4px;"></div></div>
+   239→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Previous Qualification *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   240→    </div>
+   241→    <div style="display:flex;gap:24px;">
+   242→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">University / Board Name</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   243→      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Percentage / CGPA</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+   244→    </div>
+   245→    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;">Additional Information</div>
+   246→    <div style="margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Message / Statement of Purpose (Optional)</label><div style="border-bottom:1px dashed #cbd5e1;height:80px;"></div></div>
+   247→    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-top:30px;font-size:12px;color:#166534;">
+   248→      <h3 style="font-size:14px;margin:0 0 8px;">Submission Instructions</h3>
+   249→      <ol style="padding-left:20px;margin:0;"><li style="margin-bottom:4px;">Fill out all required fields marked with an asterisk (*).</li><li style="margin-bottom:4px;">You may also submit this application online at greenfield.edu/admissions.</li><li style="margin-bottom:4px;">Attach a copy of your most recent academic transcript and a valid photo ID.</li><li style="margin-bottom:4px;">Submit the completed form to the Admissions Office or email it to admissions@greenfield.edu.</li><li style="margin-bottom:0;">You will receive an acknowledgment with your application tracking ID within 24 hours.</li></ol>
+   250→    </div>
+   251→    <div style="margin-top:40px;display:flex;justify-content:space-between;align-items:end;">
+   252→      <div><label style="font-size:12px;font-weight:600;color:#475569;">Applicant's Signature</label><div style="border-bottom:1px dashed #cbd5e1;width:200px;height:28px;margin-top:4px;"></div></div>
+   253→      <div style="text-align:right;"><label style="font-size:12px;font-weight:600;color:#475569;">Date</label><div style="border-bottom:1px dashed #cbd5e1;width:180px;height:28px;margin-top:4px;"></div></div>
+   254→    </div>
+   255→  </div>`;
+   256→
+   257→    document.body.appendChild(container);
+   258→    try {
+   259→      await html2pdf().set({
+   260→        margin: [10, 10, 10, 10],
+   261→        filename: 'Greenfield_University_Application_Form_2025-26.pdf',
+   262→        image: { type: 'jpeg', quality: 0.98 },
+   263→        html2canvas: { scale: 2, useCORS: true },
+   264→        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+   265→      }).from(container).save();
+   266→    } catch {
+   267→      toast({ title: 'Download Failed', description: 'Could not generate PDF. Please try again.', variant: 'destructive' });
+   268→    } finally {
+   269→      document.body.removeChild(container);
+   270→    }
+   271→  }
+   272→
+   273→  // ── File Upload ───────────────────────────────────────────────────
+   274→  function validateFile(file: File): boolean {
+   275→    if (file.type !== 'application/pdf') {
+   276→      toast({ title: 'Invalid File', description: 'Only PDF files are accepted.', variant: 'destructive' });
+   277→      return false;
+   278→    }
+   279→    if (file.size > 10 * 1024 * 1024) {
+   280→      toast({ title: 'File Too Large', description: 'Maximum file size is 10 MB.', variant: 'destructive' });
+   281→      return false;
+   282→    }
+   283→    return true;
+   284→  }
+   285→
+   286→  async function handleFileUpload(file: File) {
+   287→    if (!validateFile(file)) return;
+   288→    setUploadedFile(file);
+   289→    setUploadComplete(false);
+   290→    setUploadRef(null);
+   291→
+   292→    if (isSupabaseConfigured()) {
+   293→      setUploading(true);
+   294→      try {
+   295→        const { supabase } = await import('@/lib/supabase');
+   296→        const fileName = `applications/${Date.now()}_${file.name}`;
+   297→        const { data, error } = await supabase!
+   298→          .storage
+   299→          .from('documents')
+   300→          .upload(fileName, file, { upsert: false });
+   301→
+   302→        if (error) {
+   303→          toast({ title: 'Upload Failed', description: error.message, variant: 'destructive' });
+   304→        } else {
+   305→          setUploadRef(data.path);
+   306→          setUploadComplete(true);
+   307→          toast({ title: 'Document Uploaded', description: 'Your document has been saved successfully.', variant: 'default' });
+   308→        }
+   309→      } catch {
+   310→        toast({ title: 'Upload Error', description: 'Could not upload to cloud storage. File is selected locally.', variant: 'destructive' });
+   311→      } finally {
+   312→        setUploading(false);
+   313→      }
+   314→    } else {
+   315→      // No Supabase — read file as base64 so it can be sent with the form
+   316→      setUploading(true);
+   317→      try {
+   318→        const base64 = await readFileAsBase64(file);
+   319→        setPdfBase64Data(base64);
+   320→        setUploadComplete(true);
+   321→        toast({ title: 'File Selected', description: 'File is ready. Submit your application to include it.', variant: 'default' });
+   322→      } catch {
+   323→        toast({ title: 'File Error', description: 'Could not read the file. Please try again.', variant: 'destructive' });
+   324→        setUploadedFile(null);
+   325→      } finally {
+   326→        setUploading(false);
+   327→      }
+   328→    }
+   329→  }
+   330→
+   331→  function readFileAsBase64(file: File): Promise<string> {
+   332→    return new Promise((resolve, reject) => {
+   333→      const reader = new FileReader();
+   334→      reader.onload = () => resolve(reader.result as string);
+   335→      reader.onerror = () => reject(new Error('Failed to read file'));
+   336→      reader.readAsDataURL(file);
+   337→    });
+   338→  }
+   339→
+   340→  function handleRemoveFile() {
+   341→    setUploadedFile(null);
+   342→    setUploadComplete(false);
+   343→    setUploadRef(null);
+   344→    setPdfBase64Data(null);
+   345→    if (fileInputRef.current) fileInputRef.current.value = '';
+   346→  }
+   347→
+   348→  const handleDragOver = useCallback((e: React.DragEvent) => {
+   349→    e.preventDefault();
+   350→    e.stopPropagation();
+   351→    setIsDragOver(true);
+   352→  }, []);
+   353→
+   354→  const handleDragLeave = useCallback((e: React.DragEvent) => {
+   355→    e.preventDefault();
+   356→    e.stopPropagation();
+   357→    setIsDragOver(false);
+   358→  }, []);
+   359→
+   360→  const handleDrop = useCallback((e: React.DragEvent) => {
+   361→    e.preventDefault();
+   362→    e.stopPropagation();
+   363→    setIsDragOver(false);
+   364→    const file = e.dataTransfer.files[0];
+   365→    if (file) handleFileUpload(file);
+   366→  }, []);
+   367→
+   368→  // ── Application form benefits ─────────────────────────────────────
+   369→  const benefits = [
+   370→    { title: 'Easy Online Process', description: 'Complete your application in under 5 minutes with our streamlined digital form.' },
+   371→    { title: 'Instant Confirmation', description: 'Receive immediate acknowledgment and application tracking ID via email.' },
+   372→    { title: 'Scholarship Eligibility', description: 'Merit-based and need-based scholarships automatically evaluated for all applicants.' },
+   373→    { title: 'Counseling Support', description: 'Free academic counseling sessions to help you choose the right program.' },
+   374→  ];
+   375→
+   376→  return (
+   377→    <div ref={pageRef} className="min-h-screen flex flex-col bg-background">
+   378→      <Navbar />
+   379→
+   380→      <main className="flex-1">
+   381→        {/* ═══════════════════ HERO SECTION ═══════════════════ */}
+   382→        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+   383→          <div
+   384→            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+   385→            style={{ backgroundImage: `url(${IMAGES.graduation})` }}
+   386→            aria-hidden="true"
+   387→          />
+   388→          <div className="hero-overlay absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+   389→          <div className="noise-overlay absolute inset-0" />
+   390→
+   391→          <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+   392→            <span className="hero-title inline-block font-section-label text-emerald-light text-sm font-semibold tracking-[0.2em] mb-4">
+   393→              Session 2025–26
+   394→            </span>
+   395→            <h1 className="hero-title font-hero-word text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+   396→              Admissions 2025-26
+   397→            </h1>
+   398→            <p className="hero-subtitle font-body-alt text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+   399→              Your journey to excellence starts here. Apply now and join our community of achievers.
+   400→            </p>
+   401→            <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
+   402→              <a
+   403→                href="#apply"
+   404→                className="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald hover:bg-emerald-dark text-white font-semibold rounded-full shadow-lg shadow-emerald/25 transition-all duration-300 hover:shadow-emerald/40 hover:scale-105"
+   405→              >
+   406→                Apply Now <ArrowRight className="w-4 h-4" />
+   407→              </a>
+   408→              <a
+   409→                href="#dates"
+   410→                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-medium rounded-full border border-white/20 transition-all duration-300"
+   411→              >
+   412→                View Important Dates
+   413→              </a>
+   414→            </div>
+   415→          </div>
+   416→
+   417→          {/* Decorative bottom gradient */}
+   418→          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+   419→        </section>
+   420→
+   421→        {/* ═══════════════════ HOW TO APPLY ═══════════════════ */}
+   422→        <section className="steps-section py-20 sm:py-28 bg-background">
+   423→          <div className="max-w-7xl mx-auto px-4 sm:px-6 glass-card">
+   424→            <div className="text-center mb-16">
+   425→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   426→                Application Process
+   427→              </span>
+   428→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   429→                <span className="gradient-text">How to Apply</span>
+   430→              </h2>
+   431→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   432→                Follow these simple steps to complete your application and secure your place at Greenfield University.
+   433→              </p>
+   434→            </div>
+   435→
+   436→            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+   437→              {steps.map((step, i) => (
+   438→                <div
+   439→                  key={step.title}
+   440→                  className={`step-card group relative bg-white dark:bg-card rounded-2xl p-6 sm:p-8 border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1 animate-fade-up stagger-${i + 1}`}
+   441→                >
+   442→                  {/* Step number */}
+   443→                  <div className="absolute -top-4 -left-2 w-10 h-10 rounded-xl bg-emerald text-white flex items-center justify-center font-bold text-lg shadow-lg shadow-emerald/30 group-hover:scale-110 transition-transform duration-300">
+   444→                    {i + 1}
+   445→                  </div>
+   446→
+   447→                  {/* Icon */}
+   448→                  <div className="w-14 h-14 rounded-2xl bg-emerald/10 dark:bg-emerald/20 flex items-center justify-center mb-5 group-hover:bg-emerald group-hover:scale-110 transition-all duration-300 mt-2">
+   449→                    <step.icon className="w-7 h-7 text-emerald group-hover:text-white transition-colors duration-300" />
+   450→                  </div>
+   451→
+   452→                  <h3 className="font-feature-title text-lg font-bold text-foreground mb-3">{step.title}</h3>
+   453→                  <p className="font-body-alt text-sm text-muted-foreground leading-relaxed">{step.description}</p>
+   454→
+   455→                  {/* Connector line (hidden on last card and mobile) */}
+   456→                  {i < steps.length - 1 && (
+   457→                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-emerald/20" />
+   458→                  )}
+   459→                </div>
+   460→              ))}
+   461→            </div>
+   462→          </div>
+   463→        </section>
+   464→
+   465→        {/* Section divider */}
+   466→        <div className="section-divider-gradient h-px" />
+   467→
+   468→        {/* ═══════════════════ ADMISSION COUNSELING ═══════════════════ */}
+   469→        <section className="py-20 sm:py-28">
+   470→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   471→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+   472→              <div className="group rounded-2xl overflow-hidden img-reveal">
+   473→                <div className="relative h-72 sm:h-80 lg:h-[420px]">
+   474→                  <img
+   475→                    src={PAGE_PHOTOS.admissionCounseling}
+   476→                    alt="Admission Counseling Session at Greenfield University"
+   477→                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+   478→                  />
+   479→                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+   480→                </div>
+   481→              </div>
+   482→              <div>
+   483→                <span className="font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   484→                  Personalized Guidance
+   485→                </span>
+   486→                <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-foreground mb-4">
+   487→                  Admission Counseling
+   488→                </h2>
+   489→                <p className="font-body-alt text-muted-foreground leading-relaxed mb-6">
+   490→                  Our dedicated counselors guide you through every step of the admission process — from choosing the right program to understanding fee structures and scholarship opportunities. One-on-one sessions ensure you make an informed decision about your academic future.
+   491→                </p>
+   492→                <ul className="space-y-3">
+   493→                  {["Personalized program selection guidance", "Document verification & application support", "Scholarship eligibility assessment", "Campus tour scheduling"].map((item) => (
+   494→                    <li key={item} className="flex items-center gap-3">
+   495→                      <CheckCircle className="w-5 h-5 text-emerald flex-shrink-0" />
+   496→                      <span className="font-body-alt text-sm text-muted-foreground">{item}</span>
+   497→                    </li>
+   498→                  ))}
+   499→                </ul>
+   500→              </div>
+   501→            </div>
+   502→          </div>
+   503→        </section>
+   504→
+   505→        {/* Section divider */}
+   506→        <div className="section-divider-gradient h-px" />
+   507→
+   508→        {/* ═══════════════════ ELIGIBILITY CRITERIA ═══════════════════ */}
+   509→        <section className="eligibility-section py-20 sm:py-28 bg-emerald/[0.03] dark:bg-emerald/[0.02]">
+   510→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   511→            <div className="text-center mb-16">
+   512→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   513→                Requirements
+   514→              </span>
+   515→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   516→                Eligibility Criteria
+   517→              </h2>
+   518→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   519→                Check the minimum requirements for each program level before applying.
+   520→              </p>
+   521→            </div>
+   522→
+   523→            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 card-glow">
+   524→              {eligibilityCriteria.map((item, i) => (
+   525→                <Card
+   526→                  key={item.level}
+   527→                  className={`eligibility-card rounded-2xl border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1 bg-white dark:bg-card overflow-hidden group animate-fade-up stagger-${i + 1}`}
+   528→                >
+   529→                  <CardHeader className="pb-4">
+   530→                    <div className="flex items-center gap-4">
+   531→                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+   532→                        item.color === 'gold'
+   533→                          ? 'bg-gold/10 group-hover:bg-gold'
+   534→                          : 'bg-emerald/10 group-hover:bg-emerald'
+   535→                      }`}>
+   536→                        <item.icon className={`w-7 h-7 transition-colors duration-300 ${
+   537→                          item.color === 'gold'
+   538→                            ? 'text-gold group-hover:text-white'
+   539→                            : 'text-emerald group-hover:text-white'
+   540→                        }`} />
+   541→                      </div>
+   542→                      <CardTitle className="font-feature-title text-lg font-bold text-foreground">{item.level}</CardTitle>
+   543→                    </div>
+   544→                  </CardHeader>
+   545→                  <CardContent>
+   546→                    <p className="font-body-alt text-muted-foreground leading-relaxed text-sm">{item.criteria}</p>
+   547→                    <div className="mt-5 flex items-center gap-2">
+   548→                      <Badge variant="secondary" className={`text-xs font-medium ${
+   549→                        item.color === 'gold'
+   550→                          ? 'bg-gold/10 text-gold-dark hover:bg-gold/20'
+   551→                          : 'bg-emerald/10 text-emerald-dark hover:bg-emerald/20'
+   552→                      }`}>
+   553→                        {item.level === 'Undergraduate (UG)' ? 'Min. 50% in 10+2' : item.level === 'Postgraduate (PG)' ? "Min. 50% in Bachelor's" : "Min. 55% in Master's"}
+   554→                      </Badge>
+   555→                    </div>
+   556→                  </CardContent>
+   557→                </Card>
+   558→              ))}
+   559→            </div>
+   560→          </div>
+   561→        </section>
+   562→
+   563→        {/* Section divider */}
+   564→        <div className="section-divider-gradient h-px" />
+   565→
+   566→        {/* ═══════════════════ IMPORTANT DATES ═══════════════════ */}
+   567→        <section id="dates" className="dates-section py-20 sm:py-28 bg-background">
+   568→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   569→            <div className="text-center mb-16">
+   570→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   571→                Mark Your Calendar
+   572→              </span>
+   573→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   574→                Important Dates
+   575→              </h2>
+   576→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   577→                Stay on track with key admission deadlines and milestones.
+   578→              </p>
+   579→            </div>
+   580→
+   581→            <div className="max-w-3xl mx-auto">
+   582→              <div className="relative">
+   583→                {/* Timeline line */}
+   584→                <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-emerald/10" />
+   585→
+   586→                <div className="space-y-6">
+   587→                  {importantDates.map((item, i) => (
+   588→                    <div
+   589→                      key={item.label}
+   590→                      className="date-card relative flex items-start gap-5 sm:gap-6 group"
+   591→                    >
+   592→                      {/* Timeline dot */}
+   593→                      <div className={`relative z-10 shrink-0 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+   594→                        item.highlight
+   595→                          ? 'bg-emerald shadow-lg shadow-emerald/30'
+   596→                          : 'bg-emerald/10 dark:bg-emerald/20 group-hover:bg-emerald group-hover:shadow-lg group-hover:shadow-emerald/20'
+   597→                      }`}>
+   598→                        <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 transition-colors duration-300 ${
+   599→                          item.highlight ? 'text-white' : 'text-emerald group-hover:text-white'
+   600→                        }`} />
+   601→                      </div>
+   602→
+   603→                      {/* Content card */}
+   604→                      <div className={`flex-1 p-4 sm:p-5 rounded-2xl border transition-all duration-300 ${
+   605→                        item.highlight
+   606→                          ? 'bg-emerald/5 border-emerald/20 shadow-md shadow-emerald/5'
+   607→                          : 'bg-white dark:bg-card border-border hover:border-emerald/30 hover:shadow-lg hover:shadow-emerald/5'
+   608→                      }`}>
+   609→                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+   610→                          <div>
+   611→                            <h3 className={`font-feature-title font-bold text-base sm:text-lg ${
+   612→                              item.highlight ? 'text-emerald' : 'text-foreground'
+   613→                            }`}>
+   614→                              {item.label}
+   615→                            </h3>
+   616→                            <p className="font-body-alt text-sm text-muted-foreground mt-1">{item.date}</p>
+   617→                          </div>
+   618→                          {item.highlight && (
+   619→                            <Badge className="bg-emerald text-white w-fit">Early Bird</Badge>
+   620→                          )}
+   621→                        </div>
+   622→                      </div>
+   623→                    </div>
+   624→                  ))}
+   625→                </div>
+   626→              </div>
+   627→            </div>
+   628→          </div>
+   629→        </section>
+   630→
+   631→        {/* Section divider */}
+   632→        <div className="section-divider-gradient h-px" />
+   633→
+   634→        {/* ═══════════════════ FEE STRUCTURE ═══════════════════ */}
+   635→        <section className="fees-section py-20 sm:py-28 bg-emerald/[0.03] dark:bg-emerald/[0.02]">
+   636→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   637→            <div className="text-center mb-16">
+   638→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   639→                Transparent Pricing
+   640→              </span>
+   641→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   642→                Fee Structure
+   643→              </h2>
+   644→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   645→                Competitive fees with flexible payment options and scholarship support.
+   646→              </p>
+   647→            </div>
+   648→
+   649→            <div className="fees-table max-w-4xl mx-auto">
+   650→              <Card className="rounded-2xl border border-border overflow-hidden shadow-sm bg-white dark:bg-card">
+   651→                {/* UG Header */}
+   652→                <div className="bg-emerald/5 dark:bg-emerald/10 px-6 py-3 border-b border-border">
+   653→                  <h3 className="font-feature-title font-bold text-emerald flex items-center gap-2">
+   654→                    <GraduationCap className="w-5 h-5" />
+   655→                    Undergraduate Programs
+   656→                  </h3>
+   657→                </div>
+   658→                <div className="divide-y divide-border">
+   659→                  {feeStructure.filter(f => f.program.startsWith('B')).map((item) => (
+   660→                    <div key={item.program} className="flex items-center justify-between px-6 py-4 hover:bg-emerald/[0.02] transition-colors">
+   661→                      <span className="font-body-alt text-sm sm:text-base text-foreground">{item.program}</span>
+   662→                      <span className="font-feature-title font-bold text-emerald whitespace-nowrap ml-4">
+   663→                        {item.fee}<span className="text-muted-foreground font-normal text-xs">{item.year}</span>
+   664→                      </span>
+   665→                    </div>
+   666→                  ))}
+   667→                </div>
+   668→
+   669→                {/* PG Header */}
+   670→                <div className="bg-gold/5 dark:bg-gold/10 px-6 py-3 border-y border-border">
+   671→                  <h3 className="font-feature-title font-bold text-gold-dark flex items-center gap-2">
+   672→                    <BookOpen className="w-5 h-5" />
+   673→                    Postgraduate Programs
+   674→                  </h3>
+   675→                </div>
+   676→                <div className="divide-y divide-border">
+   677→                  {feeStructure.filter(f => f.program.startsWith('M')).map((item) => (
+   678→                    <div key={item.program} className="flex items-center justify-between px-6 py-4 hover:bg-emerald/[0.02] transition-colors">
+   679→                      <span className="font-body-alt text-sm sm:text-base text-foreground">{item.program}</span>
+   680→                      <span className="font-feature-title font-bold text-emerald whitespace-nowrap ml-4">
+   681→                        {item.fee}<span className="text-muted-foreground font-normal text-xs">{item.year}</span>
+   682→                      </span>
+   683→                    </div>
+   684→                  ))}
+   685→                </div>
+   686→
+   687→                {/* Note */}
+   688→                <div className="bg-muted/50 px-6 py-3 border-t border-border">
+   689→                  <p className="text-xs text-muted-foreground">
+   690→                    <IndianRupee className="w-3 h-3 inline mr-1" />
+   691→                    Fees are indicative and may vary. Additional laboratory and hostel charges apply. EMI options available.
+   692→                  </p>
+   693→                </div>
+   694→              </Card>
+   695→            </div>
+   696→          </div>
+   697→        </section>
+   698→
+   699→        {/* Section divider */}
+   700→        <div className="section-divider-gradient h-px" />
+   701→
+   702→        {/* ═══════════════════ SCHOLARSHIPS ═══════════════════ */}
+   703→        <section className="scholarships-section py-20 sm:py-28 bg-background">
+   704→          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   705→            <div className="text-center mb-16">
+   706→              <span className="section-label font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   707→                Financial Support
+   708→              </span>
+   709→              <h2 className="section-title font-section-title text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+   710→                Scholarships & Aid
+   711→              </h2>
+   712→              <p className="font-body-alt text-muted-foreground max-w-2xl mx-auto text-lg">
+   713→                We believe in nurturing talent regardless of financial background. Explore our scholarship programs.
+   714→              </p>
+   715→            </div>
+   716→
+   717→            <div className="grid sm:grid-cols-2 gap-6 lg:gap-8 card-glow">
+   718→              {scholarships.map((s, i) => (
+   719→                <Card
+   720→                  key={s.title}
+   721→                  className={`scholarship-card group rounded-2xl border border-border shadow-sm hover:shadow-xl hover:shadow-emerald/5 transition-all duration-500 hover:-translate-y-1 bg-white dark:bg-card overflow-hidden animate-fade-up stagger-${i + 1}`}
+   722→                >
+   723→                  <CardContent className="p-6 sm:p-8">
+   724→                    <div className="flex items-start gap-5">
+   725→                      <div className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+   726→                        s.color === 'gold'
+   727→                          ? 'bg-gold/10 group-hover:bg-gold'
+   728→                          : 'bg-emerald/10 group-hover:bg-emerald'
+   729→                      }`}>
+   730→                        <s.icon className={`w-7 h-7 transition-colors duration-300 ${
+   731→                          s.color === 'gold'
+   732→                            ? 'text-gold group-hover:text-white'
+   733→                            : 'text-emerald group-hover:text-white'
+   734→                        }`} />
+   735→                      </div>
+   736→                      <div className="flex-1 min-w-0">
+   737→                        <div className="flex items-start justify-between gap-3 mb-2">
+   738→                          <h3 className="font-feature-title text-lg font-bold text-foreground">{s.title}</h3>
+   739→                          <div className={`shrink-0 text-right`}>
+   740→                            <span className={`block text-2xl font-bold ${
+   741→                              s.color === 'gold' ? 'text-gold' : 'text-emerald'
+   742→                            }`}>
+   743→                              {s.percentage}
+   744→                            </span>
+   745→                            <span className="text-xs text-muted-foreground">{s.tag}</span>
+   746→                          </div>
+   747→                        </div>
+   748→                        <p className="font-body-alt text-sm text-muted-foreground leading-relaxed">{s.description}</p>
+   749→                      </div>
+   750→                    </div>
+   751→                  </CardContent>
+   752→                </Card>
+   753→              ))}
+   754→            </div>
+   755→          </div>
+   756→        </section>
+   757→
+   758→        {/* Section divider */}
+   759→        <div className="section-divider-gradient h-px" />
+   760→
+   761→        {/* ═══════════════════ APPLICATION FORM ═══════════════════ */}
+   762→        <section id="apply" className="application-section py-20 sm:py-28 bg-slate-dark dark:bg-slate-900 relative overflow-hidden">
+   763→          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald/5 rounded-full blur-3xl -translate-y-1/2" />
+   764→
+   765→          <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+   766→            <div className="text-center mb-16 admission-heading">
+   767→              <span className="font-section-label inline-block text-emerald text-sm font-semibold tracking-[0.2em] mb-3">
+   768→                Begin Your Journey
+   769→              </span>
+   770→              <h2 className="font-cta-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+   771→                Apply for Admission 2025–26
+   772→              </h2>
+   773→              <p className="text-white/50 max-w-2xl mx-auto text-lg font-body-alt">
+   774→                Take the first step towards an extraordinary academic career. Apply now and join our community of achievers.
+   775→              </p>
+   776→            </div>
+   777→
+   778→            <div className="grid lg:grid-cols-5 gap-12 items-start">
+   779→              {/* Benefits */}
+   780→              <div className="lg:col-span-2 admission-features">
+   781→                <div className="space-y-6">
+   782→                  {benefits.map((b, i) => (
+   783→                    <div key={b.title} className="flex gap-4 group">
+   784→                      <div className="shrink-0 w-8 h-8 rounded-lg bg-emerald/10 flex items-center justify-center text-emerald text-sm font-bold group-hover:bg-emerald group-hover:text-white transition-all duration-300">
+   785→                        {i + 1}
+   786→                      </div>
+   787→                      <div>
+   788→                        <h4 className="text-white font-semibold text-sm mb-1">{b.title}</h4>
+   789→                        <p className="text-white/40 text-sm leading-relaxed">{b.description}</p>
+   790→                      </div>
+   791→                    </div>
+   792→                  ))}
+   793→                </div>
+   794→              </div>
+   795→
+   796→              {/* Form */}
+   797→              <div className="lg:col-span-3 admission-form">
+   798→                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 sm:p-8">
+   799→                  {submitted ? (
+   800→                    <div className="text-center py-12">
+   801→                      <CheckCircle className="w-16 h-16 text-emerald mx-auto mb-4" />
+   802→                      <h3 className="text-2xl font-bold text-white mb-2">Application Received!</h3>
+   803→                      <p className="text-white/50 mb-6">Thank you for your interest. Our admissions team will reach out to you within 48 hours.</p>
+   804→                      <Button
+   805→                        variant="outline"
+   806→                        className="border-emerald/50 text-emerald hover:bg-emerald/10 rounded-full"
+   807→                        onClick={() => { setSubmitted(false); handleRemoveFile(); }}
+   808→                      >
+   809→                        Submit Another Application
+   810→                      </Button>
+   811→                    </div>
+   812→                  ) : (
+   813→                    <>
+   814→                      {/* Download Application Form Button */}
+   815→                      <button
+   816→                        type="button"
+   817→                        onClick={handleDownloadForm}
+   818→                        className="w-full mb-6 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border border-dashed border-white/20 text-white/70 hover:text-white hover:border-emerald/50 hover:bg-emerald/5 transition-all duration-300 text-sm font-medium group"
+   819→                      >
+   820→                        <Download className="w-4 h-4 group-hover:text-emerald transition-colors" />
+   821→                        <span>Download Application Form (PDF)</span>
+   822→                        <FileText className="w-3.5 h-3.5 opacity-50" />
+   823→                      </button>
+   824→
+   825→                      <form onSubmit={handleSubmit} className="space-y-5">
+   826→                        <div className="grid sm:grid-cols-2 gap-5">
+   827→                          <div className="space-y-2">
+   828→                            <Label htmlFor="fullName" className="text-white/70 text-sm">Full Name *</Label>
+   829→                            <Input id="fullName" name="fullName" required placeholder="John Doe"
+   830→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   831→                          </div>
+   832→                          <div className="space-y-2">
+   833→                            <Label htmlFor="email" className="text-white/70 text-sm">Email Address *</Label>
+   834→                            <Input id="email" name="email" type="email" required placeholder="john@example.com"
+   835→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   836→                          </div>
+   837→                        </div>
+   838→                        <div className="grid sm:grid-cols-2 gap-5">
+   839→                          <div className="space-y-2">
+   840→                            <Label htmlFor="phone" className="text-white/70 text-sm">Phone Number *</Label>
+   841→                            <Input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210"
+   842→                              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   843→                          </div>
+   844→                          <div className="space-y-2">
+   845→                            <Label htmlFor="program" className="text-white/70 text-sm">Program *</Label>
+   846→                            <select
+   847→                              id="program"
+   848→                              name="program"
+   849→                              required
+   850→                              className="w-full bg-white/5 border border-white/10 text-white rounded-xl h-11 px-3 text-sm focus:outline-none focus:border-emerald/50 focus:ring-emerald/20 [&>option]:bg-slate-dark [&>option]:text-white"
+   851→                            >
+   852→                              <option value="">Select a program</option>
+   853→                              {programs.map((p) => (
+   854→                                <option key={p.id} value={p.name}>{p.shortName} — {p.name}</option>
+   855→                              ))}
+   856→                            </select>
+   857→                          </div>
+   858→                        </div>
+   859→                        <div className="space-y-2">
+   860→                          <Label htmlFor="qualification" className="text-white/70 text-sm">Previous Qualification</Label>
+   861→                          <Input id="qualification" name="qualification" placeholder="e.g., 12th Standard, B.Sc., Diploma..."
+   862→                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl h-11" />
+   863→                        </div>
+   864→                        <div className="space-y-2">
+   865→                          <Label htmlFor="message" className="text-white/70 text-sm">Message (Optional)</Label>
+   866→                          <Textarea id="message" name="message" rows={3} placeholder="Tell us about your goals and aspirations..."
+   867→                            className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-emerald/50 focus:ring-emerald/20 rounded-xl resize-none" />
+   868→                        </div>
+   869→
+   870→                        {/* Drag-and-Drop Upload Zone */}
+   871→                        <div className="space-y-2">
+   872→                          <Label className="text-white/70 text-sm">Upload Document (PDF, max 10 MB)</Label>
+   873→                          <div
+   874→                            onDragOver={handleDragOver}
+   875→                            onDragLeave={handleDragLeave}
+   876→                            onDrop={handleDrop}
+   877→                            onClick={() => !uploadedFile && fileInputRef.current?.click()}
+   878→                            className={`relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 cursor-pointer transition-all duration-300 ${
+   879→                              isDragOver
+   880→                                ? 'border-emerald bg-emerald/10 scale-[1.01]'
+   881→                                : uploadedFile
+   882→                                  ? 'border-emerald/40 bg-emerald/5'
+   883→                                  : 'border-white/15 hover:border-white/30 hover:bg-white/5'
+   884→                            }`}
+   885→                          >
+   886→                            <input
+   887→                              ref={fileInputRef}
+   888→                              type="file"
+   889→                              accept=".pdf,application/pdf"
+   890→                              className="hidden"
+   891→                              onChange={(e) => {
+   892→                                const file = e.target.files?.[0];
+   893→                                if (file) handleFileUpload(file);
+   894→                              }}
+   895→                            />
+   896→
+   897→                            {uploading ? (
+   898→                              <>
+   899→                                <Loader2 className="w-8 h-8 text-emerald animate-spin" />
+   900→                                <p className="text-sm text-white/60">Uploading document...</p>
+   901→                              </>
+   902→                            ) : uploadedFile ? (
+   903→                              <>
+   904→                                <div className="flex items-center gap-3 w-full">
+   905→                                  <div className="shrink-0 w-10 h-10 rounded-lg bg-emerald/20 flex items-center justify-center">
+   906→                                    {uploadComplete ? (
+   907→                                      <Check className="w-5 h-5 text-emerald" />
+   908→                                    ) : (
+   909→                                      <FileText className="w-5 h-5 text-emerald" />
+   910→                                    )}
+   911→                                  </div>
+   912→                                  <div className="min-w-0 flex-1">
+   913→                                    <p className="text-sm text-white font-medium truncate">{uploadedFile.name}</p>
+   914→                                    <p className="text-xs text-white/40">
+   915→                                      {(uploadedFile.size / 1024).toFixed(1)} KB
+   916→                                      {uploadComplete && ' • Ready'}
+   917→                                      {uploadRef && ' • Cloud saved'}
+   918→                                    </p>
+   919→                                  </div>
+   920→                                  <button
+   921→                                    type="button"
+   922→                                    onClick={(e) => { e.stopPropagation(); handleRemoveFile(); }}
+   923→                                    className="shrink-0 w-8 h-8 rounded-lg hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white transition-colors"
+   924→                                    aria-label="Remove file"
+   925→                                  >
+   926→                                    <X className="w-4 h-4" />
+   927→                                  </button>
+   928→                                </div>
+   929→                              </>
+   930→                            ) : (
+   931→                              <>
+   932→                                <CloudUpload className={`w-8 h-8 transition-colors ${isDragOver ? 'text-emerald' : 'text-white/30'}`} />
+   933→                                <div className="text-center">
+   934→                                  <p className="text-sm text-white/60">
+   935→                                    <span className="text-emerald font-medium">Click to upload</span> or drag and drop
+   936→                                  </p>
+   937→                                  <p className="text-xs text-white/30 mt-1">PDF files only, up to 10 MB</p>
+   938→                                </div>
+   939→                              </>
+   940→                            )}
+   941→                          </div>
+   942→                        </div>
+   943→
+   944→                        <Button
+   945→                          type="submit"
+   946→                          disabled={submitting}
+   947→                          className="w-full bg-emerald hover:bg-emerald-dark text-white rounded-xl h-12 text-base font-semibold shadow-lg shadow-emerald/20 hover:shadow-emerald/40 transition-all"
+   948→                        >
+   949→                          {submitting ? (
+   950→                            <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Submitting...</>
+   951→                          ) : (
+   952→                            <><Send className="w-4 h-4 mr-2" /> Submit Application</>
+   953→                          )}
+   954→                        </Button>
+   955→                      </form>
+   956→                    </>
+   957→                  )}
+   958→                </div>
+   959→              </div>
+   960→            </div>
+   961→          </div>
+   962→        </section>
+   963→      </main>
+   964→
+   965→      <Footer />
+   966→
+   967→      <OtpModal
+   968→        isOpen={otpOpen}
+   969→        email={otpEmail}
+   970→        onClose={() => setOtpOpen(false)}
+   971→        onVerified={handleOtpVerified}
+   972→      />
+   973→    </div>
+   974→  );
+   975→}

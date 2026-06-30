@@ -1,0 +1,442 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Research & Innovation - Greenfield University</title>
+     7→  <meta name="description" content="Discover groundbreaking research at Greenfield University — 450+ publications, 85+ patents, 12 research centers, and global collaborations with MIT, Stanford, and IIT Bombay.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→</head>
+    15→<body class="min-h-screen flex flex-col">
+    16→  <div id="site-header"></div>
+    17→  <main class="flex-1">
+    18→
+    19→    <!-- Hero -->
+    20→    <section class="page-hero noise">
+    21→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=1200&q=80')"></div>
+    22→      <div class="page-hero-overlay"></div>
+    23→      <div class="page-hero-content">
+    24→        <div class="hero-breadcrumbs">
+    25→          <a href="/">Home</a>
+    26→          <span class="sep">/</span>
+    27→          <span>Research</span>
+    28→        </div>
+    29→        <div class="hero-badge">
+    30→          <span class="pulse-dot"></span>
+    31→          12 Dedicated Research Centers
+    32→        </div>
+    33→        <h1>Research & Innovation</h1>
+    34→        <p class="hero-sub">Pioneering breakthroughs across artificial intelligence, biotechnology, sustainable technology, and more. Our research ecosystem fosters collaboration, discovery, and real-world impact.</p>
+    35→      </div>
+    36→    </section>
+    37→
+    38→    <!-- Research Stats -->
+    39→    <section class="section bg-white" style="padding-top:0;margin-top:-3rem;position:relative;z-index:2">
+    40→      <div class="container">
+    41→        <div class="grid-6 card-stagger">
+    42→          <div class="stat-card">
+    43→            <div class="stat-icon">📄</div>
+    44→            <div class="stat-number" data-counter="450" data-suffix="+">0</div>
+    45→            <div class="stat-label">Publications</div>
+    46→          </div>
+    47→          <div class="stat-card">
+    48→            <div class="stat-icon">📝</div>
+    49→            <div class="stat-number" data-counter="85" data-suffix="+">0</div>
+    50→            <div class="stat-label">Patents Filed</div>
+    51→          </div>
+    52→          <div class="stat-card">
+    53→            <div class="stat-icon">🧪</div>
+    54→            <div class="stat-number" data-counter="25" data-suffix="+">0</div>
+    55→            <div class="stat-label">Funded Projects</div>
+    56→          </div>
+    57→          <div class="stat-card">
+    58→            <div class="stat-icon">🌐</div>
+    59→            <div class="stat-number" data-counter="80" data-suffix="+">0</div>
+    60→            <div class="stat-label">Global Collaborations</div>
+    61→          </div>
+    62→          <div class="stat-card">
+    63→            <div class="stat-icon">🏗️</div>
+    64→            <div class="stat-number" data-counter="12" data-suffix="">0</div>
+    65→            <div class="stat-label">Research Centers</div>
+    66→          </div>
+    67→          <div class="stat-card">
+    68→            <div class="stat-icon">💰</div>
+    69→            <div class="stat-number" data-counter="150" data-suffix="+">0</div>
+    70→            <div class="stat-label">Crore Funding</div>
+    71→          </div>
+    72→        </div>
+    73→      </div>
+    74→    </section>
+    75→
+    76→    <!-- Research Centers -->
+    77→    <section class="section bg-light" id="centers">
+    78→      <div class="container">
+    79→        <div class="section-header">
+    80→          <span class="section-label">Infrastructure</span>
+    81→          <h2 class="section-title">Research Centers</h2>
+    82→          <p class="section-desc">Our specialized research centers provide state-of-the-art facilities and collaborative environments for cutting-edge investigation.</p>
+    83→        </div>
+    84→        <div class="grid-3 card-stagger">
+    85→          <div class="card">
+    86→            <div class="text-3xl mb-3">🧠</div>
+    87→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">AI & Data Science Lab</h3>
+    88→            <p class="text-sm text-muted mb-3">Director: Dr. Rajesh Kumar</p>
+    89→            <p class="text-sm text-muted mb-3" style="line-height:1.7">A 5,000 sq.ft facility equipped with NVIDIA A100 GPU clusters, supporting research in deep learning, NLP, computer vision, and reinforcement learning.</p>
+    90→            <div class="flex flex-wrap gap-2">
+    91→              <span class="badge badge-emerald">Deep Learning</span>
+    92→              <span class="badge badge-emerald">NLP</span>
+    93→              <span class="badge badge-emerald">Computer Vision</span>
+    94→            </div>
+    95→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Automated crop disease detection using drone imagery, deployed across 200+ farms in partnership with the State Agricultural Department.</p>
+    96→          </div>
+    97→          <div class="card">
+    98→            <div class="text-3xl mb-3">⛓️</div>
+    99→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">Blockchain Research Center</h3>
+   100→            <p class="text-sm text-muted mb-3">Director: Dr. Arjun Das</p>
+   101→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Dedicated to enterprise blockchain solutions, DeFi protocols, and scalable consensus mechanisms. Houses a private blockchain testnet with 50+ validator nodes.</p>
+   102→            <div class="flex flex-wrap gap-2">
+   103→              <span class="badge badge-purple">DeFi</span>
+   104→              <span class="badge badge-purple">Smart Contracts</span>
+   105→              <span class="badge badge-purple">Consensus</span>
+   106→            </div>
+   107→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Scalable proof-of-stake consensus for agricultural supply chain transparency, funded by DST with ₹2.3 crores.</p>
+   108→          </div>
+   109→          <div class="card">
+   110→            <div class="text-3xl mb-3">🌿</div>
+   111→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">Sustainable Technology Institute</h3>
+   112→            <p class="text-sm text-muted mb-3">Director: Prof. Suresh Menon</p>
+   113→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Interdisciplinary center focusing on renewable energy, climate modeling, and sustainable urban development. Equipped with solar testing labs and weather stations.</p>
+   114→            <div class="flex flex-wrap gap-2">
+   115→              <span class="badge badge-teal">Solar Energy</span>
+   116→              <span class="badge badge-teal">Climate</span>
+   117→              <span class="badge badge-teal">Urban Planning</span>
+   118→            </div>
+   119→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Perovskite-silicon tandem solar cell optimization achieving 28.4% efficiency, a national record for university-led research.</p>
+   120→          </div>
+   121→          <div class="card">
+   122→            <div class="text-3xl mb-3">🧬</div>
+   123→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">Biotechnology Research Unit</h3>
+   124→            <p class="text-sm text-muted mb-3">Director: Dr. Priya Sharma</p>
+   125→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Focuses on computational biology, bioinformatics, and genetic data analysis. Collaborates with pharmaceutical companies on drug discovery research.</p>
+   126→            <div class="flex flex-wrap gap-2">
+   127→              <span class="badge badge-rose">Bioinformatics</span>
+   128→              <span class="badge badge-rose">Drug Discovery</span>
+   129→              <span class="badge badge-rose">Genomics</span>
+   130→            </div>
+   131→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Machine learning-assisted protein folding prediction for tuberculosis drug targets, in collaboration with IISc Bangalore.</p>
+   132→          </div>
+   133→          <div class="card">
+   134→            <div class="text-3xl mb-3">🔒</div>
+   135→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">Cybersecurity Center</h3>
+   136→            <p class="text-sm text-muted mb-3">Director: Dr. Rajesh Kumar</p>
+   137→            <p class="text-sm text-muted mb-3" style="line-height:1.7">A CERT-In empaneled center conducting research in network security, cryptographic protocols, IoT security, and privacy-enhancing technologies.</p>
+   138→            <div class="flex flex-wrap gap-2">
+   139→              <span class="badge badge-cyan">Network Security</span>
+   140→              <span class="badge badge-cyan">Cryptography</span>
+   141→              <span class="badge badge-cyan">IoT Security</span>
+   142→            </div>
+   143→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Post-quantum cryptographic framework for critical infrastructure, funded by MeitY with ₹1.8 crores.</p>
+   144→          </div>
+   145→          <div class="card">
+   146→            <div class="text-3xl mb-3">📜</div>
+   147→            <h3 class="font-bold text-lg mb-1" style="color:var(--slate-dark)">Digital Humanities Lab</h3>
+   148→            <p class="text-sm text-muted mb-3">Director: Dr. Meera Nair</p>
+   149→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Bridges technology and humanities through computational linguistics, digital archiving, cultural analytics, and technology-enhanced pedagogy research.</p>
+   150→            <div class="flex flex-wrap gap-2">
+   151→              <span class="badge badge-gold">NLP</span>
+   152→              <span class="badge badge-gold">Digital Archives</span>
+   153→              <span class="badge badge-gold">Cultural Analytics</span>
+   154→            </div>
+   155→            <p class="text-xs text-muted mt-3" style="line-height:1.6"><strong style="color:var(--slate-600)">Key Project:</strong> Digitization and computational analysis of 10,000+ regional language manuscripts from the 16th-19th centuries.</p>
+   156→          </div>
+   157→        </div>
+   158→      </div>
+   159→    </section>
+   160→
+   161→    <!-- Key Research Areas -->
+   162→    <section class="section bg-white" id="areas">
+   163→      <div class="container">
+   164→        <div class="section-header">
+   165→          <span class="section-label">Domains</span>
+   166→          <h2 class="section-title">Key Research Areas</h2>
+   167→          <p class="section-desc">Detailed overview of our primary research domains, recent breakthroughs, and ongoing investigations.</p>
+   168→        </div>
+   169→        <div class="grid-4 card-stagger">
+   170→          <div class="card">
+   171→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">🤖 AI & Machine Learning</h3>
+   172→            <p class="text-sm text-muted" style="line-height:1.7">Research spans neural architecture search, federated learning, explainable AI, and reinforcement learning. Recent breakthrough: developed an efficient edge-computing model reducing inference time by 40% for mobile healthcare diagnostics.</p>
+   173→          </div>
+   174→          <div class="card">
+   175→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">📊 Data Science & Analytics</h3>
+   176→            <p class="text-sm text-muted" style="line-height:1.7">Focus on predictive modeling, time-series forecasting, and big data architectures. Recent breakthrough: built an early-warning system for crop failure prediction adopted by three state governments with 92% accuracy.</p>
+   177→          </div>
+   178→          <div class="card">
+   179→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">⛓️ Blockchain & Fintech</h3>
+   180→            <p class="text-sm text-muted" style="line-height:1.7">Enterprise blockchain, decentralized finance, and digital identity systems. Recent breakthrough: patented a scalable BFT consensus mechanism processing 10,000+ transactions per second for supply chain applications.</p>
+   181→          </div>
+   182→          <div class="card">
+   183→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">🌱 Sustainable Development</h3>
+   184→            <p class="text-sm text-muted" style="line-height:1.7">Climate modeling, circular economy, and sustainable urban planning research. Recent breakthrough: developed a carbon-neutral campus framework adopted by 15 universities across India as a policy template.</p>
+   185→          </div>
+   186→          <div class="card">
+   187→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">🧬 Biotechnology</h3>
+   188→            <p class="text-sm text-muted" style="line-height:1.7">Computational biology, protein structure prediction, and genomic data analysis. Recent breakthrough: ML-based drug repurposing model identified three candidate compounds for drug-resistant tuberculosis treatment.</p>
+   189→          </div>
+   190→          <div class="card">
+   191→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">⚡ Renewable Energy</h3>
+   192→            <p class="text-sm text-muted" style="line-height:1.7">Solar cell optimization, wind energy systems, and smart grid technologies. Recent breakthrough: perovskite-silicon tandem solar cell achieving 28.4% efficiency, surpassing the previous national university record.</p>
+   193→          </div>
+   194→          <div class="card">
+   195→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">🔒 Cybersecurity</h3>
+   196→            <p class="text-sm text-muted" style="line-height:1.7">Post-quantum cryptography, IoT vulnerability analysis, and privacy-preserving computation. Recent breakthrough: developed a lattice-based encryption scheme resilient to quantum computing attacks for government communications.</p>
+   197→          </div>
+   198→          <div class="card">
+   199→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">📜 Digital Humanities</h3>
+   200→            <p class="text-sm text-muted" style="line-height:1.7">Computational linguistics, digital archiving, and cultural analytics. Recent breakthrough: automated transcription and translation of 10,000+ historical manuscripts using custom NLP models trained on regional scripts.</p>
+   201→          </div>
+   202→        </div>
+   203→      </div>
+   204→    </section>
+   205→
+   206→    <!-- Publications -->
+   207→    <section class="section bg-light" id="publications">
+   208→      <div class="container">
+   209→        <div class="section-header">
+   210→          <span class="section-label">Scholarship</span>
+   211→          <h2 class="section-title">Recent Publications</h2>
+   212→          <p class="section-desc">A selection of recent high-impact publications from our research faculty.</p>
+   213→        </div>
+   214→        <div class="gsap-reveal" style="overflow-x:auto;border-radius:var(--radius-xl);border:1px solid var(--slate-200);background:white">
+   215→          <table class="data-table">
+   216→            <thead>
+   217→              <tr>
+   218→                <th style="min-width:280px">Title</th>
+   219→                <th>Authors</th>
+   220→                <th>Journal</th>
+   221→                <th>Year</th>
+   222→                <th>Citations</th>
+   223→              </tr>
+   224→            </thead>
+   225→            <tbody>
+   226→              <tr>
+   227→                <td style="font-weight:500;color:var(--slate-dark)">Neural Architecture Search for Efficient Edge Computing</td>
+   228→                <td>R. Kumar, P. Sharma</td>
+   229→                <td>IEEE Trans. Neural Networks</td>
+   230→                <td>2024</td>
+   231→                <td>47</td>
+   232→              </tr>
+   233→              <tr>
+   234→                <td style="font-weight:500;color:var(--slate-dark)">Scalable Consensus Mechanisms for Enterprise Blockchain</td>
+   235→                <td>A. Das, R. Kumar</td>
+   236→                <td>ACM Computing Surveys</td>
+   237→                <td>2024</td>
+   238→                <td>38</td>
+   239→              </tr>
+   240→              <tr>
+   241→                <td style="font-weight:500;color:var(--slate-dark)">Disruptive Innovation in Emerging Markets</td>
+   242→                <td>S. Reddy</td>
+   243→                <td>Harvard Business Review</td>
+   244→                <td>2024</td>
+   245→                <td>112</td>
+   246→              </tr>
+   247→              <tr>
+   248→                <td style="font-weight:500;color:var(--slate-dark)">Perovskite-Silicon Tandem Solar Cell Optimization</td>
+   249→                <td>S. Menon, V. Singh</td>
+   250→                <td>Nature Energy</td>
+   251→                <td>2024</td>
+   252→                <td>89</td>
+   253→              </tr>
+   254→              <tr>
+   255→                <td style="font-weight:500;color:var(--slate-dark)">ML-Assisted Protein Folding for Tuberculosis Drug Targets</td>
+   256→                <td>P. Sharma, A. Das</td>
+   257→                <td>Bioinformatics (Oxford)</td>
+   258→                <td>2023</td>
+   259→                <td>156</td>
+   260→              </tr>
+   261→              <tr>
+   262→                <td style="font-weight:500;color:var(--slate-dark)">Post-Quantum Lattice-Based Encryption for Critical Infrastructure</td>
+   263→                <td>R. Kumar, A. Das</td>
+   264→                <td>IEEE Trans. Information Security</td>
+   265→                <td>2023</td>
+   266→                <td>73</td>
+   267→              </tr>
+   268→              <tr>
+   269→                <td style="font-weight:500;color:var(--slate-dark)">Federated Learning for Privacy-Preserving Healthcare Diagnostics</td>
+   270→                <td>P. Sharma, R. Kumar</td>
+   271→                <td>JMIR Medical Informatics</td>
+   272→                <td>2023</td>
+   273→                <td>95</td>
+   274→              </tr>
+   275→              <tr>
+   276→                <td style="font-weight:500;color:var(--slate-dark)">Computational Analysis of Pre-Colonial Indian Manuscripts</td>
+   277→                <td>M. Nair, L. Nair</td>
+   278→                <td>Digital Scholarship in the Humanities</td>
+   279→                <td>2023</td>
+   280→                <td>28</td>
+   281→              </tr>
+   282→            </tbody>
+   283→          </table>
+   284→        </div>
+   285→      </div>
+   286→    </section>
+   287→
+   288→    <!-- Funded Projects -->
+   289→    <section class="section bg-white" id="projects">
+   290→      <div class="container">
+   291→        <div class="section-header">
+   292→          <span class="section-label">Grants</span>
+   293→          <h2 class="section-title">Funded Research Projects</h2>
+   294→          <p class="section-desc">Our researchers have secured significant funding from national and international agencies to drive impactful investigations.</p>
+   295→        </div>
+   296→        <div class="grid-3 card-stagger">
+   297→          <div class="card">
+   298→            <span class="badge badge-emerald mb-3">DST-SERB</span>
+   299→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Automated Crop Disease Detection using Drone Imagery</h3>
+   300→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   301→              <span>💰 ₹3.2 Crores</span>
+   302→              <span>📅 3 Years</span>
+   303→            </div>
+   304→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Developing AI-powered drone-based surveillance for early detection of crop diseases across 200+ farms, in partnership with the State Agricultural Department.</p>
+   305→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Dr. Rajesh Kumar</p>
+   306→          </div>
+   307→          <div class="card">
+   308→            <span class="badge badge-purple mb-3">MeitY</span>
+   309→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Post-Quantum Cryptographic Framework for Critical Infrastructure</h3>
+   310→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   311→              <span>💰 ₹1.8 Crores</span>
+   312→              <span>📅 2 Years</span>
+   313→            </div>
+   314→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Designing lattice-based encryption schemes resilient to quantum computing attacks, targeting government communication networks and financial systems.</p>
+   315→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Dr. Arjun Das</p>
+   316→          </div>
+   317→          <div class="card">
+   318→            <span class="badge badge-teal mb-3">DST</span>
+   319→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Perovskite-Silicon Tandem Solar Cell Efficiency Optimization</h3>
+   320→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   321→              <span>💰 ₹4.5 Crores</span>
+   322→              <span>📅 4 Years</span>
+   323→            </div>
+   324→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Pushing the boundaries of solar cell efficiency using novel perovskite-silicon tandem architectures, achieving a national university record of 28.4%.</p>
+   325→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Prof. Suresh Menon</p>
+   326→          </div>
+   327→          <div class="card">
+   328→            <span class="badge badge-rose mb-3">DBT</span>
+   329→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">ML-Based Drug Repurposing for Drug-Resistant Tuberculosis</h3>
+   330→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   331→              <span>💰 ₹2.1 Crores</span>
+   332→              <span>📅 3 Years</span>
+   333→            </div>
+   334→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Applying machine learning to identify existing drug compounds effective against drug-resistant TB strains, in collaboration with IISc Bangalore.</p>
+   335→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Dr. Priya Sharma</p>
+   336→          </div>
+   337→          <div class="card">
+   338→            <span class="badge badge-gold mb-3">UGC</span>
+   339→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Blockchain-Based Agricultural Supply Chain Transparency</h3>
+   340→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   341→              <span>💰 ₹2.3 Crores</span>
+   342→              <span>📅 2 Years</span>
+   343→            </div>
+   344→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Implementing an enterprise blockchain solution for end-to-end traceability in agricultural supply chains, ensuring fair pricing and reducing waste.</p>
+   345→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Dr. Arjun Das</p>
+   346→          </div>
+   347→          <div class="card">
+   348→            <span class="badge badge-cyan mb-3">ICSSR</span>
+   349→            <h3 class="font-bold mb-2" style="color:var(--slate-dark)">Digital Preservation and Computational Analysis of Regional Manuscripts</h3>
+   350→            <div class="flex items-center gap-4 mb-3 text-sm text-muted">
+   351→              <span>💰 ₹0.8 Crores</span>
+   352→              <span>📅 3 Years</span>
+   353→            </div>
+   354→            <p class="text-sm text-muted mb-3" style="line-height:1.7">Digitizing, transcribing, and analyzing 10,000+ historical manuscripts using custom NLP models trained on regional scripts and languages.</p>
+   355→            <p class="text-xs text-muted"><strong style="color:var(--slate-600)">Principal Investigator:</strong> Dr. Meera Nair</p>
+   356→          </div>
+   357→        </div>
+   358→      </div>
+   359→    </section>
+   360→
+   361→    <!-- Collaborations -->
+   362→    <section class="section bg-dark" id="collaborations">
+   363→      <div class="container">
+   364→        <div class="section-header">
+   365→          <span class="section-label">Partnerships</span>
+   366→          <h2 class="section-title">Global Collaborations</h2>
+   367→          <p class="section-desc">Our research network spans across leading institutions worldwide, enabling cross-border knowledge exchange and joint innovation.</p>
+   368→        </div>
+   369→        <div class="grid-4 card-stagger">
+   370→          <div class="card card-dark text-center">
+   371→            <div class="text-2xl mb-2">🏛️</div>
+   372→            <h3 class="font-bold text-sm mb-1" style="color:white">MIT</h3>
+   373→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">United States</p>
+   374→            <span class="badge badge-emerald mt-3" style="font-size:0.625rem">Joint Research</span>
+   375→          </div>
+   376→          <div class="card card-dark text-center">
+   377→            <div class="text-2xl mb-2">🏛️</div>
+   378→            <h3 class="font-bold text-sm mb-1" style="color:white">Stanford University</h3>
+   379→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">United States</p>
+   380→            <span class="badge badge-emerald mt-3" style="font-size:0.625rem">Faculty Exchange</span>
+   381→          </div>
+   382→          <div class="card card-dark text-center">
+   383→            <div class="text-2xl mb-2">🏛️</div>
+   384→            <h3 class="font-bold text-sm mb-1" style="color:white">IIT Bombay</h3>
+   385→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">India</p>
+   386→            <span class="badge badge-gold mt-3" style="font-size:0.625rem">Co-Supervision</span>
+   387→          </div>
+   388→          <div class="card card-dark text-center">
+   389→            <div class="text-2xl mb-2">🏛️</div>
+   390→            <h3 class="font-bold text-sm mb-1" style="color:white">IISc Bangalore</h3>
+   391→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">India</p>
+   392→            <span class="badge badge-gold mt-3" style="font-size:0.625rem">Joint Projects</span>
+   393→          </div>
+   394→          <div class="card card-dark text-center">
+   395→            <div class="text-2xl mb-2">🏛️</div>
+   396→            <h3 class="font-bold text-sm mb-1" style="color:white">NUS Singapore</h3>
+   397→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">Singapore</p>
+   398→            <span class="badge badge-purple mt-3" style="font-size:0.625rem">Student Exchange</span>
+   399→          </div>
+   400→          <div class="card card-dark text-center">
+   401→            <div class="text-2xl mb-2">🏛️</div>
+   402→            <h3 class="font-bold text-sm mb-1" style="color:white">ETH Zurich</h3>
+   403→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">Switzerland</p>
+   404→            <span class="badge badge-purple mt-3" style="font-size:0.625rem">Research Collaboration</span>
+   405→          </div>
+   406→          <div class="card card-dark text-center">
+   407→            <div class="text-2xl mb-2">🏛️</div>
+   408→            <h3 class="font-bold text-sm mb-1" style="color:white">University of Oxford</h3>
+   409→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">United Kingdom</p>
+   410→            <span class="badge badge-cyan mt-3" style="font-size:0.625rem">Joint Publications</span>
+   411→          </div>
+   412→          <div class="card card-dark text-center">
+   413→            <div class="text-2xl mb-2">🏛️</div>
+   414→            <h3 class="font-bold text-sm mb-1" style="color:white">Tsinghua University</h3>
+   415→            <p class="text-xs" style="color:rgba(255,255,255,0.4)">China</p>
+   416→            <span class="badge badge-rose mt-3" style="font-size:0.625rem">Conference Partner</span>
+   417→          </div>
+   418→        </div>
+   419→      </div>
+   420→    </section>
+   421→
+   422→    <!-- CTA -->
+   423→    <section class="cta-section">
+   424→      <div class="container">
+   425→        <h2 class="gsap-reveal">Explore Research Opportunities</h2>
+   426→        <p class="gsap-reveal">Interested in collaborating with our researchers, pursuing a PhD, or funding a project? We welcome partnerships from industry, academia, and government organizations.</p>
+   427→        <div class="flex items-center justify-center gap-4 flex-wrap gsap-reveal">
+   428→          <a href="/contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
+   429→          <a href="/academics.html#programs" class="btn btn-outline btn-lg">View PhD Programs</a>
+   430→        </div>
+   431→      </div>
+   432→    </section>
+   433→
+   434→  </main>
+   435→  <div id="site-footer"></div>
+   436→  <div id="floating-dock"></div>
+   437→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   438→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   439→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   440→  <script src="/js/college-base.js"></script>
+   441→</body>
+   442→</html>

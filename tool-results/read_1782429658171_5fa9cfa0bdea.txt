@@ -1,0 +1,566 @@
+     1→     1→'use client';
+     2→     2→
+     3→     3→import { useEffect, useRef, useState } from 'react';
+     4→     4→import gsap from 'gsap';
+     5→     5→import { ScrollTrigger } from 'gsap/ScrollTrigger';
+     6→     6→import {
+     7→     7→  MapPin, Phone, Mail, Clock, Send, Loader2,
+     8→     8→  Facebook, Twitter, Instagram, Linkedin, Youtube,
+     9→     9→  ChevronDown, ExternalLink, Building2,
+    10→    10→} from 'lucide-react';
+    11→    11→import { Navbar } from '@/components/college/Navbar';
+    12→    12→import { Footer } from '@/components/college/Footer';
+    13→    13→import { Button } from '@/components/ui/button';
+    14→    14→import { Input } from '@/components/ui/input';
+    15→    15→import { Textarea } from '@/components/ui/textarea';
+    16→    16→import { Label } from '@/components/ui/label';
+    17→    17→import { useToast } from '@/hooks/use-toast';
+    18→    18→import { IMAGES, PAGE_PHOTOS } from '@/lib/images';
+    19→    19→import { OtpModal } from '@/components/OtpModal';
+    20→    20→
+    21→    21→gsap.registerPlugin(ScrollTrigger);
+    22→    22→
+    23→    23→/* ------------------------------------------------------------------ */
+    24→    24→/*  Data                                                               */
+    25→    25→/* ------------------------------------------------------------------ */
+    26→    26→
+    27→    27→const contactInfo = [
+    28→    28→  { icon: MapPin, title: 'Address', lines: ['University Road, Academic City', 'State 123456, India'] },
+    29→    29→  { icon: Phone, title: 'Phone', lines: ['+91 7973290805'] },
+    30→    30→  { icon: Mail, title: 'Email', lines: ['navpreet8testing@gmail.com'] },
+    31→    31→  { icon: Clock, title: 'Office Hours', lines: ['Mon – Fri: 9:00 AM – 5:00 PM', 'Sat: 9:00 AM – 1:00 PM'] },
+    32→    32→];
+    33→    33→
+    34→    34→const departments = [
+    35→    35→  { name: 'Admissions Office', phone: '+91 7973290805', email: 'admissions@greenfield.edu' },
+    36→    36→  { name: 'Academic Affairs', phone: '+91 7973290806', email: 'academic@greenfield.edu' },
+    37→    37→  { name: 'Student Services', phone: '+91 7973290807', email: 'students@greenfield.edu' },
+    38→    38→  { name: 'Placement Cell', phone: '+91 7973290808', email: 'placements@greenfield.edu' },
+    39→    39→  { name: 'Library', phone: '+91 7973290809', email: 'library@greenfield.edu' },
+    40→    40→  { name: 'Research Center', phone: '+91 7973290810', email: 'research@greenfield.edu' },
+    41→    41→];
+    42→    42→
+    43→    43→const faqs = [
+    44→    44→  { q: 'How do I apply for admission?', a: 'You can apply online through our Admissions Portal or visit the campus during office hours. The application form and required documents are listed on the Admissions page.' },
+    45→    45→  { q: 'What are the eligibility criteria for undergraduate programs?', a: 'Candidates must have completed 10+2 from a recognized board with a minimum aggregate of 50%. Specific programs may have additional subject requirements.' },
+    46→    46→  { q: 'Is hostel accommodation available?', a: 'Yes, Greenfield University provides separate hostel facilities for boys and girls with all modern amenities including Wi-Fi, mess, and recreational areas.' },
+    47→    47→  { q: 'How can I schedule a campus visit?', a: 'Campus visits can be scheduled by contacting the Admissions Office at +91 7973290805 or by emailing admissions@greenfield.edu. Walk-ins during office hours are also welcome.' },
+    48→    48→  { q: 'What scholarship opportunities are available?', a: 'We offer merit-based, need-based, and sports scholarships. Details about eligibility and application deadlines are available on the Admissions page.' },
+    49→    49→  { q: 'How do I request my transcripts or certificates?', a: 'Transcripts and certificates can be requested through the Student Portal or by visiting the Academic Affairs office. Processing takes 5-7 working days.' },
+    50→    50→];
+    51→    51→
+    52→    52→const socialLinks = [
+    53→    53→  { icon: Facebook, href: '#', label: 'Facebook' },
+    54→    54→  { icon: Twitter, href: '#', label: 'Twitter' },
+    55→    55→  { icon: Instagram, href: '#', label: 'Instagram' },
+    56→    56→  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    57→    57→  { icon: Youtube, href: '#', label: 'YouTube' },
+    58→    58→];
+    59→    59→
+    60→    60→/* ------------------------------------------------------------------ */
+    61→    61→/*  Component                                                          */
+    62→    62→/* ------------------------------------------------------------------ */
+    63→    63→
+    64→    64→export default function ContactPage() {
+    65→    65→  const heroRef = useRef<HTMLElement>(null);
+    66→    66→  const [submitting, setSubmitting] = useState(false);
+    67→    67→  const [openFaq, setOpenFaq] = useState<number | null>(null);
+    68→    68→  const [otpOpen, setOtpOpen] = useState(false);
+    69→    69→  const [otpEmail, setOtpEmail] = useState('');
+    70→    70→  const pendingFormRef = useRef<HTMLFormElement | null>(null);
+    71→    71→  const { toast } = useToast();
+    72→    72→
+    73→    73→  /* ---------- GSAP Animations ---------- */
+    74→    74→  useEffect(() => {
+    75→    75→    const ctx = gsap.context(() => {
+    76→    76→      // Hero content
+    77→    77→      gsap.from('.contact-hero-content', {
+    78→    78→        y: 60, duration: 1.2, ease: 'power3.out',
+    79→    79→        scrollTrigger: { trigger: heroRef.current, start: 'top 70%', once: true, immediateRender: false },
+    80→    80→      });
+    81→    81→
+    82→    82→      // Section headings
+    83→    83→      document.querySelectorAll('.contact-heading').forEach((el) => {
+    84→    84→        gsap.from(el, {
+    85→    85→          y: 30, duration: 0.8, ease: 'power3.out',
+    86→    86→          scrollTrigger: { trigger: el, start: 'top 85%', once: true, immediateRender: false },
+    87→    87→        });
+    88→    88→      });
+    89→    89→
+    90→    90→      // Info cards
+    91→    91→      document.querySelectorAll('.contact-info-card').forEach((el, i) => {
+    92→    92→        gsap.from(el, {
+    93→    93→          y: 40, scale: 0.95, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+    94→    94→          scrollTrigger: { trigger: el, start: 'top 88%', once: true, immediateRender: false },
+    95→    95→        });
+    96→    96→      });
+    97→    97→
+    98→    98→      // Form slide in
+    99→    99→      gsap.from('.contact-form-wrapper', {
+   100→   100→        y: 40, duration: 0.8, ease: 'power3.out',
+   101→   101→        scrollTrigger: { trigger: '.contact-form-wrapper', start: 'top 85%', once: true, immediateRender: false },
+   102→   102→      });
+   103→   103→
+   104→   104→      // Map section
+   105→   105→      gsap.from('.contact-map-section', {
+   106→   106→        scale: 0.97, duration: 0.9, ease: 'power3.out',
+   107→   107→        scrollTrigger: { trigger: '.contact-map-section', start: 'top 85%', once: true, immediateRender: false },
+   108→   108→      });
+   109→   109→
+   110→   110→      // Department cards
+   111→   111→      document.querySelectorAll('.dept-card').forEach((el, i) => {
+   112→   112→        gsap.from(el, {
+   113→   113→          y: 30, duration: 0.6, delay: i * 0.08, ease: 'power3.out',
+   114→   114→          scrollTrigger: { trigger: el, start: 'top 90%', once: true, immediateRender: false },
+   115→   115→        });
+   116→   116→      });
+   117→   117→
+   118→   118→      // FAQ items
+   119→   119→      document.querySelectorAll('.faq-item').forEach((el, i) => {
+   120→   120→        gsap.from(el, {
+   121→   121→          y: 20, duration: 0.5, delay: i * 0.07, ease: 'power3.out',
+   122→   122→          scrollTrigger: { trigger: el, start: 'top 90%', once: true, immediateRender: false },
+   123→   123→        });
+   124→   124→      });
+   125→   125→
+   126→   126→      // Social icons
+   127→   127→      gsap.from('.social-icon', {
+   128→   128→        y: 20, duration: 0.5, stagger: 0.08, ease: 'power3.out',
+   129→   129→        scrollTrigger: { trigger: '.social-grid', start: 'top 90%', once: true, immediateRender: false },
+   130→   130→      });
+   131→   131→    });
+   132→   132→    return () => ctx.revert();
+   133→   133→  }, []);
+   134→   134→
+   135→   135→  /* ---------- Form handler ---------- */
+   136→   136→  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+   137→   137→    e.preventDefault();
+   138→   138→    const form = e.currentTarget;
+   139→   139→    const email = (form.email as HTMLInputElement)?.value?.trim();
+   140→   140→    if (!email) {
+   141→   141→      toast({ title: 'Error', description: 'Email address is required', variant: 'destructive' });
+   142→   142→      return;
+   143→   143→    }
+   144→   144→    pendingFormRef.current = form;
+   145→   145→    setOtpEmail(email);
+   146→   146→    setOtpOpen(true);
+   147→   147→  }
+   148→   148→
+   149→   149→  async function handleOtpVerified() {
+   150→   150→    setOtpOpen(false);
+   151→   151→    setSubmitting(true);
+   152→   152→    try {
+   153→   153→      const form = pendingFormRef.current;
+   154→   154→      if (!form) return;
+   155→   155→      const data = {
+   156→   156→        name: (form.name as HTMLInputElement).value,
+   157→   157→        email: (form.email as HTMLInputElement).value,
+   158→   158→        phone: (form.phone as HTMLInputElement).value,
+   159→   159→        subject: (form.subject as HTMLInputElement).value,
+   160→   160→        message: (form.message as HTMLTextAreaElement).value,
+   161→   161→      };
+   162→   162→
+   163→   163→      const res = await fetch('/api/contact', {
+   164→   164→        method: 'POST',
+   165→   165→        headers: { 'Content-Type': 'application/json' },
+   166→   166→        body: JSON.stringify(data),
+   167→   167→      });
+   168→   168→
+   169→   169→      if (res.ok) {
+   170→   170→        toast({ title: 'Application submitted successfully!' });
+   171→   171→        form.reset();
+   172→   172→      } else {
+   173→   173→        const err = await res.json();
+   174→   174→        toast({ title: 'Error', description: err.error || 'Failed to send message', variant: 'destructive' });
+   175→   175→      }
+   176→   176→    } catch {
+   177→   177→      toast({ title: 'Error', description: 'Network error. Please try again.', variant: 'destructive' });
+   178→   178→    } finally {
+   179→   179→      setSubmitting(false);
+   180→   180→    }
+   181→   181→  }
+   182→   182→
+   183→   183→  /* ---------- Render ---------- */
+   184→   184→  return (
+   185→   185→    <main className="min-h-screen flex flex-col bg-white dark:bg-slate-dark">
+   186→   186→      <Navbar />
+   187→   187→
+   188→   188→      {/* ============ HERO ============ */}
+   189→   189→      <section
+   190→   190→        ref={heroRef}
+   191→   191→        className="relative h-[70vh] min-h-[480px] flex items-center justify-center overflow-hidden"
+   192→   192→        style={{ backgroundImage: `url(${IMAGES.architecture})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+   193→   193→      >
+   194→   194→        <div className="hero-overlay" />
+   195→   195→        <div className="noise-overlay" />
+   196→   196→
+   197→   197→        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto contact-hero-content">
+   198→   198→          <span className="font-section-label inline-block text-emerald-light text-sm font-semibold uppercase tracking-widest mb-4">
+   199→   199→            Get in Touch
+   200→   200→          </span>
+   201→   201→          <h1 className="font-section-title text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+   202→   202→            Contact Us
+   203→   203→          </h1>
+   204→   204→          <p className="font-body-alt text-white/70 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+   205→   205→            Have questions? We&apos;d love to hear from you. Reach out and our team will respond promptly.
+   206→   206→          </p>
+   207→   207→        </div>
+   208→   208→      </section>
+   209→   209→
+   210→   210→      {/* ============ CONTACT INFO CARDS ============ */}
+   211→   211→      <section className="py-20 sm:py-28 bg-gradient-to-b from-white to-emerald-50/20 dark:from-slate-dark dark:to-slate-dark/95">
+   212→   212→        <div className="max-w-7xl mx-auto px-4 sm:px-6 glass-card">
+   213→   213→          <div className="text-center mb-14 contact-heading">
+   214→   214→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   215→   215→              Reach Us
+   216→   216→            </span>
+   217→   217→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   218→   218→              <span className="gradient-text">Contact Information</span>
+   219→   219→            </h2>
+   220→   220→          </div>
+   221→   221→
+   222→   222→          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 card-glow">
+   223→   223→            {contactInfo.map((item, i) => (
+   224→   224→              <div
+   225→   225→                key={item.title}
+   226→   226→                className={`contact-info-card rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 p-6 text-center group hover:border-emerald/30 dark:hover:border-emerald/30 hover:shadow-lg hover:shadow-emerald/5 transition-all duration-300 animate-fade-up stagger-${i + 1}`}
+   227→   227→              >
+   228→   228→                <div className="mx-auto w-14 h-14 rounded-2xl bg-emerald/10 dark:bg-emerald/20 flex items-center justify-center mb-4 group-hover:bg-emerald transition-colors duration-300">
+   229→   229→                  <item.icon className="w-6 h-6 text-emerald group-hover:text-white transition-colors duration-300" />
+   230→   230→                </div>
+   231→   231→                <h3 className="font-semibold text-slate-dark dark:text-white text-sm mb-2">{item.title}</h3>
+   232→   232→                {item.lines.map((line) => (
+   233→   233→                  <p key={line} className="text-sm text-muted-foreground dark:text-white/50">{line}</p>
+   234→   234→                ))}
+   235→   235→              </div>
+   236→   236→            ))}
+   237→   237→          </div>
+   238→   238→        </div>
+   239→   239→      </section>
+   240→   240→
+   241→   241→      <div className="section-divider-gradient" />
+   242→   242→
+   243→   243→      {/* ============ CONTACT FORM ============ */}
+   244→   244→      <section className="py-20 sm:py-28 bg-gradient-to-b from-emerald-50/20 to-white dark:from-slate-dark/95 dark:to-slate-dark">
+   245→   245→        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+   246→   246→          <div className="text-center mb-14 contact-heading">
+   247→   247→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   248→   248→              Send a Message
+   249→   249→            </span>
+   250→   250→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   251→   251→              We&apos;d Love to Hear From You
+   252→   252→            </h2>
+   253→   253→            <p className="text-muted-foreground dark:text-white/50 mt-3 font-body-alt max-w-xl mx-auto">
+   254→   254→              Fill out the form below and our team will get back to you within 24 hours.
+   255→   255→            </p>
+   256→   256→          </div>
+   257→   257→
+   258→   258→          <div className="contact-form-wrapper">
+   259→   259→            <form
+   260→   260→              onSubmit={handleSubmit}
+   261→   261→              className="bg-white dark:bg-white/5 rounded-2xl border border-border/50 dark:border-white/10 p-6 sm:p-8 shadow-sm"
+   262→   262→            >
+   263→   263→              <div className="grid sm:grid-cols-2 gap-5 mb-5">
+   264→   264→                <div className="space-y-2">
+   265→   265→                  <Label htmlFor="contact-name" className="text-sm">Your Name *</Label>
+   266→   266→                  <Input
+   267→   267→                    id="contact-name"
+   268→   268→                    name="name"
+   269→   269→                    required
+   270→   270→                    placeholder="Full name"
+   271→   271→                    className="rounded-xl h-11"
+   272→   272→                  />
+   273→   273→                </div>
+   274→   274→                <div className="space-y-2">
+   275→   275→                  <Label htmlFor="contact-email" className="text-sm">Email Address *</Label>
+   276→   276→                  <Input
+   277→   277→                    id="contact-email"
+   278→   278→                    name="email"
+   279→   279→                    type="email"
+   280→   280→                    required
+   281→   281→                    placeholder="you@example.com"
+   282→   282→                    className="rounded-xl h-11"
+   283→   283→                  />
+   284→   284→                </div>
+   285→   285→                <div className="space-y-2">
+   286→   286→                  <Label htmlFor="contact-phone" className="text-sm">Phone Number *</Label>
+   287→   287→                  <Input
+   288→   288→                    id="contact-phone"
+   289→   289→                    name="phone"
+   290→   290→                    type="tel"
+   291→   291→                    required
+   292→   292→                    placeholder="+91 98765 43210"
+   293→   293→                    className="rounded-xl h-11"
+   294→   294→                  />
+   295→   295→                </div>
+   296→   296→              </div>
+   297→   297→              <div className="space-y-2 mb-5">
+   298→   298→                <Label htmlFor="contact-subject" className="text-sm">Subject *</Label>
+   299→   299→                <Input
+   300→   300→                  id="contact-subject"
+   301→   301→                  name="subject"
+   302→   302→                  required
+   303→   303→                  placeholder="How can we help?"
+   304→   304→                  className="rounded-xl h-11"
+   305→   305→                />
+   306→   306→              </div>
+   307→   307→              <div className="space-y-2 mb-6">
+   308→   308→                <Label htmlFor="contact-message" className="text-sm">Message *</Label>
+   309→   309→                <Textarea
+   310→   310→                  id="contact-message"
+   311→   311→                  name="message"
+   312→   312→                  required
+   313→   313→                  rows={5}
+   314→   314→                  placeholder="Tell us more about your inquiry..."
+   315→   315→                  className="rounded-xl resize-none"
+   316→   316→                />
+   317→   317→              </div>
+   318→   318→              <Button
+   319→   319→                type="submit"
+   320→   320→                disabled={submitting}
+   321→   321→                className="bg-emerald hover:bg-emerald-dark text-white rounded-xl h-12 px-8 font-semibold shadow-lg shadow-emerald/20 hover:shadow-emerald/40 transition-all"
+   322→   322→              >
+   323→   323→                {submitting ? (
+   324→   324→                  <>
+   325→   325→                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+   326→   326→                    Sending...
+   327→   327→                  </>
+   328→   328→                ) : (
+   329→   329→                  <>
+   330→   330→                    <Send className="w-4 h-4 mr-2" />
+   331→   331→                    Send Message
+   332→   332→                  </>
+   333→   333→                )}
+   334→   334→              </Button>
+   335→   335→            </form>
+   336→   336→          </div>
+   337→   337→        </div>
+   338→   338→      </section>
+   339→   339→
+   340→   340→      <div className="section-divider-gradient" />
+   341→   341→
+   342→   342→      {/* ============ CAMPUS MAP ============ */}
+   343→   343→      <section className="py-20 sm:py-28 bg-white dark:bg-slate-dark">
+   344→   344→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   345→   345→          <div className="text-center mb-14 contact-heading">
+   346→   346→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   347→   347→              Location
+   348→   348→            </span>
+   349→   349→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   350→   350→              Find Us on Campus
+   351→   351→            </h2>
+   352→   352→          </div>
+   353→   353→
+   354→   354→          <a
+   355→   355→            href="/campus"
+   356→   356→            className="contact-map-section rounded-2xl h-80 sm:h-96 relative overflow-hidden group cursor-pointer img-reveal block"
+   357→   357→            style={{ backgroundImage: `url(${PAGE_PHOTOS.modernLibrary})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+   358→   358→          >
+   359→   359→            {/* Dark gradient overlay */}
+   360→   360→            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 group-hover:from-black/60 transition-all duration-500" />
+   361→   361→            {/* Content */}
+   362→   362→            <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+   363→   363→              {/* Pulsing green dot */}
+   364→   364→              <div className="mb-4 relative">
+   365→   365→                <div className="w-5 h-5 rounded-full bg-emerald pulse-dot" />
+   366→   366→                <div className="absolute inset-0 flex items-center justify-center">
+   367→   367→                  <div className="w-2.5 h-2.5 rounded-full bg-white" />
+   368→   368→                </div>
+   369→   369→              </div>
+   370→   370→              <p className="text-white font-semibold text-lg sm:text-xl tracking-wide">Interactive Campus Map</p>
+   371→   371→              <p className="text-white/50 text-sm mt-2">Virtual Tour Coming Soon</p>
+   372→   372→              <div className="mt-4 inline-flex items-center gap-2 text-emerald-light text-sm font-medium group-hover:gap-3 transition-all duration-300">
+   373→   373→                <ExternalLink className="w-4 h-4" />
+   374→   374→                <span>Explore Campus</span>
+   375→   375→              </div>
+   376→   376→            </div>
+   377→   377→            {/* Subtle border */}
+   378→   378→            <div className="absolute inset-0 rounded-2xl border border-white/10 pointer-events-none" />
+   379→   379→          </a>
+   380→   380→        </div>
+   381→   381→      </section>
+   382→   382→
+   383→   383→      <div className="section-divider-gradient" />
+   384→   384→
+   385→   385→      {/* ============ DEPARTMENT CONTACTS ============ */}
+   386→   386→      <section className="py-20 sm:py-28 bg-gradient-to-b from-white to-emerald-50/20 dark:from-slate-dark dark:to-slate-dark/95">
+   387→   387→        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+   388→   388→          <div className="text-center mb-14 contact-heading">
+   389→   389→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   390→   390→              Direct Lines
+   391→   391→            </span>
+   392→   392→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   393→   393→              Department Contacts
+   394→   394→            </h2>
+   395→   395→            <p className="text-muted-foreground dark:text-white/50 mt-3 font-body-alt max-w-xl mx-auto">
+   396→   396→              Reach out directly to the relevant department for faster assistance.
+   397→   397→            </p>
+   398→   398→          </div>
+   399→   399→
+   400→   400→          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 card-glow">
+   401→   401→            {departments.map((dept, i) => (
+   402→   402→              <div
+   403→   403→                key={dept.name}
+   404→   404→                className={`dept-card rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 p-6 hover:border-emerald/30 dark:hover:border-emerald/30 hover:shadow-lg hover:shadow-emerald/5 transition-all duration-300 animate-fade-up stagger-${i + 1}`}
+   405→   405→              >
+   406→   406→                <div className="flex items-center gap-3 mb-4">
+   407→   407→                  <div className="w-10 h-10 rounded-xl bg-emerald/10 dark:bg-emerald/20 flex items-center justify-center">
+   408→   408→                    <Building2 className="w-5 h-5 text-emerald" />
+   409→   409→                  </div>
+   410→   410→                  <h3 className="font-semibold text-slate-dark dark:text-white text-sm">{dept.name}</h3>
+   411→   411→                </div>
+   412→   412→                <div className="space-y-2">
+   413→   413→                  <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-white/50">
+   414→   414→                    <Phone className="w-3.5 h-3.5 text-emerald shrink-0" />
+   415→   415→                    <span>{dept.phone}</span>
+   416→   416→                  </div>
+   417→   417→                  <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-white/50">
+   418→   418→                    <Mail className="w-3.5 h-3.5 text-emerald shrink-0" />
+   419→   419→                    <span>{dept.email}</span>
+   420→   420→                  </div>
+   421→   421→                </div>
+   422→   422→              </div>
+   423→   423→            ))}
+   424→   424→          </div>
+   425→   425→        </div>
+   426→   426→      </section>
+   427→   427→
+   428→   428→      <div className="section-divider-gradient" />
+   429→   429→
+   430→   430→      {/* ============ VISIT OUR CAMPUS ============ */}
+   431→   431→      <section className="py-20 sm:py-28">
+   432→   432→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   433→   433→          <div className="text-center mb-14 contact-heading">
+   434→   434→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   435→   435→              Experience It Yourself
+   436→   436→            </span>
+   437→   437→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   438→   438→              Visit Our Campus
+   439→   439→            </h2>
+   440→   440→            <p className="text-muted-foreground dark:text-white/50 mt-3 font-body-alt max-w-xl mx-auto">
+   441→   441→              Walk through our sprawling 120-acre campus and witness world-class infrastructure first-hand.
+   442→   442→            </p>
+   443→   443→          </div>
+   444→   444→
+   445→   445→          <div className="contact-map-section group rounded-2xl overflow-hidden relative h-72 sm:h-96 img-reveal">
+   446→   446→            <img
+   447→   447→              src={PAGE_PHOTOS.convocationHall}
+   448→   448→              alt="Greenfield University Convocation Hall"
+   449→   449→              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+   450→   450→            />
+   451→   451→            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+   452→   452→            <div className="absolute inset-0 rounded-2xl border border-white/10 pointer-events-none" />
+   453→   453→            <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8">
+   454→   454→              <h3 className="font-section-title text-2xl sm:text-3xl font-bold text-white mb-2">Plan Your Visit</h3>
+   455→   455→              <p className="text-white/70 text-sm sm:text-base font-body-alt max-w-lg">
+   456→   456→                Campus tours are available Monday through Saturday. Contact our Admissions Office to schedule a guided tour.
+   457→   457→              </p>
+   458→   458→            </div>
+   459→   459→          </div>
+   460→   460→        </div>
+   461→   461→      </section>
+   462→   462→
+   463→   463→      <div className="section-divider-gradient" />
+   464→   464→
+   465→   465→      {/* ============ FAQ ============ */}
+   466→   466→      <section className="py-20 sm:py-28 bg-gradient-to-b from-emerald-50/20 to-white dark:from-slate-dark/95 dark:to-slate-dark">
+   467→   467→        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+   468→   468→          <div className="text-center mb-14 contact-heading">
+   469→   469→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   470→   470→              FAQ
+   471→   471→            </span>
+   472→   472→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   473→   473→              Frequently Asked Questions
+   474→   474→            </h2>
+   475→   475→          </div>
+   476→   476→
+   477→   477→          <div className="space-y-3">
+   478→   478→            {faqs.map((faq, idx) => (
+   479→   479→              <div
+   480→   480→                key={idx}
+   481→   481→                className="faq-item rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 overflow-hidden transition-all duration-300"
+   482→   482→              >
+   483→   483→                <button
+   484→   484→                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+   485→   485→                  className="flex items-center justify-between w-full text-left px-6 py-5 gap-4 group"
+   486→   486→                  aria-expanded={openFaq === idx}
+   487→   487→                >
+   488→   488→                  <span className="font-medium text-slate-dark dark:text-white text-sm sm:text-base group-hover:text-emerald transition-colors">
+   489→   489→                    {faq.q}
+   490→   490→                  </span>
+   491→   491→                  <ChevronDown
+   492→   492→                    className={`w-5 h-5 text-emerald shrink-0 transition-transform duration-300 ${
+   493→   493→                      openFaq === idx ? 'rotate-180' : ''
+   494→   494→                    }`}
+   495→   495→                  />
+   496→   496→                </button>
+   497→   497→                <div
+   498→   498→                  className={`overflow-hidden transition-all duration-300 ${
+   499→   499→                    openFaq === idx ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'
+   500→   500→                  }`}
+   501→   501→                >
+   502→   502→                  <p className="px-6 pb-5 text-sm text-muted-foreground dark:text-white/50 leading-relaxed">
+   503→   503→                    {faq.a}
+   504→   504→                  </p>
+   505→   505→                </div>
+   506→   506→              </div>
+   507→   507→            ))}
+   508→   508→          </div>
+   509→   509→        </div>
+   510→   510→      </section>
+   511→   511→
+   512→   512→      <div className="section-divider-gradient" />
+   513→   513→
+   514→   514→      {/* ============ SOCIAL MEDIA ============ */}
+   515→   515→      <section className="py-20 sm:py-28 bg-white dark:bg-slate-dark">
+   516→   516→        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+   517→   517→          <div className="mb-14 contact-heading">
+   518→   518→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">
+   519→   519→              Follow Us
+   520→   520→            </span>
+   521→   521→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white">
+   522→   522→              Stay Connected
+   523→   523→            </h2>
+   524→   524→            <p className="text-muted-foreground dark:text-white/50 mt-3 font-body-alt max-w-xl mx-auto">
+   525→   525→              Connect with us on social media for the latest news, events, and campus updates.
+   526→   526→            </p>
+   527→   527→          </div>
+   528→   528→
+   529→   529→          <div className="social-grid flex items-center justify-center gap-4 flex-wrap">
+   530→   530→            {socialLinks.map((s) => (
+   531→   531→              <a
+   532→   532→                key={s.label}
+   533→   533→                href={s.href}
+   534→   534→                aria-label={s.label}
+   535→   535→                className="social-icon w-14 h-14 rounded-2xl bg-emerald/10 dark:bg-emerald/20 flex items-center justify-center hover:bg-emerald hover:scale-110 transition-all duration-300 group"
+   536→   536→              >
+   537→   537→                <s.icon className="w-6 h-6 text-emerald group-hover:text-white transition-colors duration-300" />
+   538→   538→              </a>
+   539→   539→            ))}
+   540→   540→          </div>
+   541→   541→
+   542→   542→          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-muted-foreground dark:text-white/40">
+   543→   543→            {socialLinks.map((s) => (
+   544→   544→              <a
+   545→   545→                key={s.label}
+   546→   546→                href={s.href}
+   547→   547→                className="hover:text-emerald transition-colors duration-200"
+   548→   548→              >
+   549→   549→                {s.label}
+   550→   550→              </a>
+   551→   551→            ))}
+   552→   552→          </div>
+   553→   553→        </div>
+   554→   554→      </section>
+   555→   555→
+   556→   556→      <Footer />
+   557→   557→
+   558→   558→      <OtpModal
+   559→   559→        isOpen={otpOpen}
+   560→   560→        email={otpEmail}
+   561→   561→        onClose={() => setOtpOpen(false)}
+   562→   562→        onVerified={handleOtpVerified}
+   563→   563→      />
+   564→   564→    </main>
+   565→   565→  );
+   566→   566→}

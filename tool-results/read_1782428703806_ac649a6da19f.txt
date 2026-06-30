@@ -1,0 +1,508 @@
+     1→'use client';
+     2→
+     3→import { useEffect, useRef } from 'react';
+     4→import gsap from 'gsap';
+     5→import { ScrollTrigger } from 'gsap/ScrollTrigger';
+     6→import { Navbar } from '@/components/college/Navbar';
+     7→import { Footer } from '@/components/college/Footer';
+     8→import {
+     9→  Dumbbell, Users, BedDouble, BookOpen, FlaskConical, Coffee,
+    10→  Camera, CalendarDays, PartyPopper, Music, Wrench,
+    11→  TreePine, Wifi, Shield, Utensils, Monitor, ChevronRight,
+    12→  MapPin, Clock, Star,
+    13→} from 'lucide-react';
+    14→import { IMAGES, PAGE_PHOTOS } from '@/lib/images';
+    15→
+    16→gsap.registerPlugin(ScrollTrigger);
+    17→
+    18→/* ── Data ───────────────────────────────────────────────── */
+    19→
+    20→const campusStats = [
+    21→  { icon: TreePine, value: '150+', label: 'Acres of Green Campus' },
+    22→  { icon: Users, value: '30+', label: 'Student Clubs' },
+    23→  { icon: Star, value: '4.8★', label: 'Student Satisfaction' },
+    24→  { icon: Shield, value: '24/7', label: 'Campus Security' },
+    25→];
+    26→
+    27→const sportsFacilities = [
+    28→  { title: 'Cricket Ground', desc: 'International-standard cricket ground with practice nets and floodlights for day-night matches.' },
+    29→  { title: 'Swimming Pool', desc: 'Olympic-size heated swimming pool with trained lifeguards and coaching staff.' },
+    30→  { title: 'Indoor Sports Arena', desc: 'Badminton, table tennis, basketball, and volleyball courts in a climate-controlled arena.' },
+    31→  { title: 'Gymnasium', desc: 'State-of-the-art fitness center with modern equipment, personal trainers, and yoga studio.' },
+    32→  { title: 'Athletics Track', desc: '400m synthetic athletics track with facilities for long jump, high jump, and shot put.' },
+    33→  { title: 'Tennis & Squash Courts', desc: 'Professional-grade tennis and squash courts available for practice and tournaments.' },
+    34→];
+    35→
+    36→const clubs = [
+    37→  { name: 'Robotics Club', icon: Monitor, members: '120+', desc: 'Build robots, compete in national-level competitions, and explore AI & embedded systems.' },
+    38→  { name: 'Dramatics Society', icon: Music, members: '80+', desc: 'Stage plays, street theatre, and improv workshops throughout the year.' },
+    39→  { name: 'Debate & MUN Society', icon: Users, members: '95+', desc: 'Regular debates, Model UN conferences, and public speaking competitions.' },
+    40→  { name: 'Photography Club', icon: Camera, members: '60+', desc: 'Photo walks, exhibitions, and workshops with professional photographers.' },
+    41→  { name: 'Eco & Sustainability Club', icon: TreePine, members: '70+', desc: 'Campus greening initiatives, waste management drives, and eco-awareness campaigns.' },
+    42→  { name: 'Coding & Hackathon Club', icon: Wrench, members: '150+', desc: 'Hosts CodeStorm hackathon, competitive coding sessions, and open-source contributions.' },
+    43→  { name: 'Sports Club', icon: Dumbbell, members: '200+', desc: 'Organizes inter-department tournaments and represents the university at state and national level.' },
+    44→  { name: 'Music & Dance Society', icon: PartyPopper, members: '110+', desc: 'Classical and western music, choreography, and performances at fests and events.' },
+    45→];
+    46→
+    47→const hostelFeatures = [
+    48→  { icon: Wifi, title: 'High-Speed Wi-Fi', desc: '24/7 fiber-optic internet in every room and common area.' },
+    49→  { icon: Utensils, title: 'Mess & Dining', desc: 'Nutritious multi-cuisine meals with vegetarian and non-vegetarian options.' },
+    50→  { icon: Shield, title: '24/7 Security', desc: 'CCTV surveillance, biometric entry, and round-the-clock wardens.' },
+    51→  { icon: Monitor, title: 'Common Rooms', desc: 'TV, indoor games, and recreational spaces for socializing.' },
+    52→];
+    53→
+    54→const labs = [
+    55→  { title: 'Computer Science Lab', desc: '200+ workstations with latest hardware, dual monitors, and high-speed networking for coding, AI/ML, and data science projects.', image: PAGE_PHOTOS.pgComputerLab },
+    56→  { title: 'Research Lab', desc: 'Dedicated research facility for PhD scholars with advanced instrumentation, funded projects, and publication support.', image: PAGE_PHOTOS.researchLab },
+    57→  { title: 'Smart Classroom', desc: 'Technology-enabled classrooms with interactive smart boards, projectors, and video conferencing for hybrid learning.', image: PAGE_PHOTOS.ugClassroom },
+    58→  { title: 'Biotechnology Lab', desc: 'Fully equipped biotech lab with PCR machines, centrifuges, spectrophotometers, and tissue culture facilities.', image: IMAGES.laboratory },
+    59→];
+    60→
+    61→const events = [
+    62→  { title: 'Annual Technical Fest — TechVista', date: 'March 2025', desc: 'Three-day national-level technical festival with hackathons, coding contests, robotics challenges, and tech talks by industry leaders.', image: IMAGES.hackathon },
+    63→  { title: 'Cultural Extravaganza — Rang Tarang', date: 'February 2025', desc: 'A vibrant celebration of music, dance, drama, and art featuring performances by students and guest artists.', image: IMAGES.cultural },
+    64→  { title: 'Greenfield Model UN Conference', date: 'January 2025', desc: 'Inter-collegiate MUN conference with 500+ delegates debating global issues across multiple committees.', image: PAGE_PHOTOS.auditorium },
+    65→  { title: 'Inter-University Sports Meet', date: 'November 2024', desc: 'Annual sports championship hosting 20+ universities competing across 15 disciplines over 5 days.', image: PAGE_PHOTOS.sportsComplex },
+    66→];
+    67→
+    68→const workshops = [
+    69→  { title: 'AI & Machine Learning Bootcamp', category: 'Technology', desc: 'Intensive 3-day hands-on workshop covering neural networks, NLP, and computer vision with industry mentors.' },
+    70→  { title: 'Entrepreneurship & Startup Summit', category: 'Business', desc: 'Pitch competitions, investor meet-and-greet, and masterclasses by successful founders.' },
+    71→  { title: 'Research Methodology Workshop', category: 'Academics', desc: 'Training in research design, statistical analysis, academic writing, and publication ethics.' },
+    72→  { title: 'Digital Marketing Masterclass', category: 'Marketing', desc: 'SEO, social media strategy, Google Ads, and analytics with live campaign projects.' },
+    73→  { title: 'Cybersecurity Awareness Camp', category: 'Technology', desc: 'Ethical hacking, CTF challenges, and security best practices for students and faculty.' },
+    74→  { title: 'Personality Development & Soft Skills', category: 'Personal Growth', desc: 'Communication, leadership, teamwork, and interview preparation by certified trainers.' },
+    75→];
+    76→
+    77→/* ── Page ───────────────────────────────────────────────── */
+    78→
+    79→export default function CampusPage() {
+    80→  const heroRef = useRef<HTMLElement>(null);
+    81→
+    82→  useEffect(() => {
+    83→    const ctx = gsap.context(() => {
+    84→      if (heroRef.current) {
+    85→        gsap.from('.campus-hero-content', { y: 30, duration: 0.8, ease: 'power3.out' });
+    86→      }
+    87→      document.querySelectorAll('.campus-heading').forEach((el) => {
+    88→        gsap.from(el, { y: 30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+    89→      });
+    90→      document.querySelectorAll('.campus-card').forEach((el, i) => {
+    91→        gsap.from(el, { y: 40, duration: 0.7, delay: i * 0.08, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    92→      });
+    93→    });
+    94→    return () => ctx.revert();
+    95→  }, []);
+    96→
+    97→  return (
+    98→    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    99→      <Navbar />
+   100→
+   101→      {/* ===== Hero ===== */}
+   102→      <section ref={heroRef} className="relative min-h-[60vh] flex items-center overflow-hidden">
+   103→        <div className="absolute inset-0">
+   104→          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${PAGE_PHOTOS.campusAerial})` }} />
+   105→          <div className="hero-overlay absolute inset-0" />
+   106→        </div>
+   107→        <div className="noise-overlay absolute inset-0 pointer-events-none" />
+   108→        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-32 w-full">
+   109→          <div className="campus-hero-content max-w-3xl">
+   110→            <span className="font-section-label inline-block text-emerald-light text-sm font-semibold uppercase tracking-widest mb-4">Life at Greenfield</span>
+   111→            <h1 className="font-hero-word text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.1] mb-6">
+   112→              Campus Life
+   113→            </h1>
+   114→            <p className="font-body-alt text-lg sm:text-xl text-white/70 max-w-xl leading-relaxed">
+   115→              A vibrant 150-acre campus where academics meet adventure. World-class facilities, thriving communities, and unforgettable experiences await you.
+   116→            </p>
+   117→          </div>
+   118→        </div>
+   119→      </section>
+   120→
+   121→      {/* ===== Campus Overview ===== */}
+   122→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   123→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   124→          <div className="campus-heading text-center mb-16">
+   125→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Explore</span>
+   126→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Campus Overview</h2>
+   127→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   128→              Nestled in lush greenery, our campus is a self-contained ecosystem designed to nurture learning, creativity, and personal growth.
+   129→            </p>
+   130→          </div>
+   131→
+   132→          {/* Stats */}
+   133→          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+   134→            {campusStats.map((s) => (
+   135→              <div key={s.label} className="campus-card p-6 rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm text-center">
+   136→                <s.icon className="w-8 h-8 text-emerald mx-auto mb-3" />
+   137→                <p className="font-section-title text-3xl font-bold text-slate-dark dark:text-white">{s.value}</p>
+   138→                <p className="text-sm text-muted-foreground dark:text-white/60 mt-1">{s.label}</p>
+   139→              </div>
+   140→            ))}
+   141→          </div>
+   142→
+   143→          {/* Overview Image */}
+   144→          <div className="campus-card rounded-2xl overflow-hidden shadow-lg">
+   145→            <img src={IMAGES.campusWalk} alt="Campus walkway" className="w-full h-64 sm:h-80 object-cover" />
+   146→            <div className="p-6 bg-white dark:bg-white/5">
+   147→              <p className="font-body-alt text-muted-foreground dark:text-white/70 leading-relaxed">
+   148→                Greenfield University spans <strong className="text-slate-dark dark:text-white">150+ acres</strong> of beautifully landscaped grounds featuring modern academic blocks, tree-lined pathways, tranquil gardens, and sustainable green buildings. Our campus is a <strong className="text-slate-dark dark:text-white">zero-waste certified</strong> institution with solar power, rainwater harvesting, and organic gardens.
+   149→              </p>
+   150→            </div>
+   151→          </div>
+   152→        </div>
+   153→      </section>
+   154→
+   155→      {/* ===== Sports & Fitness ===== */}
+   156→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   157→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   158→          <div className="campus-heading text-center mb-16">
+   159→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Stay Active</span>
+   160→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Sports &amp; Fitness</h2>
+   161→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   162→              Compete, train, and play — our world-class sports facilities ensure every student finds their athletic passion.
+   163→            </p>
+   164→          </div>
+   165→
+   166→          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   167→            {sportsFacilities.map((s) => (
+   168→              <div key={s.title} className="campus-card p-6 rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+   169→                <div className="w-12 h-12 rounded-xl bg-emerald/10 flex items-center justify-center mb-4">
+   170→                  <Dumbbell className="w-6 h-6 text-emerald" />
+   171→                </div>
+   172→                <h3 className="font-feature-title text-lg font-bold text-slate-dark dark:text-white mb-2">{s.title}</h3>
+   173→                <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{s.desc}</p>
+   174→              </div>
+   175→            ))}
+   176→          </div>
+   177→
+   178→          <div className="campus-card mt-8 rounded-2xl overflow-hidden shadow-md">
+   179→            <img src={PAGE_PHOTOS.sportsComplex} alt="Sports complex" className="w-full h-64 object-cover" />
+   180→          </div>
+   181→        </div>
+   182→      </section>
+   183→
+   184→      {/* ===== Clubs & Societies ===== */}
+   185→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   186→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   187→          <div className="campus-heading text-center mb-16">
+   188→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Get Involved</span>
+   189→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Clubs &amp; Societies</h2>
+   190→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   191→              Join 30+ active student clubs and discover your passion beyond the classroom.
+   192→            </p>
+   193→          </div>
+   194→
+   195→          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+   196→            {clubs.map((c) => (
+   197→              <div key={c.name} className="campus-card p-6 rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300 text-center">
+   198→                <div className="w-12 h-12 rounded-xl bg-emerald/10 flex items-center justify-center mb-4 mx-auto">
+   199→                  <c.icon className="w-6 h-6 text-emerald" />
+   200→                </div>
+   201→                <h3 className="font-feature-title text-sm font-bold text-slate-dark dark:text-white mb-1">{c.name}</h3>
+   202→                <p className="text-xs text-emerald font-medium mb-2">{c.members} Members</p>
+   203→                <p className="text-xs text-muted-foreground dark:text-white/60 leading-relaxed">{c.desc}</p>
+   204→              </div>
+   205→            ))}
+   206→          </div>
+   207→        </div>
+   208→      </section>
+   209→
+   210→      {/* ===== Hostel & Dining ===== */}
+   211→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   212→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   213→          <div className="grid lg:grid-cols-2 gap-12 items-center">
+   214→            <div className="campus-heading">
+   215→              <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Home Away</span>
+   216→              <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-6">Hostel &amp; Dining</h2>
+   217→              <p className="font-body-alt text-muted-foreground dark:text-white/60 leading-relaxed mb-8">
+   218→                Our residential halls provide a safe, comfortable, and vibrant living experience. With separate hostels for boys and girls, each equipped with modern amenities, students feel right at home.
+   219→              </p>
+   220→
+   221→              <div className="grid sm:grid-cols-2 gap-4">
+   222→                {hostelFeatures.map((f) => (
+   223→                  <div key={f.title} className="campus-card flex items-start gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10">
+   224→                    <f.icon className="w-5 h-5 text-emerald shrink-0 mt-0.5" />
+   225→                    <div>
+   226→                      <h4 className="text-sm font-semibold text-slate-dark dark:text-white">{f.title}</h4>
+   227→                      <p className="text-xs text-muted-foreground dark:text-white/60 mt-0.5">{f.desc}</p>
+   228→                    </div>
+   229→                  </div>
+   230→                ))}
+   231→              </div>
+   232→
+   233→              <div className="mt-8 flex flex-wrap gap-6 text-sm text-muted-foreground dark:text-white/60">
+   234→                <div className="flex items-center gap-2"><BedDouble className="w-4 h-4 text-emerald" /> <span><strong className="text-slate-dark dark:text-white">2,000+</strong> hostel beds</span></div>
+   235→                <div className="flex items-center gap-2"><Users className="w-4 h-4 text-emerald" /> <span><strong className="text-slate-dark dark:text-white">AC & Non-AC</strong> rooms</span></div>
+   236→                <div className="flex items-center gap-2"><Utensils className="w-4 h-4 text-emerald" /> <span><strong className="text-slate-dark dark:text-white">3 dining halls</strong></span></div>
+   237→              </div>
+   238→            </div>
+   239→
+   240→            <div className="campus-card rounded-2xl overflow-hidden shadow-lg">
+   241→              <img src={IMAGES.campusLife} alt="Hostel life" className="w-full h-80 lg:h-[420px] object-cover" />
+   242→            </div>
+   243→          </div>
+   244→        </div>
+   245→      </section>
+   246→
+   247→      {/* ===== Library Portal ===== */}
+   248→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   249→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   250→          <div className="grid lg:grid-cols-2 gap-12 items-center">
+   251→            <div className="campus-card rounded-2xl overflow-hidden shadow-lg order-2 lg:order-1">
+   252→              <img src={PAGE_PHOTOS.modernLibrary} alt="Library" className="w-full h-80 lg:h-[420px] object-cover" />
+   253→            </div>
+   254→            <div className="campus-heading order-1 lg:order-2">
+   255→              <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Knowledge Hub</span>
+   256→              <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-6">Library Portal</h2>
+   257→              <p className="font-body-alt text-muted-foreground dark:text-white/60 leading-relaxed mb-6">
+   258→                Our central library is a treasure trove of knowledge with an extensive collection of print and digital resources, modern reading halls, and 24/7 online access.
+   259→              </p>
+   260→              <ul className="space-y-3">
+   261→                {[
+   262→                  '50,000+ volumes across all disciplines',
+   263→                  'Digital access to 10,000+ e-journals & e-books',
+   264→                  'Separate sections for reference, periodicals, and rare collections',
+   265→                  '24/7 online portal with OPAC search and remote access',
+   266→                  'Dedicated quiet zones and collaborative study rooms',
+   267→                ].map((item, i) => (
+   268→                  <li key={i} className="campus-card flex items-start gap-3">
+   269→                    <ChevronRight className="w-5 h-5 text-emerald shrink-0 mt-0.5" />
+   270→                    <span className="font-body-alt text-sm text-muted-foreground dark:text-white/60">{item}</span>
+   271→                  </li>
+   272→                ))}
+   273→              </ul>
+   274→            </div>
+   275→          </div>
+   276→        </div>
+   277→      </section>
+   278→
+   279→      {/* ===== Laboratories ===== */}
+   280→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   281→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   282→          <div className="campus-heading text-center mb-16">
+   283→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Innovation Hub</span>
+   284→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Laboratories</h2>
+   285→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   286→              25+ cutting-edge laboratories equipped with the latest technology for research, innovation, and hands-on learning.
+   287→            </p>
+   288→          </div>
+   289→
+   290→          <div className="grid sm:grid-cols-2 gap-6">
+   291→            {labs.map((l) => (
+   292→              <div key={l.title} className="campus-card rounded-2xl overflow-hidden bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+   293→                <img src={l.image} alt={l.title} className="w-full h-48 object-cover" />
+   294→                <div className="p-6">
+   295→                  <h3 className="font-feature-title text-lg font-bold text-slate-dark dark:text-white mb-2">{l.title}</h3>
+   296→                  <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{l.desc}</p>
+   297→                </div>
+   298→              </div>
+   299→            ))}
+   300→          </div>
+   301→        </div>
+   302→      </section>
+   303→
+   304→      {/* ===== Cafeteria ===== */}
+   305→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   306→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   307→          <div className="grid lg:grid-cols-2 gap-12 items-center">
+   308→            <div className="campus-heading">
+   309→              <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Fresh &amp; Delicious</span>
+   310→              <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-6">Cafeteria</h2>
+   311→              <p className="font-body-alt text-muted-foreground dark:text-white/60 leading-relaxed mb-8">
+   312→                Our multi-cuisine cafeteria and food courts serve nutritious, freshly prepared meals throughout the day — from North Indian thalis to continental dishes, fresh juices, and healthy snacks.
+   313→              </p>
+   314→              <div className="grid grid-cols-2 gap-4">
+   315→                {[
+   316→                  { icon: Utensils, label: 'Multi-Cuisine Menu' },
+   317→                  { icon: Shield, label: 'FSSAI Certified Kitchen' },
+   318→                  { icon: Clock, label: '6 AM – 11 PM Daily' },
+   319→                  { icon: TreePine, label: 'Organic Garden Fresh' },
+   320→                ].map((item) => (
+   321→                  <div key={item.label} className="campus-card flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10">
+   322→                    <item.icon className="w-5 h-5 text-emerald shrink-0" />
+   323→                    <span className="text-sm font-medium text-slate-dark dark:text-white">{item.label}</span>
+   324→                  </div>
+   325→                ))}
+   326→              </div>
+   327→            </div>
+   328→            <div className="campus-card rounded-2xl overflow-hidden shadow-lg">
+   329→              <img src={IMAGES.cafeteria} alt="Cafeteria" className="w-full h-80 lg:h-[400px] object-cover" />
+   330→            </div>
+   331→          </div>
+   332→        </div>
+   333→      </section>
+   334→
+   335→      {/* ===== Photo Gallery (teaser) ===== */}
+   336→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   337→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   338→          <div className="campus-heading text-center mb-16">
+   339→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Memories</span>
+   340→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Photo Gallery</h2>
+   341→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   342→              A visual journey through campus life — from academics to celebrations.
+   343→            </p>
+   344→          </div>
+   345→
+   346→          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+   347→            {[
+   348→              { src: PAGE_PHOTOS.campusAerial, label: 'Campus Aerial' },
+   349→              { src: PAGE_PHOTOS.convocationHall, label: 'Convocation Hall' },
+   350→              { src: PAGE_PHOTOS.auditorium, label: 'Auditorium' },
+   351→              { src: IMAGES.campusWalk, label: 'Campus Walk' },
+   352→              { src: IMAGES.sports, label: 'Sports Complex' },
+   353→              { src: IMAGES.cultural, label: 'Cultural Night' },
+   354→              { src: IMAGES.graduation, label: 'Graduation Day' },
+   355→              { src: PAGE_PHOTOS.modernLibrary, label: 'Library' },
+   356→            ].map((p) => (
+   357→              <div key={p.label} className="campus-card group relative rounded-2xl overflow-hidden aspect-square">
+   358→                <img src={p.src} alt={p.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+   359→                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+   360→                  <span className="text-white text-sm font-medium">{p.label}</span>
+   361→                </div>
+   362→              </div>
+   363→            ))}
+   364→          </div>
+   365→        </div>
+   366→      </section>
+   367→
+   368→      {/* ===== Events & News ===== */}
+   369→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   370→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   371→          <div className="campus-heading text-center mb-16">
+   372→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">What&apos;s Happening</span>
+   373→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Events &amp; News</h2>
+   374→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   375→              Stay updated with the latest happenings, achievements, and celebrations at Greenfield.
+   376→            </p>
+   377→          </div>
+   378→
+   379→          <div className="grid sm:grid-cols-2 gap-6">
+   380→            {events.map((e) => (
+   381→              <div key={e.title} className="campus-card rounded-2xl overflow-hidden bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+   382→                <img src={e.image} alt={e.title} className="w-full h-48 object-cover" />
+   383→                <div className="p-6">
+   384→                  <div className="flex items-center gap-2 text-xs text-emerald font-medium mb-2">
+   385→                    <CalendarDays className="w-3.5 h-3.5" />
+   386→                    {e.date}
+   387→                  </div>
+   388→                  <h3 className="font-feature-title text-lg font-bold text-slate-dark dark:text-white mb-2">{e.title}</h3>
+   389→                  <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{e.desc}</p>
+   390→                </div>
+   391→              </div>
+   392→            ))}
+   393→          </div>
+   394→        </div>
+   395→      </section>
+   396→
+   397→      {/* ===== Annual Fest ===== */}
+   398→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   399→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   400→          <div className="grid lg:grid-cols-2 gap-12 items-center">
+   401→            <div className="campus-card rounded-2xl overflow-hidden shadow-lg">
+   402→              <img src={IMAGES.cultural} alt="Annual fest" className="w-full h-80 lg:h-[420px] object-cover" />
+   403→            </div>
+   404→            <div className="campus-heading">
+   405→              <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">The Big Celebration</span>
+   406→              <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-6">Annual Fest — Rang Tarang</h2>
+   407→              <p className="font-body-alt text-muted-foreground dark:text-white/60 leading-relaxed mb-6">
+   408→                Our flagship annual fest is a 3-day extravaganza that brings together 5,000+ students from 50+ colleges. It features technical events, cultural performances, celebrity nights, and more.
+   409→              </p>
+   410→              <div className="space-y-3">
+   411→                {[
+   412→                  '50+ inter-college competitions and events',
+   413→                  'Celebrity performances and DJ nights',
+   414→                  'Tech expo, startup showcase, and innovation fair',
+   415→                  'Food festival with 30+ stalls from across India',
+   416→                ].map((item, i) => (
+   417→                  <li key={i} className="campus-card flex items-start gap-3">
+   418→                    <ChevronRight className="w-5 h-5 text-emerald shrink-0 mt-0.5" />
+   419→                    <span className="font-body-alt text-sm text-muted-foreground dark:text-white/60">{item}</span>
+   420→                  </li>
+   421→                ))}
+   422→              </div>
+   423→            </div>
+   424→          </div>
+   425→        </div>
+   426→      </section>
+   427→
+   428→      {/* ===== Cultural Programs ===== */}
+   429→      <section className="py-20 sm:py-24 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950">
+   430→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   431→          <div className="campus-heading text-center mb-16">
+   432→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Express Yourself</span>
+   433→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Cultural Programs</h2>
+   434→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   435→              A year-round calendar of cultural activities celebrating diversity, creativity, and artistic expression.
+   436→            </p>
+   437→          </div>
+   438→
+   439→          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   440→            {[
+   441→              { icon: Music, title: 'Music Concerts', desc: 'Classical, western, and fusion performances by student bands and guest artists throughout the year.' },
+   442→              { icon: PartyPopper, title: 'Dance Competitions', desc: 'From classical dance forms to hip-hop battles — our stage welcomes every style and tradition.' },
+   443→              { icon: Camera, title: 'Theatre & Drama', desc: 'Full-length plays, street theatre, and improv nights that explore social themes and storytelling.' },
+   444→              { icon: Star, title: 'Talent Shows', desc: 'Open mic nights, singing competitions, poetry slams, and stand-up comedy events.' },
+   445→              { icon: Star, title: 'Festival Celebrations', desc: 'Diwali, Holi, Eid, Christmas, Onam, and Pongal — celebrating every culture on campus.' },
+   446→              { icon: Users, title: 'Inter-College Meets', desc: 'Host and participate in cultural fests at universities across the state and country.' },
+   447→            ].map((item) => (
+   448→              <div key={item.title} className="campus-card p-6 rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+   449→                <div className="w-12 h-12 rounded-xl bg-emerald/10 flex items-center justify-center mb-4">
+   450→                  <item.icon className="w-6 h-6 text-emerald" />
+   451→                </div>
+   452→                <h3 className="font-feature-title text-lg font-bold text-slate-dark dark:text-white mb-2">{item.title}</h3>
+   453→                <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{item.desc}</p>
+   454→              </div>
+   455→            ))}
+   456→          </div>
+   457→        </div>
+   458→      </section>
+   459→
+   460→      {/* ===== Workshops ===== */}
+   461→      <section className="py-20 sm:py-24 bg-slate-50 dark:bg-slate-900/50">
+   462→        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+   463→          <div className="campus-heading text-center mb-16">
+   464→            <span className="font-section-label inline-block text-emerald text-sm font-semibold uppercase tracking-widest mb-3">Learn &amp; Grow</span>
+   465→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold text-slate-dark dark:text-white mb-4">Workshops</h2>
+   466→            <p className="font-body-alt text-muted-foreground dark:text-white/60 max-w-2xl mx-auto">
+   467→              Regular skill-building workshops conducted by industry experts and academia to bridge the gap between theory and practice.
+   468→            </p>
+   469→          </div>
+   470→
+   471→          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   472→            {workshops.map((w) => (
+   473→              <div key={w.title} className="campus-card p-6 rounded-2xl bg-white dark:bg-white/5 border border-emerald-100/50 dark:border-white/10 shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+   474→                <span className="inline-block px-3 py-1 rounded-full bg-emerald/10 text-emerald text-xs font-medium mb-4">{w.category}</span>
+   475→                <h3 className="font-feature-title text-lg font-bold text-slate-dark dark:text-white mb-2">{w.title}</h3>
+   476→                <p className="text-sm text-muted-foreground dark:text-white/60 leading-relaxed">{w.desc}</p>
+   477→              </div>
+   478→            ))}
+   479→          </div>
+   480→        </div>
+   481→      </section>
+   482→
+   483→      {/* ===== CTA: Visit Campus ===== */}
+   484→      <section className="py-20 sm:py-24 bg-emerald text-white">
+   485→        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+   486→          <div className="campus-heading">
+   487→            <h2 className="font-section-title text-3xl sm:text-4xl font-bold mb-4">Experience Campus Life First-Hand</h2>
+   488→            <p className="font-body-alt text-white/80 max-w-xl mx-auto mb-8">
+   489→              Schedule a campus visit and see for yourself why Greenfield is the perfect place for your academic journey.
+   490→            </p>
+   491→            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+   492→              <a href="/contact" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-emerald font-semibold text-sm hover:bg-white/90 transition-colors duration-300 shadow-lg">
+   493→                <MapPin className="w-4 h-4" />
+   494→                Schedule a Visit
+   495→              </a>
+   496→              <a href="/gallery" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors duration-300">
+   497→                <Camera className="w-4 h-4" />
+   498→                View Photo Gallery
+   499→              </a>
+   500→            </div>
+   501→          </div>
+   502→        </div>
+   503→      </section>
+   504→
+   505→      <Footer />
+   506→    </main>
+   507→  );
+   508→}

@@ -1,0 +1,527 @@
+     1→<!DOCTYPE html>
+     2→<html lang="en">
+     3→<head>
+     4→  <meta charset="UTF-8">
+     5→  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6→  <title>Admissions - Greenfield University</title>
+     7→  <meta name="description" content="Apply to Greenfield University — explore eligibility criteria, fee structure, scholarships, important dates, and the complete application process for 2025-26 admissions.">
+     8→  <link rel="preconnect" href="https://fonts.googleapis.com">
+     9→  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    10→  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Cinzel:wght@700;900&family=Space+Grotesk:wght@400;700&family=Chakra+Petch:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Bebas+Neue&family=Great+Vibes&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    11→  <link rel="stylesheet" href="/css/college-base.css">
+    12→  <script src="https://cdn.tailwindcss.com"></script>
+    13→  <script>tailwind.config={theme:{extend:{colors:{emerald:{DEFAULT:'#059669',light:'#d1fae5',dark:'#064e3b'},gold:{DEFAULT:'#d97706',light:'#fef3c7',dark:'#92400e'},'slate-dark':'#0f172a'}}}}</script>
+    14→</head>
+    15→<body class="min-h-screen flex flex-col">
+    16→  <div id="site-header"></div>
+    17→
+    18→  <main class="flex-1">
+    19→
+    20→    <!-- ===== HERO ===== -->
+    21→    <section class="page-hero noise">
+    22→      <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80')"></div>
+    23→      <div class="page-hero-overlay"></div>
+    24→      <div class="page-hero-content">
+    25→        <div class="hero-breadcrumbs">
+    26→          <a href="/">Home</a>
+    27→          <span class="sep">/</span>
+    28→          <span>Admissions</span>
+    29→        </div>
+    30→        <div class="hero-badge">
+    31→          <span class="pulse-dot"></span>
+    32→          Admissions Open 2025-26
+    33→        </div>
+    34→        <h1>Admissions</h1>
+    35→        <p class="hero-sub">Begin your journey at Greenfield University. Explore programs, check eligibility, and apply online for the upcoming academic session.</p>
+    36→        <div class="flex gap-4 mt-6">
+    37→          <a href="#apply" class="btn btn-primary btn-lg">Apply Now</a>
+    38→          <a href="#process" class="btn btn-outline btn-lg">How to Apply</a>
+    39→        </div>
+    40→      </div>
+    41→    </section>
+    42→
+    43→    <!-- ===== WHY JOIN US ===== -->
+    44→    <section id="why" class="section bg-white">
+    45→      <div class="container">
+    46→        <div class="section-header gsap-reveal">
+    47→          <span class="section-label">Why Greenfield</span>
+    48→          <h2 class="section-title">Why Join Us</h2>
+    49→          <p class="section-desc">Greenfield University offers a transformative education experience backed by accreditation, exceptional placements, and a future-ready curriculum.</p>
+    50→        </div>
+    51→        <div class="grid-4 card-stagger">
+    52→          <div class="card text-center gsap-reveal">
+    53→            <div class="text-4xl mb-4">🏆</div>
+    54→            <h3 class="font-semibold text-lg text-dark mb-2">NAAC A++ Accredited</h3>
+    55→            <p class="text-sm text-muted">Nationally recognized for academic excellence, research output, and infrastructure quality with the highest accreditation grade.</p>
+    56→          </div>
+    57→          <div class="card text-center gsap-reveal">
+    58→            <div class="text-4xl mb-4">📈</div>
+    59→            <h3 class="font-semibold text-lg text-dark mb-2">94% Placement Record</h3>
+    60→            <p class="text-sm text-muted">Our graduates are recruited by top companies including Google, Microsoft, Amazon, Deloitte, and TCS with competitive packages.</p>
+    61→          </div>
+    62→          <div class="card text-center gsap-reveal">
+    63→            <div class="text-4xl mb-4">🎯</div>
+    64→            <h3 class="font-semibold text-lg text-dark mb-2">Industry-Aligned Curriculum</h3>
+    65→            <p class="text-sm text-muted">Courses designed with industry experts, featuring live projects, internships, and certifications in emerging technologies.</p>
+    66→          </div>
+    67→          <div class="card text-center gsap-reveal">
+    68→            <div class="text-4xl mb-4">👨‍🏫</div>
+    69→            <h3 class="font-semibold text-lg text-dark mb-2">World-Class Faculty</h3>
+    70→            <p class="text-sm text-muted">Learn from PhD holders from IITs, IIMs, and international universities with extensive research and industry experience.</p>
+    71→          </div>
+    72→        </div>
+    73→      </div>
+    74→    </section>
+    75→
+    76→    <!-- ===== ELIGIBILITY CRITERIA ===== -->
+    77→    <section id="eligibility" class="section bg-light">
+    78→      <div class="container">
+    79→        <div class="section-header gsap-reveal">
+    80→          <span class="section-label">Eligibility</span>
+    81→          <h2 class="section-title">Eligibility Criteria</h2>
+    82→          <p class="section-desc">Review the minimum requirements for each program before submitting your application.</p>
+    83→        </div>
+    84→        <div class="gsap-reveal" style="overflow-x:auto; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:white;">
+    85→          <table class="data-table">
+    86→            <thead>
+    87→              <tr>
+    88→                <th>Program</th>
+    89→                <th>Duration</th>
+    90→                <th>Eligibility</th>
+    91→                <th>Seats</th>
+    92→                <th>Entrance Exam</th>
+    93→              </tr>
+    94→            </thead>
+    95→            <tbody>
+    96→              <tr>
+    97→                <td class="font-medium text-dark">BCA</td>
+    98→                <td>3 Years</td>
+    99→                <td>10+2 with Maths, 50% aggregate</td>
+   100→                <td>120</td>
+   101→                <td>GU-AT</td>
+   102→              </tr>
+   103→              <tr>
+   104→                <td class="font-medium text-dark">B.Com</td>
+   105→                <td>3 Years</td>
+   106→                <td>10+2 with Commerce, 50% aggregate</td>
+   107→                <td>100</td>
+   108→                <td>GU-AT</td>
+   109→              </tr>
+   110→              <tr>
+   111→                <td class="font-medium text-dark">BBA</td>
+   112→                <td>3 Years</td>
+   113→                <td>10+2 any stream, 50% aggregate</td>
+   114→                <td>80</td>
+   115→                <td>GU-AT</td>
+   116→              </tr>
+   117→              <tr>
+   118→                <td class="font-medium text-dark">B.Sc Maths</td>
+   119→                <td>3 Years</td>
+   120→                <td>10+2 with Maths, 55% aggregate</td>
+   121→                <td>60</td>
+   122→                <td>GU-AT</td>
+   123→              </tr>
+   124→              <tr>
+   125→                <td class="font-medium text-dark">MCA</td>
+   126→                <td>2 Years</td>
+   127→                <td>BCA / B.Sc CS, 50% aggregate</td>
+   128→                <td>60</td>
+   129→                <td>GU-AT</td>
+   130→              </tr>
+   131→              <tr>
+   132→                <td class="font-medium text-dark">MBA</td>
+   133→                <td>2 Years</td>
+   134→                <td>Any Graduation, 50% aggregate</td>
+   135→                <td>80</td>
+   136→                <td>GU-AT</td>
+   137→              </tr>
+   138→            </tbody>
+   139→          </table>
+   140→        </div>
+   141→      </div>
+   142→    </section>
+   143→
+   144→    <!-- ===== APPLICATION PROCESS ===== -->
+   145→    <section id="process" class="section bg-white">
+   146→      <div class="container">
+   147→        <div class="section-header gsap-reveal">
+   148→          <span class="section-label">Process</span>
+   149→          <h2 class="section-title">Application Process</h2>
+   150→          <p class="section-desc">Follow these four simple steps to complete your admission to Greenfield University.</p>
+   151→        </div>
+   152→        <div class="steps-grid gsap-reveal">
+   153→          <div class="step-card">
+   154→            <div class="step-number">1</div>
+   155→            <h4>Register Online</h4>
+   156→            <p>Create your applicant account on the portal and fill in your basic personal and academic details to get started.</p>
+   157→          </div>
+   158→          <div class="step-card">
+   159→            <div class="step-number">2</div>
+   160→            <h4>Upload Documents</h4>
+   161→            <p>Submit scanned copies of your 10th and 12th mark sheets, valid ID proof, passport-size photographs, and transfer certificate.</p>
+   162→          </div>
+   163→          <div class="step-card">
+   164→            <div class="step-number">3</div>
+   165→            <h4>Pay Application Fee</h4>
+   166→            <p>Pay the non-refundable application fee of ₹1,000 securely online through UPI, net banking, or debit/credit card.</p>
+   167→          </div>
+   168→          <div class="step-card">
+   169→            <div class="step-number">4</div>
+   170→            <h4>Entrance Test &amp; Counseling</h4>
+   171→            <p>Appear for the GU-AT entrance test on the scheduled date. Admission is merit-based, followed by counseling and seat allocation.</p>
+   172→          </div>
+   173→        </div>
+   174→      </div>
+   175→    </section>
+   176→
+   177→    <!-- ===== FEE STRUCTURE ===== -->
+   178→    <section id="fees" class="section bg-light">
+   179→      <div class="container">
+   180→        <div class="section-header gsap-reveal">
+   181→          <span class="section-label">Fees</span>
+   182→          <h2 class="section-title">Fee Structure</h2>
+   183→          <p class="section-desc">Transparent and competitive fee structure for all programs. Additional one-time and recurring fees listed below.</p>
+   184→        </div>
+   185→        <div class="gsap-reveal" style="overflow-x:auto; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:white; margin-bottom:2rem;">
+   186→          <table class="data-table">
+   187→            <thead>
+   188→              <tr>
+   189→                <th>Program</th>
+   190→                <th>Annual Tuition Fee</th>
+   191→                <th>Total (Duration)</th>
+   192→              </tr>
+   193→            </thead>
+   194→            <tbody>
+   195→              <tr>
+   196→                <td class="font-medium text-dark">BCA</td>
+   197→                <td>₹75,000 / year</td>
+   198→                <td>₹2,25,000 (3 years)</td>
+   199→              </tr>
+   200→              <tr>
+   201→                <td class="font-medium text-dark">B.Com</td>
+   202→                <td>₹50,000 / year</td>
+   203→                <td>₹1,50,000 (3 years)</td>
+   204→              </tr>
+   205→              <tr>
+   206→                <td class="font-medium text-dark">BBA</td>
+   207→                <td>₹65,000 / year</td>
+   208→                <td>₹1,95,000 (3 years)</td>
+   209→              </tr>
+   210→              <tr>
+   211→                <td class="font-medium text-dark">B.Sc Maths</td>
+   212→                <td>₹45,000 / year</td>
+   213→                <td>₹1,35,000 (3 years)</td>
+   214→              </tr>
+   215→              <tr>
+   216→                <td class="font-medium text-dark">MCA</td>
+   217→                <td>₹90,000 / year</td>
+   218→                <td>₹1,80,000 (2 years)</td>
+   219→              </tr>
+   220→              <tr>
+   221→                <td class="font-medium text-dark">MBA</td>
+   222→                <td>₹85,000 / year</td>
+   223→                <td>₹1,70,000 (2 years)</td>
+   224→              </tr>
+   225→            </tbody>
+   226→          </table>
+   227→        </div>
+   228→        <div class="gsap-reveal" style="overflow-x:auto; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:white;">
+   229→          <table class="data-table">
+   230→            <thead>
+   231→              <tr>
+   232→                <th>Fee Component</th>
+   233→                <th>Amount</th>
+   234→                <th>Type</th>
+   235→              </tr>
+   236→            </thead>
+   237→            <tbody>
+   238→              <tr>
+   239→                <td class="font-medium text-dark">Admission Fee</td>
+   240→                <td>₹10,000</td>
+   241→                <td><span class="badge badge-outline">One-time</span></td>
+   242→              </tr>
+   243→              <tr>
+   244→                <td class="font-medium text-dark">Caution Deposit</td>
+   245→                <td>₹5,000</td>
+   246→                <td><span class="badge badge-emerald">Refundable</span></td>
+   247→              </tr>
+   248→              <tr>
+   249→                <td class="font-medium text-dark">Lab Fee</td>
+   250→                <td>₹3,000 / year</td>
+   251→                <td><span class="badge badge-outline">Annual</span></td>
+   252→              </tr>
+   253→              <tr>
+   254→                <td class="font-medium text-dark">Library Fee</td>
+   255→                <td>₹2,000 / year</td>
+   256→                <td><span class="badge badge-outline">Annual</span></td>
+   257→              </tr>
+   258→            </tbody>
+   259→          </table>
+   260→        </div>
+   261→      </div>
+   262→    </section>
+   263→
+   264→    <!-- ===== SCHOLARSHIPS ===== -->
+   265→    <section id="scholarships" class="section bg-emerald-tint">
+   266→      <div class="container">
+   267→        <div class="section-header gsap-reveal">
+   268→          <span class="section-label">Financial Aid</span>
+   269→          <h2 class="section-title">Scholarships</h2>
+   270→          <p class="section-desc">We believe talent should never be limited by finances. Explore our range of scholarship programs.</p>
+   271→        </div>
+   272→        <div class="grid-3 card-stagger">
+   273→          <div class="card gsap-reveal">
+   274→            <div class="flex items-center gap-3 mb-4">
+   275→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c476?w=120&q=80" alt="" aria-hidden="true"></div>
+   276→              <h3 class="font-semibold text-dark">Merit Scholarship</h3>
+   277→            </div>
+   278→            <p class="text-sm text-muted mb-3">Awarded to students with outstanding academic performance in their 10+2 examinations.</p>
+   279→            <div class="text-sm mb-2"><strong>Eligibility:</strong> 90% or above in 12th standard</div>
+   280→            <div class="text-sm mb-2"><strong>Benefit:</strong> 50% tuition fee waiver</div>
+   281→            <div class="text-sm"><strong>How to Apply:</strong> Automatic consideration based on application marks</div>
+   282→          </div>
+   283→          <div class="card gsap-reveal">
+   284→            <div class="flex items-center gap-3 mb-4">
+   285→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1607604276583-c986900aaaa4?w=120&q=80" alt="" aria-hidden="true"></div>
+   286→              <h3 class="font-semibold text-dark">Sports Scholarship</h3>
+   287→            </div>
+   288→            <p class="text-sm text-muted mb-3">For students who have excelled in sports at the state or national level.</p>
+   289→            <div class="text-sm mb-2"><strong>Eligibility:</strong> State/National level participation</div>
+   290→            <div class="text-sm mb-2"><strong>Benefit:</strong> 25–50% tuition fee waiver</div>
+   291→            <div class="text-sm"><strong>How to Apply:</strong> Submit sports certificates with application</div>
+   292→          </div>
+   293→          <div class="card gsap-reveal">
+   294→            <div class="flex items-center gap-3 mb-4">
+   295→              <div class="stat-icon">💛</div>
+   296→              <h3 class="font-semibold text-dark">Need-Based Scholarship</h3>
+   297→            </div>
+   298→            <p class="text-sm text-muted mb-3">Supporting students from economically weaker sections to pursue quality education.</p>
+   299→            <div class="text-sm mb-2"><strong>Eligibility:</strong> Family income below ₹3 LPA</div>
+   300→            <div class="text-sm mb-2"><strong>Benefit:</strong> Up to 75% tuition fee waiver</div>
+   301→            <div class="text-sm"><strong>How to Apply:</strong> Submit income certificate and BPL card</div>
+   302→          </div>
+   303→          <div class="card gsap-reveal">
+   304→            <div class="flex items-center gap-3 mb-4">
+   305→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=120&q=80" alt="" aria-hidden="true"></div>
+   306→              <h3 class="font-semibold text-dark">Research Excellence</h3>
+   307→            </div>
+   308→            <p class="text-sm text-muted mb-3">Encouraging students with a passion for research and innovation in their field.</p>
+   309→            <div class="text-sm mb-2"><strong>Eligibility:</strong> Published research papers or patents</div>
+   310→            <div class="text-sm mb-2"><strong>Benefit:</strong> ₹25,000 research grant</div>
+   311→            <div class="text-sm"><strong>How to Apply:</strong> Apply through the Research Cell with paper details</div>
+   312→          </div>
+   313→          <div class="card gsap-reveal">
+   314→            <div class="flex items-center gap-3 mb-4">
+   315→              <div class="stat-icon"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=120&q=80" alt="" aria-hidden="true"></div>
+   316→              <h3 class="font-semibold text-dark">Alumni Referral</h3>
+   317→            </div>
+   318→            <p class="text-sm text-muted mb-3">A special benefit for students referred by Greenfield University alumni.</p>
+   319→            <div class="text-sm mb-2"><strong>Eligibility:</strong> Referred by a verified alumnus</div>
+   320→            <div class="text-sm mb-2"><strong>Benefit:</strong> 10% tuition fee discount</div>
+   321→            <div class="text-sm"><strong>How to Apply:</strong> Mention the alumnus name and batch in the application form</div>
+   322→          </div>
+   323→        </div>
+   324→      </div>
+   325→    </section>
+   326→
+   327→    <!-- ===== IMPORTANT DATES ===== -->
+   328→    <section id="dates" class="section bg-white">
+   329→      <div class="container">
+   330→        <div class="section-header gsap-reveal">
+   331→          <span class="section-label">Timeline</span>
+   332→          <h2 class="section-title">Important Dates</h2>
+   333→          <p class="section-desc">Mark these key dates on your calendar to stay on track with the admission process.</p>
+   334→        </div>
+   335→        <div class="gsap-reveal" style="overflow-x:auto; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:white; max-width:48rem; margin:0 auto;">
+   336→          <table class="data-table">
+   337→            <thead>
+   338→              <tr>
+   339→                <th>Event</th>
+   340→                <th>Date</th>
+   341→              </tr>
+   342→            </thead>
+   343→            <tbody>
+   344→              <tr>
+   345→                <td class="font-medium text-dark">Application Start</td>
+   346→                <td>June 1, 2025</td>
+   347→              </tr>
+   348→              <tr>
+   349→                <td class="font-medium text-dark">Application Deadline</td>
+   350→                <td>July 31, 2025</td>
+   351→              </tr>
+   352→              <tr>
+   353→                <td class="font-medium text-dark">Entrance Test (GU-AT)</td>
+   354→                <td>August 5, 2025</td>
+   355→              </tr>
+   356→              <tr>
+   357→                <td class="font-medium text-dark">Counseling</td>
+   358→                <td>August 10–12, 2025</td>
+   359→              </tr>
+   360→              <tr>
+   361→                <td class="font-medium text-dark">Classes Begin</td>
+   362→                <td>August 25, 2025</td>
+   363→              </tr>
+   364→              <tr>
+   365→                <td class="font-medium text-dark">Last Date for Admission</td>
+   366→                <td>September 10, 2025</td>
+   367→              </tr>
+   368→            </tbody>
+   369→          </table>
+   370→        </div>
+   371→      </div>
+   372→    </section>
+   373→
+   374→    <!-- ===== FAQs ===== -->
+   375→    <section id="faq" class="section bg-light">
+   376→      <div class="container container-narrow">
+   377→        <div class="section-header gsap-reveal">
+   378→          <span class="section-label">FAQs</span>
+   379→          <h2 class="section-title">Frequently Asked Questions</h2>
+   380→          <p class="section-desc">Find answers to the most common questions about the admission process at Greenfield University.</p>
+   381→        </div>
+   382→        <div class="gsap-reveal">
+   383→          <div class="accordion-item">
+   384→            <button class="accordion-header">
+   385→              What is the admission process?
+   386→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   387→            </button>
+   388→            <div class="accordion-body">
+   389→              <div class="accordion-body-inner">The admission process consists of four steps: online registration on our portal, uploading required documents (marksheets, ID proof, photographs), paying the application fee of ₹1,000 online, and appearing for the GU-AT entrance test. Admission is merit-based, followed by a counseling session for seat allocation.</div>
+   390→            </div>
+   391→          </div>
+   392→          <div class="accordion-item">
+   393→            <button class="accordion-header">
+   394→              Is there an entrance exam?
+   395→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   396→            </button>
+   397→            <div class="accordion-body">
+   398→              <div class="accordion-body-inner">Yes, all applicants must appear for the GU-AT (Greenfield Aptitude Test). It is a standardized test covering logical reasoning, quantitative aptitude, English language proficiency, and general knowledge. The test is conducted online at designated centers across the country.</div>
+   399→            </div>
+   400→          </div>
+   401→          <div class="accordion-item">
+   402→            <button class="accordion-header">
+   403→              Can I apply for multiple programs?
+   404→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   405→            </button>
+   406→            <div class="accordion-body">
+   407→              <div class="accordion-body-inner">Yes, you can apply for multiple programs. However, you need to submit a separate application for each program along with the application fee for each. During counseling, you can indicate your order of preference for program selection.</div>
+   408→            </div>
+   409→          </div>
+   410→          <div class="accordion-item">
+   411→            <button class="accordion-header">
+   412→              What documents are needed?
+   413→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   414→            </button>
+   415→            <div class="accordion-body">
+   416→              <div class="accordion-body-inner">You will need the following documents: 10th standard marksheet, 12th standard marksheet, a valid government-issued ID proof (Aadhaar, PAN, or passport), recent passport-size photographs, and your transfer certificate from the previous institution. Original documents must be presented during counseling.</div>
+   417→            </div>
+   418→          </div>
+   419→          <div class="accordion-item">
+   420→            <button class="accordion-header">
+   421→              Is hostel available?
+   422→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   423→            </button>
+   424→            <div class="accordion-body">
+   425→              <div class="accordion-body-inner">Yes, Greenfield University provides separate hostel facilities for boys and girls. All rooms are air-conditioned with attached bathrooms, Wi-Fi connectivity, laundry services, and 24/7 security. Hostel allocation is based on availability and distance from the campus. Mess facilities with nutritious meals are also available.</div>
+   426→            </div>
+   427→          </div>
+   428→          <div class="accordion-item">
+   429→            <button class="accordion-header">
+   430→              What is the refund policy?
+   431→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   432→            </button>
+   433→            <div class="accordion-body">
+   434→              <div class="accordion-body-inner">A full refund of tuition fees (minus the application fee) is available if you withdraw before classes begin. If withdrawal occurs within 30 days of the start of classes, a 50% refund is applicable. No refund is provided after the 30-day window. The caution deposit is fully refundable at the time of graduation or withdrawal.</div>
+   435→            </div>
+   436→          </div>
+   437→          <div class="accordion-item">
+   438→            <button class="accordion-header">
+   439→              Are there education loan facilities?
+   440→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   441→            </button>
+   442→            <div class="accordion-body">
+   443→              <div class="accordion-body-inner">Yes, Greenfield University has tied up with SBI, HDFC, and Axis Bank for hassle-free education loans. The university provides an admission confirmation letter that can be used for loan processing. Interest rates are competitive, and repayment begins after course completion. Our finance office can guide you through the application process.</div>
+   444→            </div>
+   445→          </div>
+   446→          <div class="accordion-item">
+   447→            <button class="accordion-header">
+   448→              What is the attendance requirement?
+   449→              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+   450→            </button>
+   451→            <div class="accordion-body">
+   452→              <div class="accordion-body-inner">A minimum of 75% attendance is mandatory in each subject to be eligible to appear for the end-semester examination. Students falling below this threshold may face detention. Medical leave with valid documentation can be considered for exemption on a case-by-case basis.</div>
+   453→            </div>
+   454→          </div>
+   455→        </div>
+   456→      </div>
+   457→    </section>
+   458→
+   459→    <!-- ===== APPLY CTA FORM ===== -->
+   460→    <section id="apply" class="cta-section">
+   461→      <div class="container container-narrow">
+   462→        <div class="gsap-reveal">
+   463→          <span class="section-label">Start Your Journey</span>
+   464→          <h2 style="color:white; font-size:clamp(1.75rem,4vw,2.5rem); font-weight:700; margin-bottom:0.75rem;">Apply for Admission</h2>
+   465→          <p style="color:rgba(255,255,255,0.6); margin-bottom:2.5rem;">Fill in the form below and our admissions team will get in touch with you shortly.</p>
+   466→          <div class="card" style="background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.15); backdrop-filter:blur(12px);">
+   467→            <form onsubmit="event.preventDefault(); alert('Thank you! Your application has been submitted. We will contact you soon.');">
+   468→              <div class="form-grid">
+   469→                <div class="form-group">
+   470→                  <label class="form-label" style="color:rgba(255,255,255,0.8);">Full Name</label>
+   471→                  <input type="text" class="form-input" placeholder="Enter your full name" required>
+   472→                </div>
+   473→                <div class="form-group">
+   474→                  <label class="form-label" style="color:rgba(255,255,255,0.8);">Email Address</label>
+   475→                  <input type="email" class="form-input" placeholder="you@example.com" required>
+   476→                </div>
+   477→              </div>
+   478→              <div class="form-grid">
+   479→                <div class="form-group">
+   480→                  <label class="form-label" style="color:rgba(255,255,255,0.8);">Phone Number</label>
+   481→                  <input type="tel" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+   482→                </div>
+   483→                <div class="form-group">
+   484→                  <label class="form-label" style="color:rgba(255,255,255,0.8);">Program</label>
+   485→                  <select class="form-select" required>
+   486→                    <option value="" disabled selected>Select a program</option>
+   487→                    <option>BCA</option>
+   488→                    <option>B.Com</option>
+   489→                    <option>BBA</option>
+   490→                    <option>B.Sc Maths</option>
+   491→                    <option>MCA</option>
+   492→                    <option>MBA</option>
+   493→                  </select>
+   494→                </div>
+   495→              </div>
+   496→              <div class="form-group">
+   497→                <label class="form-label" style="color:rgba(255,255,255,0.8);">Previous Qualification</label>
+   498→                <select class="form-select" required>
+   499→                  <option value="" disabled selected>Select your qualification</option>
+   500→                  <option>10+2 (Science)</option>
+   501→                  <option>10+2 (Commerce)</option>
+   502→                  <option>10+2 (Arts)</option>
+   503→                  <option>BCA / B.Sc (CS)</option>
+   504→                  <option>Any Graduation</option>
+   505→                </select>
+   506→              </div>
+   507→              <div class="form-group">
+   508→                <label class="form-label" style="color:rgba(255,255,255,0.8);">Message (Optional)</label>
+   509→                <textarea class="form-textarea" placeholder="Any additional information or questions you'd like to share..." rows="3"></textarea>
+   510→              </div>
+   511→              <button type="submit" class="btn btn-primary btn-lg w-full">Submit Application</button>
+   512→            </form>
+   513→          </div>
+   514→        </div>
+   515→      </div>
+   516→    </section>
+   517→
+   518→  </main>
+   519→
+   520→  <div id="site-footer"></div>
+   521→  <div id="floating-dock"></div>
+   522→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+   523→  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+   524→  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+   525→  <script src="/js/college-base.js"></script>
+   526→</body>
+   527→</html>
