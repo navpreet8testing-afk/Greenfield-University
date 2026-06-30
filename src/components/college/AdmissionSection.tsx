@@ -125,59 +125,76 @@ export function AdmissionSection({ programs }: AdmissionSectionProps) {
 
   // ── PDF Download ──────────────────────────────────────────────────
   async function handleDownloadForm() {
-    const html2pdf = (await import('html2pdf.js')).default;
+    try {
+      const html2pdf = (await import('html2pdf.js')).default;
 
-    const container = document.createElement('div');
-    container.innerHTML = `
-  <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;padding:40px;color:#1e293b;">
-    <div style="text-align:center;border-bottom:3px solid #059669;padding-bottom:20px;margin-bottom:30px;">
-      <h1 style="font-size:24px;color:#059669;margin:0 0 4px;">GREENFIELD UNIVERSITY</h1>
-      <p style="font-size:13px;color:#64748b;margin:0;">University Road, Academic City &bull; admissions@greenfield.edu &bull; +91 7973290805</p>
-      <p style="margin-top:8px;font-size:14px;font-weight:600;color:#1e293b;">APPLICATION FORM &mdash; ADMISSION 2025&ndash;26</p>
+      const container = document.createElement('div');
+      container.innerHTML = `
+  <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;padding:40px;color:#1e293b;background-color:#ffffff;">
+    <div style="text-align:center;border-bottom:3px solid #059669;padding-bottom:20px;margin-bottom:30px;background-color:#ffffff;">
+      <h1 style="font-size:24px;color:#059669;margin:0 0 4px;background-color:#ffffff;">GREENFIELD UNIVERSITY</h1>
+      <p style="font-size:13px;color:#64748b;margin:0;background-color:#ffffff;">University Road, Academic City &bull; admissions@greenfield.edu &bull; +91 7973290805</p>
+      <p style="margin-top:8px;font-size:14px;font-weight:600;color:#1e293b;background-color:#ffffff;">APPLICATION FORM &mdash; ADMISSION 2025&ndash;26</p>
     </div>
-    <div style="font-size:18px;font-weight:600;margin-bottom:20px;color:#334155;">Applicant Information</div>
-    <div style="display:flex;gap:24px;">
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Full Name *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Email Address *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+    <div style="font-size:18px;font-weight:600;margin-bottom:20px;color:#334155;background-color:#ffffff;">Applicant Information</div>
+    <div style="display:flex;gap:24px;background-color:#ffffff;">
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Full Name *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Email Address *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
     </div>
-    <div style="display:flex;gap:24px;">
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Phone Number *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Date of Birth</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+    <div style="display:flex;gap:24px;background-color:#ffffff;">
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Phone Number *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Date of Birth</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
     </div>
-    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;">Academic Information</div>
-    <div style="display:flex;gap:24px;">
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Program Applied For *</label><div style="font-size:11px;color:#94a3b8;margin-top:2px;">${programs.map(p => p.shortName + ' — ' + p.name).join(' | ')}</div><div style="border-bottom:1px dashed #cbd5e1;height:28px;margin-top:4px;"></div></div>
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Previous Qualification *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;background-color:#ffffff;">Academic Information</div>
+    <div style="display:flex;gap:24px;background-color:#ffffff;">
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Program Applied For *</label><div style="font-size:11px;color:#94a3b8;margin-top:2px;background-color:#ffffff;">${programs.map(p => p.shortName + ' — ' + p.name).join(' | ')}</div><div style="border-bottom:1px dashed #cbd5e1;height:28px;margin-top:4px;background-color:#ffffff;"></div></div>
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Previous Qualification *</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
     </div>
-    <div style="display:flex;gap:24px;">
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">University / Board Name</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
-      <div style="flex:1;margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Percentage / CGPA</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;"></div></div>
+    <div style="display:flex;gap:24px;background-color:#ffffff;">
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">University / Board Name</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
+      <div style="flex:1;margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Percentage / CGPA</label><div style="border-bottom:1px dashed #cbd5e1;height:28px;background-color:#ffffff;"></div></div>
     </div>
-    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;">Additional Information</div>
-    <div style="margin-bottom:18px;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;">Message / Statement of Purpose (Optional)</label><div style="border-bottom:1px dashed #cbd5e1;height:80px;"></div></div>
-    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-top:30px;font-size:12px;color:#166534;">
-      <h3 style="font-size:14px;margin:0 0 8px;">Submission Instructions</h3>
-      <ol style="padding-left:20px;margin:0;"><li style="margin-bottom:4px;">Fill out all required fields marked with an asterisk (*).</li><li style="margin-bottom:4px;">You may also submit this application online at greenfield.edu/admissions.</li><li style="margin-bottom:4px;">Attach a copy of your most recent academic transcript and a valid photo ID.</li><li style="margin-bottom:4px;">Submit the completed form to the Admissions Office or email it to admissions@greenfield.edu.</li><li style="margin-bottom:0;">You will receive an acknowledgment with your application tracking ID within 24 hours.</li></ol>
+    <div style="font-size:18px;font-weight:600;margin:24px 0 20px;color:#334155;background-color:#ffffff;">Additional Information</div>
+    <div style="margin-bottom:18px;background-color:#ffffff;"><label style="display:block;font-size:13px;font-weight:600;color:#475569;margin-bottom:6px;background-color:#ffffff;">Message / Statement of Purpose (Optional)</label><div style="border-bottom:1px dashed #cbd5e1;height:80px;background-color:#ffffff;"></div></div>
+    <div style="background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-top:30px;font-size:12px;color:#166534;">
+      <h3 style="font-size:14px;margin:0 0 8px;background-color:#f0fdf4;color:#166534;">Submission Instructions</h3>
+      <ol style="padding-left:20px;margin:0;background-color:#f0fdf4;color:#166534;"><li style="margin-bottom:4px;background-color:#f0fdf4;color:#166534;">Fill out all required fields marked with an asterisk (*).</li><li style="margin-bottom:4px;background-color:#f0fdf4;color:#166534;">You may also submit this application online at greenfield.edu/admissions.</li><li style="margin-bottom:4px;background-color:#f0fdf4;color:#166534;">Attach a copy of your most recent academic transcript and a valid photo ID.</li><li style="margin-bottom:4px;background-color:#f0fdf4;color:#166534;">Submit the completed form to the Admissions Office or email it to admissions@greenfield.edu.</li><li style="margin-bottom:0;background-color:#f0fdf4;color:#166534;">You will receive an acknowledgment with your application tracking ID within 24 hours.</li></ol>
     </div>
-    <div style="margin-top:40px;display:flex;justify-content:space-between;align-items:end;">
-      <div><label style="font-size:12px;font-weight:600;color:#475569;">Applicant's Signature</label><div style="border-bottom:1px dashed #cbd5e1;width:200px;height:28px;margin-top:4px;"></div></div>
-      <div style="text-align:right;"><label style="font-size:12px;font-weight:600;color:#475569;">Date</label><div style="border-bottom:1px dashed #cbd5e1;width:180px;height:28px;margin-top:4px;"></div></div>
+    <div style="margin-top:40px;display:flex;justify-content:space-between;align-items:end;background-color:#ffffff;">
+      <div style="background-color:#ffffff;"><label style="font-size:12px;font-weight:600;color:#475569;background-color:#ffffff;">Applicant's Signature</label><div style="border-bottom:1px dashed #cbd5e1;width:200px;height:28px;margin-top:4px;background-color:#ffffff;"></div></div>
+      <div style="text-align:right;background-color:#ffffff;"><label style="font-size:12px;font-weight:600;color:#475569;background-color:#ffffff;">Date</label><div style="border-bottom:1px dashed #cbd5e1;width:180px;height:28px;margin-top:4px;background-color:#ffffff;"></div></div>
     </div>
   </div>`;
 
-    document.body.appendChild(container);
-    try {
+      document.body.appendChild(container);
       await html2pdf().set({
         margin: [10, 10, 10, 10],
         filename: 'Greenfield_University_Application_Form_2025-26.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          onclone: (clonedDoc) => {
+            const allElements = clonedDoc.querySelectorAll('*');
+            allElements.forEach((el) => {
+              const computed = window.getComputedStyle(el);
+              const color = computed.color;
+              const bgColor = computed.backgroundColor;
+              const borderColor = computed.borderColor;
+              if (el instanceof HTMLElement) {
+                if (color && !color.startsWith('rgb')) el.style.color = '#000000';
+                if (bgColor && !bgColor.startsWith('rgb') && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') el.style.backgroundColor = '#ffffff';
+                if (borderColor && !borderColor.startsWith('rgb') && borderColor !== 'transparent' && borderColor !== 'rgba(0, 0, 0, 0)') el.style.borderColor = '#cbd5e1';
+              }
+            });
+          },
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       }).from(container).save();
-    } catch {
-      toast({ title: 'Download Failed', description: 'Could not generate PDF. Please try again.', variant: 'destructive' });
-    } finally {
       document.body.removeChild(container);
+    } catch (error) {
+      console.error('[PDF Download] Error:', error);
+      toast({ title: 'Download Failed', description: 'Could not generate PDF. Please try again.', variant: 'destructive' });
     }
   }
 
