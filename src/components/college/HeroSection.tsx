@@ -98,7 +98,7 @@ export function HeroSection() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
             Unify Your
             <br />
-            <span className="kinetic-container inline-block h-[1.15em] align-bottom relative w-[5ch] sm:w-[7ch] md:w-[9ch]">
+            <span className="kinetic-container inline-block h-[1.15em] align-bottom relative w-[8ch] sm:w-[9ch] md:w-[10ch]">
               {rotatingWords.map((word, i) => (
                 <span
                   key={word}

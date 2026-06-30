@@ -125,10 +125,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 }
 
@@ -182,7 +183,7 @@
 /* Kinetic Typography */
 .kinetic-container {
   perspective: 800px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .kinetic-word {
